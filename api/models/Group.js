@@ -9,4 +9,4 @@ const groupSchema = new mongoose.Schema({
   phaseTitle: { type: String, required: true}
 });
 
-module.exports = mongoose.model('Phase', phaseSchema);
+module.exports = mongoose.model('Group', groupSchema);
