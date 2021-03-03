@@ -1,18 +1,21 @@
 const express = require('express');
 const passport = require('passport');
+
 const {
-  postSignin, postSignup, signOut,
+  postSignin, studentSignup, teacherSignup, signOut,
 } = require('../controllers/auth.js');
 
 const router = express.Router();
 
-// router
-//   .route('/student/signup')
-//   .post(passport.authenticate('local'), postSignup);
+router
+  .route('/student/signup')
+  .post(passport.authenticate('local'), studentSignup);
 
 router
-  .route('/signup')
-  .post(passport.authenticate('local'), postSignup);
+  .route('/teacher/signup')
+  .post(passport.authenticate('local'), teacherSignup);
+//   ,
+
 
 
 router
