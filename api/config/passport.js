@@ -2,7 +2,7 @@
 const passport = require('passport');
 const passportLocal = require('passport-local');
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const User = require('../models/User');
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -12,25 +12,27 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
-    done(err, { username: user.username, id: user.id, role: user.role });
+    done(err, { firstName: user.firstName, lastName: user.lastName, id: user._id, email: user.email, role: user.role });
   });
 });
 
 const authenticateuser = async (req, email, pass, done) => {
-  const { username, role } = req.body;
-  // console.log('>>>>>>PASSPORT<<<<<', req.body);
+  const { firstName, lastName, role } = req.body;
+  console.log('>>>>>>PASSPORT<<<<<', req.body);
 
   try {
     if (/signin/.test(req.path)) {
       const user = await User.findOne({ email }).exec();
       if (!user) return done(null, false);
-      if (await bcrypt.compare(pass, user.password)) return done(null, user);
+      if (await bcrypt.compare(pass, user.password)) return done(null, user)
+      else done(null, false);
     }
-    if (/signup/.test(req.path) && email && pass && username && role) {
+    if (/signup/.test(req.path) && email && pass && role && firstName && lastName) {
       try {
         const hashPass = await bcrypt.hash(pass, 10);
         const newUser = new User({
-          username,
+          firstName,
+          lastName,
           email,
           password: hashPass,
           role,

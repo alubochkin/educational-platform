@@ -1,22 +1,19 @@
-const getSignin = (req, res) => res.render('signin');
-const getSignup = (req, res) => res.render('signup');
-
 const postSignup = (req, res) => {
-  console.log('file-auth.js res.session', res.session);
-  res.end();
+  console.log('file-auth.js res.userUp', res.user);
+  res.json({ user: res.user });
 };
 
 const postSignin = (req, res) => {
-  console.log('file-auth.js res.locals', res.locals);
-  res.end();
+  console.log('file-auth.js res.userIn', res.user);
+  res.json({ user: res.user });
 };
 
 // eslint-disable-next-line no-unused-vars
 const signOut = (req, res, next) => {
   req.logout();
-  res.redirect('/');
+  res.json({});
 };
 
 module.exports = {
-  getSignin, getSignup, postSignup, postSignin, signOut,
+  postSignup, postSignin, signOut,
 };
