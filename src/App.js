@@ -1,10 +1,17 @@
 import './App.css';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
+import CreateGroupForm from './components/CreateGroupForm';
+import SendInvitesForm from './components/SendInvitesForm';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Odu project</h1>
-    </div>
+    <Provider store={store}>
+        <h1>Odu project</h1>
+        <CreateGroupForm />
+        <SendInvitesForm />
+    </Provider>
   );
 }
 
