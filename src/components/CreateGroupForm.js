@@ -24,10 +24,14 @@ export default function CreateGroupForm() {
       })
     })
   }
-  console.log(group)
   return (
     <Container maxWidth={false}>
       <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          dispatch(addGroupThunk(group))}
+        }
+          
         className={classes.form}
         validate="true">
         <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
@@ -68,7 +72,7 @@ export default function CreateGroupForm() {
         <div>
           <Button
             type="submit"
-            onClick={() => dispatch(addGroupThunk(group))}
+           
             variant="contained">
             Создать
           </Button>

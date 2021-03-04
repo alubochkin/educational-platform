@@ -1,4 +1,5 @@
 export async function fetchMethod({ path, method, body }) {
+  
   const response = await fetch(path, {
     method,
     headers: {
@@ -14,5 +15,6 @@ export async function fetchMethod({ path, method, body }) {
       message,
     });
   }
-  return response.json();
+  const result = await response.json();
+  return result;
 }
