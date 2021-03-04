@@ -1,12 +1,23 @@
 import './App.css';
-import Main from './pages/Main';
+import React from 'react';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import Header from './components/Header/Header';
+import MainPage from './pages/MainPage';
+import Page404 from './pages/Page404';
+import StudentOffice from './pages/StudentOffice';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Main />
-    </div>
-  );
+    <Router>
+      <Header />
+      
+      <Switch>
+        <Route exact path="/" component={MainPage}/>
+        <Route exact path="/studentOffice" component={StudentOffice} />
+        <Route path="/" component={Page404} />
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
