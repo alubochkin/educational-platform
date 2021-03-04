@@ -43,10 +43,7 @@ app.use('/auth', authRouter);
 app.use('/sendmsg', sendmsgRouter);
 app.use('/group', groupRouter);
 
-//app.use(isAuthMiddleware);
-// app.use('/', indexRouter);
 app.use(notFoundMiddleware);
 
 app.use(errorMiddleware);
 module.exports = app;
-// http://localhost:3100/group/add'
