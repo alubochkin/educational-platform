@@ -56,6 +56,7 @@ const NavigationTopStudent = () => {
       <BottomNavigationAction 
         to="/logout"
         className="nav-item is-top" 
+        label="Выйти" 
         icon={<MeetingRoomOutlinedIcon />} />
     </BottomNavigation>
 

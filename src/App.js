@@ -8,8 +8,8 @@ import StudentOffice from './pages/StudentOffice';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-import CreateGroupForm from './components/CreateGroupForm';
-import SendInvitesForm from './components/SendInvitesForm';
+// import CreateGroupForm from './components/CreateGroupForm';
+// import SendInvitesForm from './components/SendInvitesForm';
 
 const App = () => {
   return (
