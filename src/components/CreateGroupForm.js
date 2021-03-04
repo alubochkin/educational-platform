@@ -27,7 +27,9 @@ export default function CreateGroupForm() {
   console.log(group)
   return (
     <Container maxWidth={false}>
-      <FormControl className={classes.form}>
+      <form
+        className={classes.form}
+        validate="true">
         <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
         <Select
           name="groupSpec" 
@@ -45,16 +47,19 @@ export default function CreateGroupForm() {
 
         <div>
           <TextField
+            
             onChange={handleChange}
-            name="groupTitle" id="outlined-basic" label="Название группы" />
+            name="groupTitle" id="outlined-basic" label="Название группы" required />
         </div>
 
         <div>
           <TextField
+            required
             onChange={handleChange}
             type="date"
             name="dateStart" id="outlined-basic" label="Дата старта" />
           <TextField
+            required
             onChange={handleChange}
             type="date"
             name="dateFinish" id="outlined-basic" label="Дата окончания" />
@@ -62,12 +67,13 @@ export default function CreateGroupForm() {
 
         <div>
           <Button
+            type="submit"
             onClick={() => dispatch(addGroupThunk(group))}
             variant="contained">
             Создать
           </Button>
         </div>
-      </FormControl>
+        </form>
 
      
     </Container>
