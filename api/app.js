@@ -10,6 +10,8 @@ const notFoundMiddleware = require('./middlewares/notfound404.js');
 const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
 const sendmsgRouter = require('./routes/sendmsg');
+const groupRouter = require('./routes/group.router');
+
 
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
 require('./config/passport');
@@ -37,8 +39,9 @@ app.use(passport.session());
 
 app.use(userMiddleware);
 
-app.use('/sendmsg', sendmsgRouter);
 app.use('/auth', authRouter);
+app.use('/sendmsg', sendmsgRouter);
+app.use('/group', groupRouter);
 
 //app.use(isAuthMiddleware);
 // app.use('/', indexRouter);
@@ -46,3 +49,4 @@ app.use(notFoundMiddleware);
 
 app.use(errorMiddleware);
 module.exports = app;
+// http://localhost:3100/group/add'

@@ -10,19 +10,21 @@ const jwtSend = async (req, res) => {
       groupId: '1234567'
     };
     const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
-
     if (token) {
-      const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
-
       const resultSend = await sendMsg(token);
-      res.json({ msg: msgsend.jwtnum });
+      if (resultSend) {
+        const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
+        return res.json({ msg: msgsend.jwtnum });
+      } else {
+        console.log('ERROR SEND MSG!!!!');
+        return res.json({ msg: 'ERROR SEND MSG!!!!' });
+      }
     }
     else
-      res.json({ msg: 'Error1' });
+      return res.json({ msg: 'Error1' });
   } catch {
-    res.json({ msg: 'Error2' });
+    return res.json({ msg: 'Error2' });
   }
-
 };
 
 
