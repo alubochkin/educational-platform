@@ -10,7 +10,7 @@ const notFoundMiddleware = require('./middlewares/notfound404.js');
 const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
-
+require('./config/passport');
 const app = express();
 
 app.use(cors());
@@ -25,7 +25,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 1000 * 60 * 60 * 8,
+      maxAge: 1000 * 60 * 60 * 2,
     },
   }),
 );
@@ -33,9 +33,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(userMiddleware);
+app.use(userMiddleware);
 
-// app.use('/auth', authRouter);
+app.use('/auth', authRouter);
 
 //app.use(isAuthMiddleware);
 // app.use('/', indexRouter);

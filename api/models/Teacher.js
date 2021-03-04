@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 
 const teacherSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  FirstName: { type: String, required: true },
-  LastName: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  firstName: { type: String },
+  lastName: { type: String },
 });
 
 module.exports = mongoose.model('Teacher', teacherSchema);
