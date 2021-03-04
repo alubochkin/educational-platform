@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import MainPage from './pages/MainPage';
 import Page404 from './pages/Page404';
 import StudentOffice from './pages/StudentOffice';
+import TeacherOfficePage from './pages/TeacherOfficePage';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
@@ -16,6 +17,7 @@ const App = () => {
 
         <Switch>
           <Route exact path="/" component={MainPage} />
+          <Route exact path="/teacherOffice" component={TeacherOfficePage} />
           <Route exact path="/studentOffice" component={StudentOffice} />
           <Route path="/" component={Page404} />
         </Switch>

@@ -2,7 +2,7 @@ const Group = require('../models/Group');
 
 const addGroup = async (req, res) => {
   const { groupSpec, groupTitle, dateStart, dateFinish } = req.body;
- 
+
   try {
     const group = await Group.create({
       groupSpec: groupSpec,
@@ -12,7 +12,15 @@ const addGroup = async (req, res) => {
       strDateStart: dateStart,
       strDateFinish: dateFinish,
     });
-    return res.json(group);
+    return res.json({
+      groupId: group.id,
+      groupSpec: group.groupSpec,
+      groupTitle: group.groupTitle,
+      dateStart: group.dateStart,
+      dateFinish: group.dateFinish,
+      strDateStart: group.strDateStart,
+      strDateFinish: group.strDateFinish
+    });
   } catch
   {
     return res.status(500).json({ mass: 'Error adding data to groups' });

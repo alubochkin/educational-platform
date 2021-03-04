@@ -12,18 +12,7 @@ export const addGroupThunk = (group) => async (dispatch) => {
       body: group
     });
 
-    console.log('response', response);
-
-    const groupState = {
-      groupID: response._id,
-      groupSpec: response.groupSpec,
-      groupTitle: response.groupTitle,
-      strDateStart: response.strDateStart,
-      strDateFinish: response.strDateFinish,
-    }
-
-    dispatch(addGroupAC(groupState));
-
+    dispatch(addGroupAC(response));
   } catch (err) {
     console.log('Err', err);
   }
