@@ -5,11 +5,7 @@ import rootReducer from './rootReducer';
 import spec from '../modelsTemp/spec';
 
 const prelodableState = {
-  group: {
-
-  },
-  students: [{}],
-  spec,
+  specReducer: spec,
  };
 
 const composeEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));

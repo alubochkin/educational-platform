@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, TextField, Button, Select, FormControl , InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import { groupAddThunk } from '../redux/actions/actionGroup';
+import { addGroupThunk } from '../redux/actions/actionGroup';
 
 const useStyles = makeStyles({
   form: {
@@ -14,52 +14,70 @@ const useStyles = makeStyles({
 export default function CreateGroupForm() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  // const handleChange = (event) => {
-  //   console.log('select changed', event.target.value);
-  // }
-  // const [spec, setSpec] = useState();
-  const spec = useSelector((state) => state.spec);
+  const spec = useSelector((state) => state.specReducer);
+  const [group, setGroup] = useState({});
   const handleChange = (event) => {
-        
-  };
-
-
-// 
+    setGroup((group) => {
+      return ({
+        ...group,
+        [event.target.name]: event.target.value,
+      })
+    })
+  }
   return (
     <Container maxWidth={false}>
-      <FormControl className={classes.form}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          dispatch(addGroupThunk(group))}
+        }
+          
+        className={classes.form}
+        validate="true">
         <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
         <Select
+          name="groupSpec" 
           native
-          value={spec}
+          value={group.groupSpec}
           onChange={handleChange}
         >
           <option aria-label="None" value="" />
-          <option value={'Fullstack JS'}>Fullstack JS</option>
-          <option value={'Fullstack JS Online'}>Fullstack JS Online</option>
-          <option value={'Data Science'}>Data Science</option>
+          {spec.map((el) => {
+            return (
+              <option key={Math.random()} value={el.title}>{el.title}</option>
+            
+          )})}
         </Select>
 
         <div>
           <TextField
-            name="groupTitle" id="outlined-basic" label="Название группы" />
+            
+            onChange={handleChange}
+            name="groupTitle" id="outlined-basic" label="Название группы" required />
         </div>
 
         <div>
           <TextField
+            required
+            onChange={handleChange}
+            type="date"
             name="dateStart" id="outlined-basic" label="Дата старта" />
           <TextField
+            required
+            onChange={handleChange}
+            type="date"
             name="dateFinish" id="outlined-basic" label="Дата окончания" />
         </div>
 
         <div>
           <Button
-            // onclick={()=>dispatch(groupAddThunk())}
+            type="submit"
+           
             variant="contained">
             Создать
           </Button>
         </div>
-      </FormControl>
+        </form>
 
      
     </Container>
