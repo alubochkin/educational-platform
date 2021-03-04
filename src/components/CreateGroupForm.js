@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, TextField, Button, Select, FormControl , InputLabel } from '@material-ui/core';
+import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { addGroupThunk } from '../redux/actions/actionGroup';
 
@@ -29,14 +29,16 @@ export default function CreateGroupForm() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          dispatch(addGroupThunk(group))}
+          dispatch(addGroupThunk(group))
         }
-          
+        }
+
         className={classes.form}
         validate="true">
         <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
         <Select
-          name="groupSpec" 
+          required
+          name="groupSpec"
           native
           value={group.groupSpec}
           onChange={handleChange}
@@ -45,13 +47,14 @@ export default function CreateGroupForm() {
           {spec.map((el) => {
             return (
               <option key={Math.random()} value={el.title}>{el.title}</option>
-            
-          )})}
+
+            )
+          })}
         </Select>
 
         <div>
           <TextField
-            
+
             onChange={handleChange}
             name="groupTitle" id="outlined-basic" label="Название группы" required />
         </div>
@@ -72,14 +75,14 @@ export default function CreateGroupForm() {
         <div>
           <Button
             type="submit"
-           
+
             variant="contained">
             Создать
           </Button>
         </div>
-        </form>
+      </form>
 
-     
+
     </Container>
   );
 }
