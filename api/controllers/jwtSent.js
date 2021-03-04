@@ -1,4 +1,3 @@
-// const { uuid } = require('uuidv4');
 const jwt = require('jsonwebtoken');
 const Message = require('../models/Message');
 const { sendMsg } = require('../controllers/nodemailer');
@@ -30,12 +29,11 @@ const jwtSend = async (req, res) => {
 
 const jwtReceive = async (req, res) => {
   try {
-    const token = req.query.invtoken;
+    const token = req.body.invtoken;
     if (token) {
       const msg = await Message.findOne({ jwtnum: token })
       if (msg) {
-        const result = await msg.remove();
-        res.json({ msg: result });
+        res.json({ token: msg.jwtnum, email: msg.email, groupId: msg.groupId });
       }
     }
     else

@@ -20,10 +20,6 @@ const authSignup = async (req, res) => {
   }
 };
 
-
-
-
-
 const postSignin = (req, res) => {
   res.json({ user: req.user });
 };
