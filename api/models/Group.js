@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
 const groupSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  start: { type: Date, default: 0 },
-  finish: { type: Date, default: 0 },
+  groupSpec: { type: String },
+  groupTitle: { type: String, required: true },
+  dateStart: { type: Date, default: new Date() },
+  dateFinish: { type: Date, default: new Date() },
+  strDateStart: { type: String, default: '' },
+  strDateFinish: { type: String, default: '' },
   status: { type: Boolean, default: false },
-  // phaseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Phase', required: true },
-  // phaseTitle: { type: String, required: true}
 });
 
 module.exports = mongoose.model('Group', groupSchema);
