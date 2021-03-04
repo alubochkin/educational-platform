@@ -8,7 +8,7 @@ import CreateGroupForm from '../components/CreateGroupForm';
 import SendInvitesForm from '../components/SendInvitesForm';
 
 const TeacherOfficePage = () => {
-  const state = useSelector(state => state.groupRedicer);
+  const state = useSelector(state => state.groupReducer);
   console.log('state', state);
 
   const useStyles = makeStyles({
