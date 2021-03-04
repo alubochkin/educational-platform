@@ -11,20 +11,28 @@ const sendMsg = async (tocken) => {
         pass: process.env.MSG_PASSVORD, // generated ethereal password
       },
     });
-    transporter.sendMail({
-      from: `<${process.env.MSG_FROM}>`,
-      to: process.env.MSG_TO,
-      subject: 'Message registration',
-      text: `This message was sent from registration server. http://localhost:3100/registration?invtoken=${tocken}`
-    }).then((data) => { console.log('Yes Send', data); return true; }).catch((err) => { console.log('###', err); return false; });
 
+    const options = {
+      from: `"Node js" <${process.env.MSG_FROM}>`,
+      to: `<${process.env.MSG_TO}>`,
+      subject: 'Message from Node js',
+      html: '<h1>Hello msg.<h1/>',
+    }
+
+    transporter.sendMail(options, function (error, response) {
+      if (error) {
+        console.log(error);
+        // res.end("error");
+        return false;
+      } else {
+        console.log("Message sent: " + response.message);
+        // res.end("sent");
+        return true
+      }
+    });
   } catch {
-    console.log('%%%%');
     console.log('ERROR SEND MSG!!!!');
     return false;
   }
-
-
 };
 module.exports = { sendMsg };
-// console.log(sendMsg());

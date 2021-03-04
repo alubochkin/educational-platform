@@ -5,7 +5,10 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(jwtReceive)
   .post(jwtSend);
+
+router
+  .route('/token')
+  .post(jwtReceive);
 
 module.exports = router;
