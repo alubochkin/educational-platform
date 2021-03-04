@@ -2,14 +2,15 @@ const Group = require('../models/Group');
 
 const addGroup = async (req, res) => {
   const { groupSpec, groupTitle, dateStart, dateFinish } = req.body;
+ 
   try {
     const group = await Group.create({
       groupSpec: groupSpec,
       groupTitle: groupTitle,
-      dateStart: new Date(dateStart),
-      dateFinish: new Date(dateFinish),
-      strStart: dateStart,
-      strFinish: dateFinish,
+      dateStart: Date(dateStart),
+      dateFinish: Date(dateFinish),
+      strDateStart: dateStart,
+      strDateFinish: dateFinish,
     });
     return res.json(group);
   } catch
