@@ -1,17 +1,27 @@
 const Student = require('../models/Student');
 const Teacher = require('../models/Teacher');
-const studentSignup = async (req, res) => {
-  const student = await Student.create({
-    userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName,
-    groupId: req.body.groupId, groupName: req.body.groupName
-  });
-  res.json(student);
+
+const authSignup = async (req, res) => {
+  let userAuth;
+  try {
+    if (req.user.role === 3) {
+      userAuth = await Student.create({
+        userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName,
+        groupId: req.body.groupId, groupName: req.body.groupName
+      });
+    }
+    else {
+      userAuth = await Teacher.create({ userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName });
+    }
+    return res.json(userAuth);
+  } catch
+  {
+    return res.status(500).render('error');
+  }
 };
 
-const teacherSignup = async (req, res) => {
-  const teacher = await Teacher.create({ userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName });
-  res.json({ teacher: teacher.id });
-};
+
+
 
 
 const postSignin = (req, res) => {
@@ -25,5 +35,5 @@ const signOut = (req, res, next) => {
 };
 
 module.exports = {
-  teacherSignup, studentSignup, postSignin, signOut,
+  postSignin, signOut, authSignup,
 };

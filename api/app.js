@@ -9,6 +9,8 @@ const userMiddleware = require('./middlewares/user.js');
 const notFoundMiddleware = require('./middlewares/notfound404.js');
 const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
+const sendmsgRouter = require('./routes/sendmsg');
+
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
 require('./config/passport');
 const app = express();
@@ -35,6 +37,7 @@ app.use(passport.session());
 
 app.use(userMiddleware);
 
+app.use('/sendmsg', sendmsgRouter);
 app.use('/auth', authRouter);
 
 //app.use(isAuthMiddleware);
