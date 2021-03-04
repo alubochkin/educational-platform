@@ -12,6 +12,7 @@ function App() {
         <CreateGroupForm />
         <SendInvitesForm />
     </Provider>
+
   );
 }
 
