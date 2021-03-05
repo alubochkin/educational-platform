@@ -2,28 +2,39 @@ const jwt = require('jsonwebtoken');
 const Message = require('../models/Message');
 const { sendMsg } = require('../controllers/nodemailer');
 
+
 const jwtSend = async (req, res) => {
-  try {
-    const payload = {
-      email: req.body.email,
-      groupId: '1234567'
-    };
-    const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
-    if (token) {
-      const resultSend = await sendMsg(token);
-      if (resultSend) {
-        const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
-        return res.json({ msg: msgsend.jwtnum });
-      } else {
-        console.log('ERROR SEND MSG!!!!');
-        return res.json({ msg: 'ERROR SEND MSG!!!!' });
+  const { emails, groupId } = req.body;
+  let resultArr = [];
+  for (let i = 0; i < emails.length; i += 1) {
+    try {
+      const payload = {
+        email: emails[i],
+        groupId: groupId
+      };
+      const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
+      if (token) {
+        const resultSend = await sendMsg(token);
+        if (resultSend) {
+          const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
+          resultArr.push({ email: msgsend.email, status: true });
+          //return res.json({ msg: msgsend.jwtnum });
+        } else {
+          console.log('ERROR SEND MSG!!!!');
+          resultArr.push({ email: emails[i], status: false, msg: 1 });
+          //return res.json({ msg: 'ERROR SEND MSG!!!!' });
+        }
       }
+      else
+        resultArr.push({ email: emails[i], status: false, msg: 2 });
+      // return res.json({ msg: 'Error1' });
+
+    } catch {
+      resultArr.push({ email: emails[i], status: false, msg: 3 });
+      // return res.json({ msg: 'Error2' });
     }
-    else
-      return res.json({ msg: 'Error1' });
-  } catch {
-    return res.json({ msg: 'Error2' });
   }
+  return res.json({ result: resultArr });
 };
 
 
