@@ -3,8 +3,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import StudentAuth from './StudentAuth';
-import TeacherOfficePage from './TeacherOfficePage';
 
 const useStyles = makeStyles({
   content: {
@@ -22,9 +20,8 @@ const MainPage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.content} maxWidth={false}>
-        <h1>Main</h1>
-<TeacherOfficePage />
         {/* <StudentAuth /> */}
+        <img src='/images/main-page.jpg' alt='campus Danya' />
       </Container>
     </React.Fragment>
 

@@ -1,7 +1,9 @@
-import { LOGIN_USER } from '../actionTypes';
-import { fetchMethod } from '../thunkUtils';
+import { LOGIN_USER, LOGOUT_USER } from '../actionTypes';
+import { fetchMethod, fetchGet } from '../thunkUtils';
 
 export const loginUserAC = (userInfo) => ({ type: LOGIN_USER, payload: { userInfo } });
+
+export const logoutUserAC = () => ({ type: LOGOUT_USER });
 
 export const loginUserThunk = (input) => async (dispatch) => {
   try {
@@ -21,3 +23,17 @@ export const loginUserThunk = (input) => async (dispatch) => {
   }
 };
 
+export const logoutUserThunk = () => async (dispatch) => {
+  try {
+    const response = await fetchGet({
+      path: 'http://localhost:3100/auth/signout'
+    });
+
+    if (!response.error) {
+      dispatch(logoutUserAC());
+    }
+
+  } catch (err) {
+    console.log('Err', err);
+  }
+}

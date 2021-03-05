@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Container, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { loginUserThunk } from '../redux/actions/actionUser';
@@ -33,7 +33,6 @@ export default function LoginForm() {
       })
     })
   }
-  console.log('input', input);
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(loginUserThunk(input));
@@ -45,15 +44,17 @@ export default function LoginForm() {
         onSubmit={handleSubmit}
         className={classes.form}
         validate="true">
+          
+        <h2>Войдите в систему</h2>
 
         <div className={classes.formItems}>
           <TextField
             onChange={handleChange} value={input.email}
-            name="email" id="outlined-basic" label="Email" type="email" required />
+            name="email" label="Email" type="email" required />
 
           <TextField
             onChange={handleChange} value={input.password}
-            name="password" id="outlined-basic" label="Пароль" type="password" required />
+            name="password" label="Пароль" type="password" required />
         </div>
 
         <Button type="submit"
