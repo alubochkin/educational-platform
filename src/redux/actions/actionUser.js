@@ -10,7 +10,7 @@ export const loginUserThunk = (input) => async (dispatch) => {
       method: 'post',
       body: input
     });
-
+console.log(response)
     if (!response.error) {
       const userInfo = response;
       dispatch(loginUserAC(userInfo));

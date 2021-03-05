@@ -9,7 +9,7 @@ import { LOGIN_USER } from '../actionTypes';
 export default function groupReducer(state = {}, action) {
   switch (action.type) {
     case LOGIN_USER:
-      return { ...state, user: action.payload.userInfo };
+      return { ...state, ...action.payload.userInfo };
 
     default:
       return state;

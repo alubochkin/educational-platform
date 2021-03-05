@@ -17,12 +17,12 @@ const useStyles = makeStyles({
   },
 });
 
-const NavigationTopStudent = () => {
+const NavigationTopTeacher = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const currentUser = useSelector(state => state.userReducer);
   const { firstName } = currentUser;
- 
+
   return (
     <BottomNavigation
       value={value}
@@ -32,6 +32,7 @@ const NavigationTopStudent = () => {
       showLabels
       className={classes.root}
     >
+   
       <BottomNavigationAction
         component={Link}
         to="/"
@@ -44,15 +45,15 @@ const NavigationTopStudent = () => {
         className="nav-item is-top"
         label="Оповещения"
         icon={<NotificationsNoneOutlinedIcon />} />
-      <BottomNavigationAction
+       <BottomNavigationAction
         component={Link}
-        to="/studentOffice"
+        to="/teacherOffice"
         className="nav-item is-top"
-        label="Кампус"
+        label="Офис"
         icon={<SchoolOutlinedIcon />} />
       <BottomNavigationAction
         component={Link}
-        to="/studentPage"
+        to="/teacherPage"
         className="nav-item is-top"
         label={firstName}
         icon={<PersonOutlineOutlinedIcon />} />
@@ -66,4 +67,4 @@ const NavigationTopStudent = () => {
   );
 }
 
-export default NavigationTopStudent;
+export default NavigationTopTeacher;
