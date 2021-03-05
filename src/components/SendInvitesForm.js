@@ -16,11 +16,11 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr 1fr',
     gap: '30px'
   },
-  buttonSubmit: { 
+  buttonSubmit: {
     display: 'grid',
     marginTop: '30px',
     gridTemplateColumns: '1fr 1fr 1fr',
-  
+
   }
 });
 
@@ -28,7 +28,7 @@ export default function SendInvitesForm() {
   const classes = useStyles();
   const state = useSelector(state => state.groupReducer);
   console.log('group', state.group)
- 
+
   const [input, setInput] = useState({ email1: '', email2: '', email3: '' });
   const changeHandler = ({ target }) => {
     setInput((input) => {
@@ -39,29 +39,37 @@ export default function SendInvitesForm() {
     });
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log('input', input);
-    // какой-то fetch
+    try {
+      const response = await fetch('/sendmsg', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ emails: ['kolb2006puma@mail.ru', 'alubochkin@ya.ru'], groupId: '23zcxzt676z7fzx' })
+      });
+      const data = await response.json();
+      console.log(data);
 
-    setInput(() => {
-      return { email1: '', email2: '', email3: '' }
-    });
+
+    } catch (err) {
+      console.log('Err', err);
+    }
   }
 
   return (
     <Container maxWidth="sm">
       <h2>Группа {state.group.groupTitle} создана!</h2>
       <h2>отправить приглашение студентам:</h2>
-      <form
+      <form onSubmit={submitHandler}
         noValidate autoComplete="off">
 
         <TextField
           onChange={changeHandler}
           name="email" label="E-mail студента" />
         <div>
-          <Button
-            onClick={submitHandler}
+          <Button type="submit"
             variant="contained">
             Отправить приглашения
           </Button>
