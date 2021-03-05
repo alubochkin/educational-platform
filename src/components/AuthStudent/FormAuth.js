@@ -42,6 +42,7 @@ export default function StudentAuth() {
   const [mailTokenIdgroup, setmailTokenIdgroup] = useState({})
 
   const token = useParams();
+  console.log(token)
  
   useEffect(() => {
     

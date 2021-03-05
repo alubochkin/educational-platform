@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import TeacherSidebar from '../components/Sidebar/TeacherSidebar';
-import CreateGroupForm from '../components/CreateGroupForm';
-import SendInvitesForm from '../components/SendInvitesForm';
+import CreateGroupForm from '../components/InvitedStudent/CreateGroupForm';
+import SendInvitesForm from '../components/InvitedStudent/SendInvitesForm';
 
 const TeacherOfficePage = () => {
   const state = useSelector(state => state.groupReducer);

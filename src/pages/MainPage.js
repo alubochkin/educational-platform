@@ -8,7 +8,6 @@ import TeacherOfficePage from './TeacherOfficePage';
 
 const useStyles = makeStyles({
   content: {
-    marginTop: '30px',
   }
 });
 
@@ -22,8 +21,8 @@ const MainPage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.content} maxWidth={false}>
-        <h1>Main</h1>
-<TeacherOfficePage />
+
+        <TeacherOfficePage />
         {/* <StudentAuth /> */}
       </Container>
     </React.Fragment>
