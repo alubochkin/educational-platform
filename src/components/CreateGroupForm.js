@@ -12,6 +12,15 @@ const useStyles = makeStyles({
     margin: '0 auto',
     display: 'grid',
   },
+  formItems: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '30px'
+  },
+  submit: { 
+    marginTop: '50px',
+    maxWidth: 'max-content',
+    }
 });
 export default function CreateGroupForm() {
   const dispatch = useDispatch();
@@ -37,7 +46,8 @@ export default function CreateGroupForm() {
         onSubmit={handleSubmit}
         className={classes.form}
         validate="true">
-        <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
+        {/* <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel> */}
+        <div className={classes.formItems}>
         <Select
           required
           name="groupSpec"
@@ -53,20 +63,28 @@ export default function CreateGroupForm() {
           })}
         </Select>
 
-        <div>
+        
           <TextField
             onChange={handleChange}
             name="groupTitle" id="outlined-basic" label="Название группы" required />
         </div>
-
-        <div>
+ 
+        <div className={classes.formItems}>
           <TextField
+            className={classes.textField}
             required
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={handleChange}
             type="date"
             name="dateStart" id="outlined-basic" label="Дата старта" />
           <TextField
+            className={classes.textField}
             required
+             InputLabelProps={{
+              shrink: true,
+            }}
             onChange={handleChange}
             type="date"
             name="dateFinish" id="outlined-basic" label="Дата окончания" />
@@ -86,14 +104,14 @@ export default function CreateGroupForm() {
             />
           </MuiPickersUtilsProvider> */}
         </div>
-
-        <div>
-          <Button
-            type="submit"
-            variant="contained">
-            Создать
-          </Button>
-        </div>
+           <Button type="submit" 
+          variant="outlined" 
+          size="large" 
+          color="primary" 
+          className={classes.submit}>
+          Создать
+        </Button>
+       
       </form>
     </Container>
   );

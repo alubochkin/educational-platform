@@ -9,8 +9,9 @@ import SendInvitesForm from '../components/SendInvitesForm';
 
 const TeacherOfficePage = () => {
   const state = useSelector(state => state.groupReducer);
+  const isState = Object.keys(state).length ? true : false;
+  
   console.log('state', state);
-
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -36,8 +37,8 @@ const TeacherOfficePage = () => {
         <TeacherSidebar className={classes.sidebar} />
         <div className={classes.content}>
           <h1>TeacherOffice</h1>
-          <CreateGroupForm />
-          <SendInvitesForm />
+          {!isState && <CreateGroupForm />}
+          {isState && <SendInvitesForm />}
         </div>
 
       </Container>
