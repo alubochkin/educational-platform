@@ -3,6 +3,8 @@ const session = require('express-session');
 const cors = require('cors');
 const passport = require('passport');
 const morgan = require('morgan');
+const multer = require("multer");
+
 const { sessionStore } = require('./config/db');
 
 const userMiddleware = require('./middlewares/user.js');
@@ -21,6 +23,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(multer({ dest: "uploads" }).single("filedata"));
 
 app.use(
   session({

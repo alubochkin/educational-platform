@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -36,15 +36,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StudentAuth() {
-  
+
   const classes = useStyles();
 
   const [mailTokenIdgroup, setmailTokenIdgroup] = useState({})
 
   const token = useParams();
- 
+
   useEffect(() => {
-    
+
     const requestDataStudent = async (path, sendData) => {
       try {
         const response = await fetch(path, {
@@ -54,17 +54,18 @@ export default function StudentAuth() {
           },
           body: JSON.stringify(sendData)
         });
+
         if (response.status === 200) return await response.json();
         else return new Error(response.err)
-      } catch(err) {
+      } catch (err) {
         console.log('Error: ', err);
       }
     }
 
-      (async () => {
-        await requestDataStudent('/sendmsg/token', token)
-          .then((response) => setmailTokenIdgroup(response))     
-      })()
+    (async () => {
+      await requestDataStudent('/sendmsg/token', token)
+        .then((response) => setmailTokenIdgroup(response))
+    })()
 
   }, [token])
 
@@ -83,7 +84,7 @@ export default function StudentAuth() {
     console.log(dataStudentAll)
 
   }
-    
+
 
   return (
     <div className={classes.wrappRegisterPage}>
@@ -94,7 +95,7 @@ export default function StudentAuth() {
       </div>
       <form onSubmit={registrationHandler} className={classes.root} noValidate autoComplete="off">
         <div className={classes.groupformItem}>
-          <TextField name="name"id="name" label="Ваше имя" />
+          <TextField name="name" id="name" label="Ваше имя" />
           <TextField name="lastname" id="last-name" label="Ваша Фамилия" />
         </div>
         <div className={classes.groupformItem}>
@@ -102,10 +103,10 @@ export default function StudentAuth() {
           <TextField type="password" id="repassword" label="Повторите пароль" />
         </div>
 
-        <Button type="submit" 
-          variant="outlined" 
-          size="large" 
-          color="primary" 
+        <Button type="submit"
+          variant="outlined"
+          size="large"
+          color="primary"
           className={classes.submit}>
           Зарегистрироваться
         </Button>
