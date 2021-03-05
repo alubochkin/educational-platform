@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { addGroupThunk } from '../redux/actions/actionGroup';
+import { addGroupThunk } from '../../redux/actions/actionGroup';
 
 const useStyles = makeStyles({
   form: {

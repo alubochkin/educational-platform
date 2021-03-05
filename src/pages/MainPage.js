@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles({
   content: {
-    marginTop: '30px',
   }
 });
 
@@ -20,6 +19,7 @@ const MainPage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.content} maxWidth={false}>
+
         {/* <StudentAuth /> */}
         <img src='/images/main-page.jpg' alt='campus Danya' />
       </Container>
