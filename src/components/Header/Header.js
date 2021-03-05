@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import NavigationTopStudent from './NavItemsStudent';
+import NavigationTopTeacher from './NavItemsTeacher';
+import NavigationTopAdmin from './NavItemsAdmin';
 
 const useStyles = makeStyles({
   root: {
@@ -27,13 +30,21 @@ const useStyles = makeStyles({
 });
 
 const Header = () => {
-
   const classes = useStyles();
+
+  let role = 0;
+  const { user } = useSelector(state => state.userReducer);
+
+  if (user) {
+    role = user.role;
+  }
 
   return (
     <div className={classes.header}>
-      <div className={classes.logo}>ODU Project</div>
-      <NavigationTopStudent />
+      <div className={classes.logo}>EDU Project</div>
+      {role === 3 && <NavigationTopStudent />}
+      {role === 2 && <NavigationTopTeacher />}
+      {role === 1 && <NavigationTopAdmin />}
     </div>
   )
 }

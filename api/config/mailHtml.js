@@ -1,5 +1,6 @@
-module.exports = (link, token) => {
-   return `
+module.exports = (token) => {
+  const link = 'http://localhost:3000/studentregistration';
+  return `
    <div style="background-color: #fff; width: 600px; margin: 0 auto;">
 
    <h2 style="background-color: #3f51b5; padding: 30px ; color: #fff; width: 100%; text-align: center;">
