@@ -61,7 +61,8 @@ const NavigationTopStudent = () => {
         icon={<PersonOutlineOutlinedIcon />} />
       <BottomNavigationAction
         to="/logout"
-        className="nav-item is-top"
+        className="nav-item is-top" 
+        label="Выйти" 
         icon={<MeetingRoomOutlinedIcon />} />
     </BottomNavigation>
 
