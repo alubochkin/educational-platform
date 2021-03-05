@@ -1,14 +1,15 @@
 const Student = require('../models/Student');
 const Teacher = require('../models/Teacher');
 const Message = require('../models/Message');
+const Group = require('../models/Group');
 
 const authSignup = async (req, res) => {
   let userAuth;
-  const { invtoken } = req.body.invtoken;
+  let group = req.body?.groupName || '';
+  const token = req.body?.token || '';
   try {
-
-    if (invtoken) {
-      const msg = await Message.findOne({ jwtnum: invtoken })
+    if (token) {
+      const msg = await Message.findOne({ jwtnum: token })
       if (msg) {
         await msg.remove();
       } else {
@@ -18,11 +19,13 @@ const authSignup = async (req, res) => {
         }
       }
     }
-
     if (req.user.role === 3) {
+      if (req.body.groupId && !group) {
+        group = await Group.findById(req.body.groupId);
+      }
       userAuth = await Student.create({
         userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName,
-        groupId: req.body.groupId, groupName: req.body.groupName
+        groupId: req.body.groupId, groupName: group
       });
     }
     else {
