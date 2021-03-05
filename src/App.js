@@ -7,6 +7,7 @@ import Page404 from './pages/Page404';
 import StudentOffice from './pages/StudentOffice';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import RegisterStudentToken from './pages/RegisterStudentToken';
 
 // import CreateGroupForm from './components/CreateGroupForm';
 // import SendInvitesForm from './components/SendInvitesForm';
@@ -20,6 +21,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={MainPage}/>
           <Route exact path="/studentOffice" component={StudentOffice} />
+          <Route exact path="/studentregistration/:token/:mail" component={RegisterStudentToken} />
           <Route path="/" component={Page404} />
         </Switch>
       </Router>

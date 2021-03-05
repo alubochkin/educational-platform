@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer')
 const express = require('express');
-const MailComposer = require("nodemailer/lib/mail-composer");
 const dotenv = require('dotenv');
 const htmlMail = require('../config/mailHtml')
 dotenv.config();
@@ -11,19 +10,19 @@ router.get('/', async (req, res) => {
 
 
   let smtpTransport = nodemailer.createTransport({
-    host: 'smtp.yandex.ru',
+    host: 'smtp.mail.ru',
     port: 465,
     secure: true,
     auth: {
-      user: `${process.env.user}`,
-      pass: `${process.env.pass}`,
+      user: 'elbrusteacher@bk.ru',
+      pass: '-omP3erxXUA1',
     },
   })
 
   const options = {
-    from: '"Node js" <alubochkin@yandex.ru>',
-    to: '<alubochkin@yandex.ru>',
-    subject: 'Message from Node js',
+    from: '"Буткемп" <elbrusteacher@bk.ru>',
+    to: '<alubochkin@yandex.ru>, <maro_80@bk.ru',
+    subject: 'Привет это письмо от Буткемп',
     html: htmlMail(),
   }
 
