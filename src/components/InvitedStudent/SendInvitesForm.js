@@ -91,7 +91,7 @@ export default function SendInvitesForm() {
       <form className={classes.formEmail} onSubmit={submitHandler}
         noValidate autoComplete="off">
         <div className={classes.mailCreateInputs}>
-          {createdInput.map((_, i) => <MaiiStudentInput key={i} className={classes.inputMail}/>)}
+          {createdInput.map((_, i) => <MaiiStudentInput key={ i } className={classes.inputMail}/>)}
         </div>
         
         <div className={classes.groupButton}>
@@ -114,7 +114,6 @@ export default function SendInvitesForm() {
             Отправить приглашения
           </Button>
         </div>
-
       </form>
     </>
   );
