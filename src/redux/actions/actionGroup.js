@@ -3,7 +3,6 @@ import { fetchMethod } from '../thunkUtils';
 
 export const addGroupAC = (group) => ({ type: ADD_GROUP, payload: { group } });
 
-
 export const addGroupThunk = (group) => async (dispatch) => {
   try {
     const response = await fetchMethod({
@@ -12,7 +11,11 @@ export const addGroupThunk = (group) => async (dispatch) => {
       body: group
     });
 
-    dispatch(addGroupAC(response));
+    if (!response.error) {
+      const groupInfo = response;
+      dispatch(addGroupAC(groupInfo));
+    }
+
   } catch (err) {
     console.log('Err', err);
   }
