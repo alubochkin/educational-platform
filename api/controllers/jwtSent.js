@@ -1,37 +1,40 @@
 const jwt = require('jsonwebtoken');
 const Message = require('../models/Message');
-const { sendMsg } = require('../controllers/nodemailer');
+const sendMsg = require('../config/sendRegistationStudend');
+
 
 const jwtSend = async (req, res) => {
-  try {
-    const payload = {
-      email: req.body.email,
-      groupId: '1234567'
-    };
-    const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
-    if (token) {
-      const resultSend = await sendMsg(token);
-      if (resultSend) {
+  const { emails, groupId } = req.body;
+  let resultArr = [];
+  for (let i = 0; i < emails.length; i += 1) {
+
+    try {
+      const payload = {
+        email: emails[i],
+        groupId: groupId
+      };
+      const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
+      console.log(token);
+      if (token) {
+        await sendMsg(emails[i], token);
         const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
-        return res.json({ msg: msgsend.jwtnum });
-      } else {
-        console.log('ERROR SEND MSG!!!!');
-        return res.json({ msg: 'ERROR SEND MSG!!!!' });
+        resultArr.push({ email: msgsend.email, status: true });
       }
+      else
+        resultArr.push({ email: emails[i], status: false, msg: 2 });
+    } catch {
+      resultArr.push({ email: emails[i], status: false, msg: 3 });
     }
-    else
-      return res.json({ msg: 'Error1' });
-  } catch {
-    return res.json({ msg: 'Error2' });
   }
+  return res.json({ result: resultArr });
 };
 
 
 const jwtReceive = async (req, res) => {
   try {
-    const token = req.body.invtoken;
+    const token = req.body.token;
     if (token) {
-      const msg = await Message.findOne({ jwtnum: token })
+      const msg = await Message.findOne({ jwtnum: token }).lean();
       if (msg) {
         res.json({ token: msg.jwtnum, email: msg.email, groupId: msg.groupId });
       }
