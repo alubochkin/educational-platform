@@ -29,7 +29,7 @@ const jwtSend = async (req, res) => {
 
 const jwtReceive = async (req, res) => {
   try {
-    const token = req.body.invtoken;
+    const token = req.body.token;
     if (token) {
       const msg = await Message.findOne({ jwtnum: token })
       if (msg) {
