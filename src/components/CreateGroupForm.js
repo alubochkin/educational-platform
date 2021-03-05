@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { addGroupThunk } from '../redux/actions/actionGroup';
+// import DateFnsUtils from '@date-io/date-fns';
+// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles({
   form: {
@@ -10,6 +12,15 @@ const useStyles = makeStyles({
     margin: '0 auto',
     display: 'grid',
   },
+  formItems: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '30px'
+  },
+  submit: { 
+    marginTop: '50px',
+    maxWidth: 'max-content',
+    }
 });
 export default function CreateGroupForm() {
   const dispatch = useDispatch();
@@ -24,18 +35,19 @@ export default function CreateGroupForm() {
       })
     })
   }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // добавить дополнительные проверки
+    dispatch(addGroupThunk(group))
+  }
   return (
     <Container maxWidth={false}>
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          dispatch(addGroupThunk(group))
-        }
-        }
-
+        onSubmit={handleSubmit}
         className={classes.form}
         validate="true">
-        <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
+        {/* <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel> */}
+        <div className={classes.formItems}>
         <Select
           required
           name="groupSpec"
@@ -47,42 +59,60 @@ export default function CreateGroupForm() {
           {spec.map((el) => {
             return (
               <option key={Math.random()} value={el.title}>{el.title}</option>
-
             )
           })}
         </Select>
 
-        <div>
+        
           <TextField
-
             onChange={handleChange}
             name="groupTitle" id="outlined-basic" label="Название группы" required />
         </div>
-
-        <div>
+ 
+        <div className={classes.formItems}>
           <TextField
+            className={classes.textField}
             required
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={handleChange}
             type="date"
             name="dateStart" id="outlined-basic" label="Дата старта" />
           <TextField
+            className={classes.textField}
             required
+             InputLabelProps={{
+              shrink: true,
+            }}
             onChange={handleChange}
             type="date"
             name="dateFinish" id="outlined-basic" label="Дата окончания" />
-        </div>
 
-        <div>
-          <Button
-            type="submit"
-
-            variant="contained">
-            Создать
-          </Button>
+          {/* <MuiPickersUtilsProvider>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="Date picker inline"
+              onChange={handleChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </MuiPickersUtilsProvider> */}
         </div>
+           <Button type="submit" 
+          variant="outlined" 
+          size="large" 
+          color="primary" 
+          className={classes.submit}>
+          Создать
+        </Button>
+       
       </form>
-
-
     </Container>
   );
 }
