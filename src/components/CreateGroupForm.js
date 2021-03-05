@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, TextField, Button, Select, FormControl , InputLabel } from '@material-ui/core';
+import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import { groupAddThunk } from '../redux/actions/actionGroup';
+import { addGroupThunk } from '../redux/actions/actionGroup';
+// import DateFnsUtils from '@date-io/date-fns';
+// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles({
   form: {
@@ -10,58 +12,107 @@ const useStyles = makeStyles({
     margin: '0 auto',
     display: 'grid',
   },
+  formItems: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '30px'
+  },
+  submit: { 
+    marginTop: '50px',
+    maxWidth: 'max-content',
+    }
 });
 export default function CreateGroupForm() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  // const handleChange = (event) => {
-  //   console.log('select changed', event.target.value);
-  // }
-  // const [spec, setSpec] = useState();
-  const spec = useSelector((state) => state.spec);
+  const spec = useSelector((state) => state.specReducer);
+  const [group, setGroup] = useState({});
   const handleChange = (event) => {
-        
-  };
-
-
-// 
+    setGroup((group) => {
+      return ({
+        ...group,
+        [event.target.name]: event.target.value,
+      })
+    })
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // добавить дополнительные проверки
+    dispatch(addGroupThunk(group))
+  }
   return (
     <Container maxWidth={false}>
-      <FormControl className={classes.form}>
-        <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
+      <form
+        onSubmit={handleSubmit}
+        className={classes.form}
+        validate="true">
+        {/* <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel> */}
+        <div className={classes.formItems}>
         <Select
+          required
+          name="groupSpec"
           native
-          value={spec}
+          value={group.groupSpec}
           onChange={handleChange}
         >
           <option aria-label="None" value="" />
-          <option value={'Fullstack JS'}>Fullstack JS</option>
-          <option value={'Fullstack JS Online'}>Fullstack JS Online</option>
-          <option value={'Data Science'}>Data Science</option>
+          {spec.map((el) => {
+            return (
+              <option key={Math.random()} value={el.title}>{el.title}</option>
+            )
+          })}
         </Select>
 
-        <div>
+        
           <TextField
-            name="groupTitle" id="outlined-basic" label="Название группы" />
+            onChange={handleChange}
+            name="groupTitle" id="outlined-basic" label="Название группы" required />
         </div>
-
-        <div>
+ 
+        <div className={classes.formItems}>
           <TextField
+            className={classes.textField}
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+            type="date"
             name="dateStart" id="outlined-basic" label="Дата старта" />
           <TextField
+            className={classes.textField}
+            required
+             InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+            type="date"
             name="dateFinish" id="outlined-basic" label="Дата окончания" />
-        </div>
 
-        <div>
-          <Button
-            // onclick={()=>dispatch(groupAddThunk())}
-            variant="contained">
-            Создать
-          </Button>
+          {/* <MuiPickersUtilsProvider>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="Date picker inline"
+              onChange={handleChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </MuiPickersUtilsProvider> */}
         </div>
-      </FormControl>
-
-     
+           <Button type="submit" 
+          variant="outlined" 
+          size="large" 
+          color="primary" 
+          className={classes.submit}>
+          Создать
+        </Button>
+       
+      </form>
     </Container>
   );
 }

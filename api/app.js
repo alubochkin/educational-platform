@@ -9,9 +9,10 @@ const userMiddleware = require('./middlewares/user.js');
 const notFoundMiddleware = require('./middlewares/notfound404.js');
 const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
+const sendmsgRouter = require('./routes/sendmsg');
+const groupRouter = require('./routes/group.router');
 
-const registerStudent = require('./routes/registerStudent');
-const tokenStudentRouter = require('./routes/tokenStudent');
+
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
 require('./config/passport');
 const app = express();
@@ -40,11 +41,9 @@ app.use(passport.session());
 app.use(userMiddleware);
 
 app.use('/auth', authRouter);
-app.use('/registerStudent' , registerStudent)
-app.use('/auth/token' , tokenStudentRouter)
+app.use('/sendmsg', sendmsgRouter);
+app.use('/group', groupRouter);
 
-//app.use(isAuthMiddleware);
-// app.use('/', indexRouter);
 app.use(notFoundMiddleware);
 
 app.use(errorMiddleware);

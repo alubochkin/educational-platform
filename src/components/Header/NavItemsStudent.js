@@ -29,31 +29,37 @@ const NavigationTopStudent = () => {
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction 
-        component={Link} 
-        to="/" 
-        className="nav-item is-top" 
-        label="Главная" 
+      <BottomNavigationAction
+        component={Link}
+        to="/teacherOffice"
+        className="nav-item is-top"
+        label="Учительская"
         icon={<LocalLibraryOutlinedIcon />} />
       <BottomNavigationAction
-        component={Link}  
+        component={Link}
+        to="/"
+        className="nav-item is-top"
+        label="Главная"
+        icon={<LocalLibraryOutlinedIcon />} />
+      <BottomNavigationAction
+        component={Link}
         to="/notifications"
-        className="nav-item is-top" 
-        label="Оповещения" 
+        className="nav-item is-top"
+        label="Оповещения"
         icon={<NotificationsNoneOutlinedIcon />} />
       <BottomNavigationAction
-        component={Link}  
+        component={Link}
         to="/studentOffice"
-        className="nav-item is-top" 
-        label="Кампус" 
+        className="nav-item is-top"
+        label="Кампус"
         icon={<SchoolOutlinedIcon />} />
       <BottomNavigationAction
-        component={Link}  
+        component={Link}
         to="/studentPage"
-        className="nav-item is-top" 
-        label="Брундильда" 
+        className="nav-item is-top"
+        label="Брундильда"
         icon={<PersonOutlineOutlinedIcon />} />
-      <BottomNavigationAction 
+      <BottomNavigationAction
         to="/logout"
         className="nav-item is-top" 
         label="Выйти" 

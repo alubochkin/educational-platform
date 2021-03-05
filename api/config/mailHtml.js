@@ -1,4 +1,4 @@
-module.exports = (link) => {
+module.exports = (link, token) => {
    return `
    <div style="background-color: #fff; width: 600px; margin: 0 auto;">
 
@@ -10,7 +10,7 @@ module.exports = (link) => {
  
    <div style="color: #333; height: 500px">
      <p>Регистрируся по ссылке ниже</p>
-     <a href=${link} style="padding: 10px 15px; border: solid 1px #3f51b5">Регистрация<a>
+     <a href=${link}/${token} style="padding: 10px 15px; border: solid 1px #3f51b5">Регистрация<a>
    </div>
  
    <div style="background-color: #333; color: #fff;">

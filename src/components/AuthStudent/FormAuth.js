@@ -39,9 +39,9 @@ export default function StudentAuth() {
   
   const classes = useStyles();
 
-  const [mailToken, setMailToken] = useState({})
+  const [mailTokenIdgroup, setmailTokenIdgroup] = useState({})
 
-  const params = useParams();
+  const token = useParams();
  
   useEffect(() => {
     
@@ -62,11 +62,11 @@ export default function StudentAuth() {
     }
 
       (async () => {
-        await requestDataStudent('/auth/token', params)
-          .then((response) => setMailToken(response))     
+        await requestDataStudent('/sendmsg/token', token)
+          .then((response) => setmailTokenIdgroup(response))     
       })()
 
-  }, [params])
+  }, [token])
 
 
   const registrationHandler = (e) => {
@@ -74,10 +74,10 @@ export default function StudentAuth() {
     const { name, lastname, password } = e.target;
 
     const dataStudentAll = {
-      name: name.value,
-      lastname: lastname.value,
+      firsName: name.value,
+      lastName: lastname.value,
       password: password.value,
-      ...mailToken
+      ...mailTokenIdgroup
     }
 
     console.log(dataStudentAll)
@@ -114,6 +114,14 @@ export default function StudentAuth() {
   );
 }
 
+// {
+//   token,
+//   email,
+//   groupId,
+//  firstName
+  // lastName,
+ // password
+// } fetch post /auth/signup
 
 // Для регистрации http://localhost:3100/auth/student/signup body:{firstName=test,
 // lastName=test,

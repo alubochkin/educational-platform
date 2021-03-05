@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 const nodemailer = require('nodemailer')
 const dotenv = require('dotenv');
 const htmlMail = require('../config/mailHtml');
+const { EmailSharp } = require('@material-ui/icons');
 dotenv.config();
 
-module.exports = (mail) => {
+module.exports = (mail, token) => {
     let smtpTransport = nodemailer.createTransport({
     host: 'smtp.mail.ru',
     port: 465,
@@ -18,7 +20,7 @@ module.exports = (mail) => {
     from: '"Буткемп" <elbrusteacher@bk.ru>',
     to: `<${mail}>`,
     subject: 'Привет это письмо от Буткемп',
-    html: htmlMail(),
+    html: htmlMail(token),
   }
   if(mail) {
     smtpTransport.sendMail(options, function(error, response) {
@@ -27,5 +29,3 @@ module.exports = (mail) => {
     });
   };
 };
-
-
