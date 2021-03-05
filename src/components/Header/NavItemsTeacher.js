@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -9,6 +9,7 @@ import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneO
 import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined';
 import LocalLibraryOutlinedIcon from '@material-ui/icons/LocalLibraryOutlined';
 import { Link } from 'react-router-dom';
+import { logoutUserThunk } from '../../redux/actions/actionUser';
 
 const useStyles = makeStyles({
   root: {
@@ -20,8 +21,13 @@ const useStyles = makeStyles({
 const NavigationTopTeacher = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const currentUser = useSelector(state => state.userReducer);
-  const { firstName } = currentUser;
+  const dispatch = useDispatch();
+  const { user } = useSelector(state => state.userReducer);
+  const { firstName } = user;
+
+  const logoutHandler = () => {
+    dispatch(logoutUserThunk());
+  }
 
   return (
     <BottomNavigation
@@ -32,7 +38,7 @@ const NavigationTopTeacher = () => {
       showLabels
       className={classes.root}
     >
-   
+
       <BottomNavigationAction
         component={Link}
         to="/"
@@ -45,7 +51,7 @@ const NavigationTopTeacher = () => {
         className="nav-item is-top"
         label="Оповещения"
         icon={<NotificationsNoneOutlinedIcon />} />
-       <BottomNavigationAction
+      <BottomNavigationAction
         component={Link}
         to="/teacherOffice"
         className="nav-item is-top"
@@ -59,8 +65,9 @@ const NavigationTopTeacher = () => {
         icon={<PersonOutlineOutlinedIcon />} />
       <BottomNavigationAction
         to="/logout"
-        className="nav-item is-top" 
-        label="Выйти" 
+        className="nav-item is-top"
+        label="Выйти"
+        onClick={logoutHandler}
         icon={<MeetingRoomOutlinedIcon />} />
     </BottomNavigation>
 

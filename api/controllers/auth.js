@@ -4,20 +4,20 @@ const Message = require('../models/Message');
 
 const authSignup = async (req, res) => {
   let userAuth;
-  const { invtoken } = req.body.invtoken;
+  // const { invtoken } = req.body.invtoken;
   try {
 
-    if (invtoken) {
-      const msg = await Message.findOne({ jwtnum: invtoken })
-      if (msg) {
-        await msg.remove();
-      } else {
-        if (req.user.email) {
-          const msgEmail = await Message.findOne({ email: req.user.email });
-          if (msgEmail) await msgEmail.remove();
-        }
-      }
-    }
+    // if (invtoken) {
+    //   const msg = await Message.findOne({ jwtnum: invtoken })
+    //   if (msg) {
+    //     await msg.remove();
+    //   } else {
+    //     if (req.user.email) {
+    //       const msgEmail = await Message.findOne({ email: req.user.email });
+    //       if (msgEmail) await msgEmail.remove();
+    //     }
+    //   }
+    // }
 
     if (req.user.role === 3) {
       userAuth = await Student.create({

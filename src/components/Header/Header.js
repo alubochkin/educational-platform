@@ -30,20 +30,18 @@ const useStyles = makeStyles({
 });
 
 const Header = () => {
+  const classes = useStyles();
+
   let role = 0;
   const { user } = useSelector(state => state.userReducer);
-  console.log(user);
+
   if (user) {
     role = user.role;
-    console.log('role', role)
-
   }
-
-  const classes = useStyles();
 
   return (
     <div className={classes.header}>
-      <div className={classes.logo}>ODU Project</div>
+      <div className={classes.logo}>EDU Project</div>
       {role === 3 && <NavigationTopStudent />}
       {role === 2 && <NavigationTopTeacher />}
       {role === 1 && <NavigationTopAdmin />}
