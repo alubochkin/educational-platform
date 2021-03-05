@@ -8,6 +8,7 @@ import StudentOffice from './pages/StudentOffice';
 import TeacherOfficePage from './pages/TeacherOfficePage';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import RegisterStudentToken from './pages/RegisterStudentToken';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/teacherOffice" component={TeacherOfficePage} />
           <Route exact path="/studentOffice" component={StudentOffice} />
+          <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
           <Route path="/" component={Page404} />
         </Switch>
       </Router>
