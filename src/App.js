@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
 import MainPage from './pages/MainPage';
+import StartPage from './pages/StartPage';
 import Page404 from './pages/Page404';
 import StudentOffice from './pages/StudentOffice';
 import TeacherOfficePage from './pages/TeacherOfficePage';
@@ -17,7 +18,8 @@ const App = () => {
         <Header />
 
         <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={StartPage} />
+          <Route exact path="/mainPage" component={MainPage} />
           <Route exact path="/teacherOffice" component={TeacherOfficePage} />
           <Route exact path="/studentOffice" component={StudentOffice} />
           <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
