@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const passport = require('passport');
-
+const morgan = require('morgan');
 const { sessionStore } = require('./config/db');
 
 const userMiddleware = require('./middlewares/user.js');
@@ -17,6 +17,7 @@ const groupRouter = require('./routes/group.router');
 require('./config/passport');
 const app = express();
 
+app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

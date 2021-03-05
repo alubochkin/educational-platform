@@ -7,6 +7,7 @@ export async function fetchMethod({ path, method, body }) {
     },
     body: JSON.stringify(body)
   });
+  console.log(response)
   if (!response.ok) {
     const message = await response.json();
     return ({

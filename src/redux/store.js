@@ -6,8 +6,8 @@ import { spec } from '../modelsTemp/spec';
 
 const prelodableState = {
   specReducer: spec,
-  groupReducer: {},
-  userReducer: {},
+  // groupReducer: {},
+  // userReducer: {},
 };
 
 const composeEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));

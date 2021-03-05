@@ -33,7 +33,6 @@ export default function LoginForm() {
       })
     })
   }
-  console.log('input', input);
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(loginUserThunk(input));
