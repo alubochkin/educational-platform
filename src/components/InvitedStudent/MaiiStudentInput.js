@@ -15,7 +15,7 @@ const MaiiStudentInput = () => {
   return (
     <TextField
     onChange={changeHandler}
-    name="mail" label="E-mail студента" />
+    name="email" label="E-mail студента" />
   )
 }
 
