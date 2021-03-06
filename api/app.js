@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const cors = require('cors');
+// const cors = require('cors');
 const passport = require('passport');
 const morgan = require('morgan');
 const multer = require("multer");
@@ -20,9 +20,19 @@ require('./config/passport');
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+// app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.set(express.urlencoded({ extended: true }))
 app.use(multer({ dest: "uploads" }).single("filedata"));
 
 app.use(
@@ -33,7 +43,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 1000 * 60 * 60 * 2,
+      maxAge: 1000 * 60 * 60 * 24 * 2,
     },
   }),
 );
