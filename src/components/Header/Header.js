@@ -41,7 +41,9 @@ const Header = () => {
 
   return (
     <div className={classes.header}>
-      <div className={classes.logo}>EDU Project</div>
+      <div className={classes.logo}>
+        Онлайн образование
+      </div>
       {role === 3 && <NavigationTopStudent />}
       {role === 2 && <NavigationTopTeacher />}
       {role === 1 && <NavigationTopAdmin />}

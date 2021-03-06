@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import TeacherOfficePage from './TeacherOfficePage';
+import StudentAuth from '../components/AuthStudent/FormAuth';
 
 const useStyles = makeStyles({
   content: {
@@ -13,6 +15,8 @@ const useStyles = makeStyles({
 
 const MainPage = () => {
 
+  const { user } = useSelector(state => state.userReducer);
+
   const classes = useStyles();
 
   return (
@@ -21,9 +25,7 @@ const MainPage = () => {
       <CssBaseline />
       <Container className={classes.content} maxWidth={false}>
 
-        <TeacherOfficePage />
-        {/* <StudentAuth /> */}
-        <img src='/images/main-page.jpg' alt='campus Danya' />
+       { (user.role === 2) && <TeacherOfficePage /> }
       </Container>
     </React.Fragment>
 

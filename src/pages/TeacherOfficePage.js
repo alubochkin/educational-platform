@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import TeacherSidebar from '../components/Sidebar/TeacherSidebar';
 import CreateGroupForm from '../components/InvitedStudent/CreateGroupForm';
 import SendInvitesForm from '../components/InvitedStudent/SendInvitesForm';
+import Sidebar from '../components/Sidebar/Sidebar';
 
 const TeacherOfficePage = () => {
   const state = useSelector(state => state.groupReducer);
@@ -35,7 +36,7 @@ const TeacherOfficePage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.root} maxWidth={false}>
-        <TeacherSidebar className={classes.sidebar} />
+        <Sidebar className={classes.sidebar} />
         <div className={classes.content}>
           <h1>TeacherOffice</h1>
           {!isState && <CreateGroupForm />}

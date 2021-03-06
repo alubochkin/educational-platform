@@ -16,7 +16,7 @@ export const loginUserThunk = (input) => async (dispatch) => {
     if (!response.error) {
       const userInfo = response;
       dispatch(loginUserAC(userInfo));
-    }
+    } // обработка если юзера нет неправильны пароль логин
 
   } catch (err) {
     console.log('Err', err);
