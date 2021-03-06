@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import  {Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Header from './components/Header/Header';
 import MainPage from './pages/MainPage';
 import StartPage from './pages/StartPage';
@@ -33,11 +33,11 @@ const App = () => {
 
         <Route exact path="/startPage" component={StartPage} />
 
-        <Route exact path="/teacherOffice">
+        <Route path="/teacherOffice">
           {role === 2 ? <TeacherOfficePage /> : <Redirect to="/startPage" />}
         </Route>
 
-        <Route exact path="/studentOffice">
+        <Route path="/studentoffice">
           {role === 3 ? <StudentOffice /> : <Redirect to="/startPage" />}
         </Route>
 

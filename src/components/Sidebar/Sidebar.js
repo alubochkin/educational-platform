@@ -1,4 +1,9 @@
 import React from 'react';
+import {useRouteMatch,  Link, Switch, Route } from 'react-router-dom';
+
+
+import Shedule from '../Shedule.js';
+
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -58,13 +63,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SidebarLeft() {
+  const { url, path } = useRouteMatch();
   const classes = useStyles();
-
+  
   const titleCourse = [
     { title: 'Фаза 1', description: 'Javascript' },
     { title: 'Фаза 2', description: 'Backend' },
     { title: 'Фаза 3', description: 'React' }
   ]
+  console.log(path)
+  console.log(url)
   return (
     <div className={classes.root}>
       <List className={classes.sidebarUl}>
@@ -78,11 +86,11 @@ export default function SidebarLeft() {
       <Divider />
 
       <List className={classes.sidebarUl}>
-        <ListItem button ><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
+        <ListItem button component={Link} to={`${url}/shedule`}><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
         <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
         <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
       </List>
-
+     
     </div>
   );
 }

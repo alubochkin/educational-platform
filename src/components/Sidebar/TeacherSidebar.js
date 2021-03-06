@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouteMatch, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -57,16 +58,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TeacherSidebar() {
+  const { url } = useRouteMatch();
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
 
       <List className={classes.sidebarUl}>
-        <ListItem button ><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Группа' /><EventNoteOutlinedIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem>
+        <ListItem button component={Link} to={`${url}/groups`}><ListItemText primary='Мои группы' /><EventNoteOutlinedIcon /></ListItem>
+        <ListItem button component={Link} to={`${url}/groupadd`}><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
+        <ListItem button component={Link} to={`${url}/syllabus`}><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
+        {/* <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem> */}
       </List>
 
     </div>

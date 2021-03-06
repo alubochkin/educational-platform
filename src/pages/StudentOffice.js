@@ -2,9 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import SidebarLeft from '../components/Sidebar/Sidebar'
+import SidebarLeft from '../components/Sidebar/Sidebar';
+import {useRouteMatch,  Link, Switch, Route } from 'react-router-dom';
+
+
+import Shedule from '../components/Shedule.js';
 
 const StudentOffice = () => {
+  const { url, path } = useRouteMatch();
+  console.log(path);
+
 
   const useStyles = makeStyles({
     root: {
@@ -31,9 +38,13 @@ const StudentOffice = () => {
         <SidebarLeft className={classes.sidebar}/>
         <div className={classes.content}>
           <h1>StudentOffice</h1>
+      <Switch>
+        <Route path={`${path}/shedule`}><Shedule /></Route>
+      </Switch>
         </div>
 
       </Container>
+     
     </React.Fragment>
   )
 }
