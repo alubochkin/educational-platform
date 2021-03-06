@@ -8,6 +8,7 @@ import TeacherSidebar from '../components/Sidebar/TeacherSidebar';
 import CreateGroupForm from '../components/InvitedStudent/CreateGroupForm';
 import SendInvitesForm from '../components/InvitedStudent/SendInvitesForm';
 import Sidebar from '../components/Sidebar/Sidebar';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const TeacherOfficePage = () => {
   const state = useSelector(state => state.groupReducer);
@@ -35,13 +36,8 @@ const TeacherOfficePage = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container className={classes.root} maxWidth={false}>
-        <Sidebar className={classes.sidebar} />
-        <div className={classes.content}>
-          <h1>TeacherOffice</h1>
-          {!isState && <CreateGroupForm />}
-          {isState && <SendInvitesForm />}
-        </div>
+      <Container className="content-with-sidebar" maxWidth={false}>
+        <h1>TeacherOffice</h1>
 
       </Container>
     </React.Fragment>

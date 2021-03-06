@@ -40,13 +40,10 @@ export default function StudentAuth() {
   const classes = useStyles();
 
   const [mailTokenIdgroup, setmailTokenIdgroup] = useState({})
-
   const token = useParams();
-  console.log(token)
- 
+
 
   useEffect(() => {
-
     const requestDataStudent = async (path, sendData) => {
       try {
         const response = await fetch(path, {
@@ -69,7 +66,29 @@ export default function StudentAuth() {
         .then((response) => setmailTokenIdgroup(response))
     })()
 
-  }, [token])
+  }, [token]);
+
+  const sendingDataAPI = async (data) => {
+
+    try {
+      const response = await fetch('/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.status === 200) {
+        console.log(await response.json())
+        return await response.json();
+      } 
+      else return new Error(response.err)
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+
+  }
 
 
   const registrationHandler = (e) => {
@@ -77,15 +96,20 @@ export default function StudentAuth() {
     const { name, lastname, password } = e.target;
 
     const dataStudentAll = {
-      firsName: name.value,
+      firstName: name.value,
       lastName: lastname.value,
       password: password.value,
-      ...mailTokenIdgroup
+      role: 3,
+      groupName: 'Foxes',
+      groupId: mailTokenIdgroup.groupId,
+      token: mailTokenIdgroup.token,
+      email: mailTokenIdgroup.email
     }
 
-    console.log(dataStudentAll)
-
+    sendingDataAPI(dataStudentAll)
+     console.log(dataStudentAll)
   }
+
 
 
   return (
@@ -117,19 +141,3 @@ export default function StudentAuth() {
   );
 }
 
-// {
-//   token,
-//   email,
-//   groupId,
-//  firstName
-  // lastName,
- // password
-// } fetch post /auth/signup
-
-// Для регистрации http://localhost:3100/auth/student/signup body:{firstName=test,
-// lastName=test,
-// email=t1@t1.ru,
-// password=123,
-// role=1,
-// groupName=апрапрпарпа,
-// groupId=5}

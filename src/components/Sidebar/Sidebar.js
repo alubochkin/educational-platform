@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import EventNoteOutlinedIcon from '@material-ui/icons/EventNoteOutlined';
 import SubjectOutlinedIcon from '@material-ui/icons/SubjectOutlined';
+import {  Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -71,8 +72,45 @@ export default function Sidebar() {
     { title: 'Фаза 3', description: 'React' }
   ]
   return (
+
     <div className={classes.root}>
-    {user.role === 3 && <>  
+
+
+     
+    {user?.role === 2 && 
+        <List className={classes.sidebarUl}>
+          <ListItem 
+            component={Link} 
+            to="/" button >
+              <ListItemText primary='Учительская' /><ScheduleIcon />
+          </ListItem>
+
+          <ListItem 
+            component={Link} 
+            to="/creategroup" button >
+              <ListItemText primary='Создать группу' /><ScheduleIcon />
+          </ListItem>
+
+          <ListItem 
+            component={Link} 
+            to="/groups" button >
+              <ListItemText primary='Группа' /><EventNoteOutlinedIcon />
+          </ListItem>
+
+          <ListItem 
+            component={Link} 
+            to="/groups" button >
+            <ListItemText primary='Учебная программа' /><SubjectOutlinedIcon />
+          </ListItem>
+
+          <ListItem 
+            component={Link} 
+            to="/groups" button >
+            <ListItemText primary='Создать тесты' /><SubjectOutlinedIcon />
+          </ListItem>
+        </List>}
+
+    {user?.role === 3 && <>  
         <List className={classes.sidebarUl}>
           {titleCourse.map((text, index) => (
             <ListItem button key={text.title}>
@@ -89,14 +127,6 @@ export default function Sidebar() {
           <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
         </List> 
       </>}
-
-      {user.role === 2 && 
-        <List className={classes.sidebarUl}>
-          <ListItem button ><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Группа' /><EventNoteOutlinedIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem>
-        </List>}
 
     </div>
 

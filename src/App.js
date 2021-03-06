@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import Header from './components/Header/Header';
 import MainPage from './pages/MainPage';
 import StartPage from './pages/StartPage';
@@ -11,6 +12,8 @@ import TeacherOfficePage from './pages/TeacherOfficePage';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
 import { Container } from '@material-ui/core';
+import Sidebar from './components/Sidebar/Sidebar';
+import CreateGroupForm from './components/InvitedStudent/CreateGroupForm';
 
 const App = () => {
 
@@ -21,12 +24,33 @@ const App = () => {
     role = user.role;
   }
 
+  const useStyles = makeStyles({
+    root: {
+      width: '100%',
+      height: 'calc(100vh - 150px)',
+      background: 'none',
+      paddingLeft: 0,
+      display: 'flex',
+      marginTop: '30px',
+    },
+    sidebar: {
+      backgroundColor: "#f0f0f0",
+    },
+    content: {
+      paddingLeft: '50px',
+      width: '100%'
+    }
+  });
+
+  const classes = useStyles();
+
   return (
 
     <Router>
       <Header />
 
-      <Container maxWidth={false}>
+      <Container className={classes.root} maxWidth={false}>
+      <Sidebar className={classes.sidebar}/>
 
       <Switch>
 
@@ -35,6 +59,8 @@ const App = () => {
         </Route>
 
         <Route exact path="/startPage" component={StartPage} />
+
+        <Route path="/creategroup" exact component={CreateGroupForm} />
 
         <Route exact path="/teacherOffice">
           {role === 2 ? <TeacherOfficePage /> : <Redirect to="/startPage" />}

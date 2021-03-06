@@ -7,7 +7,6 @@ import { addGroupThunk } from '../../redux/actions/actionGroup';
 const useStyles = makeStyles({
   form: {
     maxWidth: '80%',
-    margin: '0 auto',
     display: 'grid',
   },
   formItems: {
@@ -39,7 +38,7 @@ export default function CreateGroupForm() {
     dispatch(addGroupThunk(group))
   }
   return (
-    <Container maxWidth={false}>
+    <Container className="content-with-sidebar" maxWidth={false}>
       <form
         onSubmit={handleSubmit}
         className={classes.form}

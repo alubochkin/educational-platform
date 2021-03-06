@@ -3,3 +3,6 @@
   margin: 0;
   box-sizing: border-box;
 }
+.content-with-sidebar {
+  padding-left: 50px !important;
+}
