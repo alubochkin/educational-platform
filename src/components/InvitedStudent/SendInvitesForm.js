@@ -72,16 +72,43 @@ export default function SendInvitesForm() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const mails = []
-    e.target.mail.forEach(mailInput => {
-      mails.push(mailInput.value);
-    })
+    let emails = []
+    if (e.target.email.length > 0) {
+      Array.prototype.slice.call(e.target.email).forEach(mailInput => {
+        emails.push(mailInput.value);
+      })
+    }  else {
+      emails = [e.target.email.value];
+    }   
     setDataSend(() => { 
-     return { mails, group }
+     return { emails, groupId: group.groupId }
     })
   }
 
-  console.log(dataSend)
+  useEffect(() => {
+
+    const requestDataStudent = async (path, sendData) => {
+      // loader
+      try {
+        const response = await fetch(path, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sendData)
+        });
+
+        if (response.status === 200) return await response.json();
+        else return new Error(response.err)
+      } catch (err) {
+        console.log('Error: ', err);
+      }
+    }
+  
+    requestDataStudent('/sendmsg', dataSend)
+      .then((response) => console.log(response))
+
+  },[dataSend])
 
   return (
     <>
@@ -114,7 +141,6 @@ export default function SendInvitesForm() {
             Отправить приглашения
           </Button>
         </div>
-
       </form>
     </>
   );

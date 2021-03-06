@@ -5,6 +5,8 @@ const sendMsg = require('../config/sendRegistationStudend');
 
 const jwtSend = async (req, res) => {
   const { emails, groupId } = req.body;
+
+  console.log(emails)
   let resultArr = [];
   for (let i = 0; i < emails.length; i += 1) {
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -57,8 +58,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SidebarLeft() {
+export default function Sidebar() {
   const classes = useStyles();
+
+  const { user } = useSelector(state => state.userReducer);
+
+  console.log(user)
 
   const titleCourse = [
     { title: 'Фаза 1', description: 'Javascript' },
@@ -67,23 +72,35 @@ export default function SidebarLeft() {
   ]
   return (
     <div className={classes.root}>
-      <List className={classes.sidebarUl}>
-        {titleCourse.map((text, index) => (
-          <ListItem button key={text.title}>
+    {user.role === 3 && <>  
+        <List className={classes.sidebarUl}>
+          {titleCourse.map((text, index) => (
+            <ListItem button key={text.title}>
             <ListItemText className={classes.listh3} primary={text.title} />
             <div className={classes.small}>{text.description}</div>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
+        </ListItem>
+          ))}
+        </List>
+        <Divider />
 
-      <List className={classes.sidebarUl}>
-        <ListItem button ><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
-      </List>
+        <List className={classes.sidebarUl}>
+          <ListItem button ><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
+          <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
+          <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
+        </List> 
+      </>}
+
+      {user.role === 2 && 
+        <List className={classes.sidebarUl}>
+          <ListItem button ><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
+          <ListItem button ><ListItemText primary='Группа' /><EventNoteOutlinedIcon /></ListItem>
+          <ListItem button ><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
+          <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem>
+        </List>}
 
     </div>
+
+
   );
 }
 

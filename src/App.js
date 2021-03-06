@@ -10,6 +10,7 @@ import StudentOffice from './pages/StudentOffice';
 import TeacherOfficePage from './pages/TeacherOfficePage';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
+import { Container } from '@material-ui/core';
 
 const App = () => {
 
@@ -24,6 +25,8 @@ const App = () => {
 
     <Router>
       <Header />
+
+      <Container maxWidth={false}>
 
       <Switch>
 
@@ -44,7 +47,10 @@ const App = () => {
         <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
         <Route path="/" component={Page404} />
       </Switch>
+      </Container>
     </Router>
+
+
 
   );
 }

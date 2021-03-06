@@ -6,13 +6,16 @@ import { loginUserThunk } from '../redux/actions/actionUser';
 
 const useStyles = makeStyles({
   form: {
-    maxWidth: '80%',
     margin: '0 auto',
     display: 'grid',
+    maxWidth: '500px',
+    marginTop: '100px',
+    padding: '100px 100px',
+    background: '#f0f0f0',
   },
   formItems: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr',
     gap: '30px'
   },
   submit: {
@@ -45,7 +48,7 @@ export default function LoginForm() {
         className={classes.form}
         validate="true">
           
-        <h2>Войдите в систему</h2>
+        <h2 className={classes.title}>Войдите в систему</h2>
 
         <div className={classes.formItems}>
           <TextField
