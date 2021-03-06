@@ -47,7 +47,7 @@ export default function SendInvitesForm() {
           'Content-Type': 'application/json'
         },
         method: 'post',
-        body: JSON.stringify({ emails: ['kolb2006puma@mail.ru', 'alubochkin@ya.ru'], groupId: '23zcxzt676z7fzx' })
+        body: JSON.stringify({ emails: ['ekaterina.leo.nikiforova@gmail.com', 'aatroshina@gmail.com@ya.ru'], groupId: '23zcxzt676z7fzx' })
       });
       const data = await response.json();
       console.log(data);
