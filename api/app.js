@@ -13,6 +13,7 @@ const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
 const sendmsgRouter = require('./routes/sendmsg');
 const groupRouter = require('./routes/group.router');
+const moduleRouter = require('./routes/module.router');
 
 
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
@@ -57,6 +58,7 @@ app.use(userMiddleware);
 app.use('/auth', authRouter);
 app.use('/sendmsg', sendmsgRouter);
 app.use('/group', groupRouter);
+app.use('/module', moduleRouter);
 
 app.use(notFoundMiddleware);
 

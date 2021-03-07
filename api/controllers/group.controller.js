@@ -1,8 +1,7 @@
 const Group = require('../models/Group');
 
 const addGroup = async (req, res) => {
-  const { groupSpec, groupTitle, dateStart, dateFinish } = req.body;
-
+  const { groupSpec, groupTitle, dateStart, dateFinish, userId } = req.body;
   try {
     const group = await Group.create({
       groupSpec: groupSpec,
@@ -11,6 +10,7 @@ const addGroup = async (req, res) => {
       dateFinish: Date(dateFinish),
       strDateStart: dateStart,
       strDateFinish: dateFinish,
+      userId: userId
     });
     return res.json({
       groupId: group.id,
@@ -77,8 +77,9 @@ const getGroupId = async (req, res) => {
 };
 
 const getGroupAll = async (req, res) => {
+  const { userId } = req.body;
   try {
-    const group = await Group.find().lean();
+    const group = await Group.find({ userId: userId }).lean();
     return res.json(group);
   } catch
   {
