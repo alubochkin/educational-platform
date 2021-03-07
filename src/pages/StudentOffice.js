@@ -3,13 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import SidebarLeft from '../components/Sidebar/Sidebar';
-import {useRouteMatch,  Link, Switch, Route } from 'react-router-dom';
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
 
-
-import Shedule from '../components/Shedule.js';
+import Shedule from '../components/students/Shedule.js';
 
 const StudentOffice = () => {
-  const { url, path } = useRouteMatch();
+  const { path } = useRouteMatch();
   console.log(path);
 
 
@@ -37,10 +36,12 @@ const StudentOffice = () => {
       <Container className={classes.root} maxWidth={false}>
         <SidebarLeft className={classes.sidebar}/>
         <div className={classes.content}>
-          <h1>StudentOffice</h1>
-      <Switch>
-        <Route path={`${path}/shedule`}><Shedule /></Route>
-      </Switch>
+          <Switch>
+            <Route exact path={`${path}`}><Redirect to={`${path}/shedule`} /></Route>
+            <Route path={`${path}/shedule`}><Shedule /></Route>
+            {/* <Route path={`${path}/groupadd`}>{!isState ? <CreateGroupForm /> : <SendInvitesForm />}</Route>
+            <Route path={`${path}/syllabus`}><Syllabus /></Route> */}
+          </Switch>
         </div>
 
       </Container>

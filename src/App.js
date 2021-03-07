@@ -8,6 +8,7 @@ import StartPage from './pages/StartPage';
 import Page404 from './pages/Page404';
 import StudentOffice from './pages/StudentOffice';
 import TeacherOfficePage from './pages/TeacherOfficePage';
+import AdminOffice from './pages/AdminOffice';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
 
@@ -33,7 +34,11 @@ const App = () => {
 
         <Route exact path="/startPage" component={StartPage} />
 
-        <Route path="/teacherOffice">
+        <Route path="/adminOffice">
+          {role === 1 ? <AdminOffice /> : <Redirect to="/startPage" />}
+        </Route>
+
+        <Route path="/teacheroffice">
           {role === 2 ? <TeacherOfficePage /> : <Redirect to="/startPage" />}
         </Route>
 

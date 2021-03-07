@@ -3,7 +3,7 @@ import React from 'react';
 function Shedule() {
   
   return (
-    <div>Расписание</div>
+    <h1>Мое расписание</h1>
   )
 }
 export default Shedule;

@@ -1,13 +1,12 @@
 import React from 'react';
-import {useRouteMatch,  Link } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-// import EventNoteOutlinedIcon from '@material-ui/icons/EventNoteOutlined';
-// import SubjectOutlinedIcon from '@material-ui/icons/SubjectOutlined';
+import EventNoteOutlinedIcon from '@material-ui/icons/EventNoteOutlined';
+import SubjectOutlinedIcon from '@material-ui/icons/SubjectOutlined';
 
 const drawerWidth = 240;
 
@@ -58,35 +57,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SidebarLeft() {
-  const { url, path } = useRouteMatch();
+export default function TeacherSidebar() {
+  const { url } = useRouteMatch();
   const classes = useStyles();
-  
-  const titleCourse = [
-    { title: 'Фаза 1', description: 'Javascript' },
-    { title: 'Фаза 2', description: 'Backend' },
-    { title: 'Фаза 3', description: 'React' }
-  ]
-  console.log(path)
-  console.log(url)
+
   return (
     <div className={classes.root}>
-      <List className={classes.sidebarUl}>
-        {titleCourse.map((text, index) => (
-          <ListItem button key={text.title}>
-            <ListItemText className={classes.listh3} primary={text.title} />
-            <div className={classes.small}>{text.description}</div>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
 
       <List className={classes.sidebarUl}>
-        <ListItem button component={Link} to={`${url}/shedule`}><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
-        {/* <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem> */}
+        <ListItem button component={Link} to={`${url}/groups`}><ListItemText primary='Мои группы' /><EventNoteOutlinedIcon /></ListItem>
+        <ListItem button component={Link} to={`${url}/groupadd`}><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
+        <ListItem button component={Link} to={`${url}/syllabus`}><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
+        {/* <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem> */}
       </List>
-     
+
     </div>
   );
 }

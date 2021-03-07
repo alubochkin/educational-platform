@@ -77,6 +77,7 @@ const getGroupId = async (req, res) => {
 };
 
 const getGroupAll = async (req, res) => {
+  console.log('пришла')
   try {
     const group = await Group.find().lean();
     return res.json(group);
