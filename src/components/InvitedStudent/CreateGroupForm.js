@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { addGroupThunk } from '../../redux/actions/actionGroup';
 
 const useStyles = makeStyles({
+  container: {
+    marginTop: '20px',
+    padding: '5px',
+    border: 'solid 1px #4253AF',
+    borderRadius: '5px',
+  },
   form: {
     maxWidth: '80%',
     margin: '0 auto',
@@ -20,11 +27,22 @@ const useStyles = makeStyles({
     maxWidth: 'max-content',
   }
 });
-export default function CreateGroupForm() {
+export default function CreateGroupForm({ handleclose }) {
+  const { user } = useSelector((state) => state.userReducer);
+  const history = useHistory();
+  const backToGroups = () => {
+    if (user.role === 1) {
+      history.push('/adminOffice/groups');
+    } else if (user.role === 2) {
+      history.push('/teacheroffice/groups');
+    }
+  }
   const dispatch = useDispatch();
   const classes = useStyles();
-  const spec = useSelector((state) => state.specReducer);
+  const { spec } = useSelector((state) => state.specReducer);
   const [group, setGroup] = useState({});
+
+
   const handleChange = (event) => {
     setGroup((group) => {
       return ({
@@ -36,10 +54,11 @@ export default function CreateGroupForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // добавить дополнительные проверки
-    dispatch(addGroupThunk(group))
+    dispatch(addGroupThunk(group));
+    backToGroups();
   }
   return (
-    <Container maxWidth={false}>
+    <Container className={classes.container} maxWidth={false}>
       <form
         onSubmit={handleSubmit}
         className={classes.form}
@@ -87,13 +106,24 @@ export default function CreateGroupForm() {
             name="dateFinish" id="outlined-basic" label="Дата окончания" />
 
         </div>
-        <Button type="submit"
-          variant="outlined"
-          size="large"
-          color="primary"
-          className={classes.submit}>
-          Создать
-        </Button>
+        <div>
+          <Button type="submit"
+            variant="outlined"
+            size="large"
+            color="primary"
+            className={classes.submit}>
+            Создать
+          </Button>
+
+          <Button type="submit"
+            variant="outlined"
+            size="large"
+            color="secondary"
+            className={classes.submit}
+            onClick={handleclose}>
+            Отменить
+           </Button>
+        </div>
 
       </form>
     </Container>

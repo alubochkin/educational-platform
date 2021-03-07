@@ -16,7 +16,7 @@ router
 
 router
   .route('/delete')
-  .delete(delGroup);
+  .post(delGroup);
 
 router
   .route('/:id')

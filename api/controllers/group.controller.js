@@ -1,4 +1,5 @@
 const Group = require('../models/Group');
+const Student = require('../models/Student');
 
 const addGroup = async (req, res) => {
   const { groupSpec, groupTitle, dateStart, dateFinish } = req.body;
@@ -67,9 +68,11 @@ const delGroup = async (req, res) => {
 };
 const getGroupId = async (req, res) => {
   const { id } = req.params;
+  // для запроса преподавателя или админа по группе
   try {
     const group = await Group.findById(id).lean();
-    return res.json(group);
+    const students = await Student.find({ groupId: id });
+    return res.json({ group, students });
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to group' });

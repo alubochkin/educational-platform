@@ -6,13 +6,13 @@
 
 import { LOGIN_USER, LOGOUT_USER } from '../actionTypes';
 
-export default function groupReducer(state = {}, action) {
+export default function userReducer(state = {}, action) {
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, ...action.payload.userInfo };
 
     case LOGOUT_USER:
-      return { ...state, user: undefined };
+      return { user: undefined };
 
     default:
       return state;
