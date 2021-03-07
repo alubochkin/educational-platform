@@ -24,7 +24,7 @@ module.exports = (email, token) => {
     return smtpTransport.sendMail(options, function (error, response) {
       if (error) { console.log(error); return 0; }
       else {
-        console.log("Message sent: " + response.message);
+        console.log("Message sent: Сообщения отправленны");
         return 1;
       }
     });
