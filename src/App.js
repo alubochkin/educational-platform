@@ -9,6 +9,7 @@ import Page404 from './pages/Page404';
 import StudentOffice from './pages/StudentOffice';
 import TeacherOfficePage from './pages/TeacherOfficePage';
 import AdminOffice from './pages/AdminOffice';
+import CreateGroupForm from './components/InvitedStudent/CreateGroupForm';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
 
@@ -47,6 +48,9 @@ const App = () => {
         </Route>
 
         <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
+
+        <Route exact path="/groupadd"><CreateGroupForm /></Route>
+        
         <Route path="/" component={Page404} />
       </Switch>
     </Router>

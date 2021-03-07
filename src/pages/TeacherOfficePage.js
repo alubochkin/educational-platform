@@ -42,7 +42,7 @@ const TeacherOfficePage = () => {
           <Switch>
             <Route exact path={`${path}`}><Redirect to={`${path}/groups`} /></Route>
             <Route path={`${path}/groups`}><GroupsList /></Route>
-            <Route path={`${path}/groupadd`}>{!isState ? <CreateGroupForm /> : <SendInvitesForm />}</Route>
+           
             <Route path={`${path}/syllabus`}><Syllabus /></Route>
           </Switch>
          

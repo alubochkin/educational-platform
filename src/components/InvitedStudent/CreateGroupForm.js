@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,6 +22,10 @@ const useStyles = makeStyles({
   }
 });
 export default function CreateGroupForm() {
+  const history = useHistory();
+   const backToGroups = () => {
+    history.push('/teacheroffice/groups');
+  }
   const dispatch = useDispatch();
   const classes = useStyles();
   const spec = useSelector((state) => state.specReducer);
@@ -36,7 +41,8 @@ export default function CreateGroupForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // добавить дополнительные проверки
-    dispatch(addGroupThunk(group))
+    dispatch(addGroupThunk(group));
+    backToGroups()
   }
   return (
     <Container maxWidth={false}>

@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteGroupThunk } from '../../redux/actions/actionGroup';
+
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
@@ -57,7 +61,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GroupMap({ group }) {
+  const dispatch = useDispatch();
+  const id = group._id;
   const classes = useStyles();
+  const deleteGroupHandler = (id) => {
+    dispatch(deleteGroupThunk(id));
+   
+  }
   return (
     <div className={classes.divGroup}>
     <ListItem button>
@@ -69,8 +79,8 @@ function GroupMap({ group }) {
         < EditIcon />
       </ListItem>
        <ListItem button
-        component={Link}
-        to="/">
+        onClick={()=>deleteGroupHandler(id)}
+      >
         <DeleteIcon />
       </ListItem>
       {/* <div className={classes.small}>{text.description}</div> */}

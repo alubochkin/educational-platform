@@ -66,7 +66,7 @@ export default function TeacherSidebar() {
 
       <List className={classes.sidebarUl}>
         <ListItem button component={Link} to={`${url}/groups`}><ListItemText primary='Мои группы' /><EventNoteOutlinedIcon /></ListItem>
-        <ListItem button component={Link} to={`${url}/groupadd`}><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
+        {/* <ListItem button component={Link} to={`${url}/groupadd`}><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem> */}
         <ListItem button component={Link} to={`${url}/syllabus`}><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
         {/* <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem> */}
       </List>
