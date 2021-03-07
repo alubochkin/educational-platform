@@ -8,7 +8,7 @@ console.log('>>>>>>>>>>> ser')
 const LocalStrategy = passportLocal.Strategy;
 
 passport.serializeUser((user, done) => {
-  console.log('>>>>>>>>>>> ser')
+  console.log('>>>>>>>>>>> ser', user)
   done(null, user.id);
 });
 

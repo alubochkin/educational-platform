@@ -8,6 +8,7 @@ const groupSchema = new mongoose.Schema({
   strDateStart: { type: String, default: '' },
   strDateFinish: { type: String, default: '' },
   status: { type: Boolean, default: false },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Group', groupSchema);

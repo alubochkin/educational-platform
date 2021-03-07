@@ -82,10 +82,11 @@ export default function StudentAuth() {
       pass: password.value,
       role: 3,
       groupName: '',
+      token,
       ...mailTokenIdgroup
     }
 
-    // console.log(dataStudentAll)
+    console.log(dataStudentAll)
 
     const sendStudentRegistration = async (path, sendData) => {
       try {
@@ -94,17 +95,18 @@ export default function StudentAuth() {
           headers: {
             'Content-Type': 'application/json'
           },
+          credentials: "include",
           body: JSON.stringify(sendData)
         });
 
         if (response.status === 200) return await response.json();
-        else return new Error(response.err)
+        else return new Error('Err')
       } catch (err) {
         console.log('Error: ', err);
       }
     }
 
-    sendStudentRegistration('/auth/signup', dataStudentAll)
+    await sendStudentRegistration('/auth/signup', dataStudentAll)
       .then((response) => console.log(response))
 
   }

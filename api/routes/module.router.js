@@ -1,30 +1,30 @@
 const express = require('express');
 
 const {
-  addGroup, delGroup, updateGroup, getGroupId, getGroupAll
-} = require('../controllers/group.controller.js');
+  addModule, delModule, updateModule, getModuleId, getModuleAll
+} = require('../controllers/module.controller.js');
 
 const router = express.Router();
 
 router
   .route('/add')
-  .post(addGroup);
+  .post(addModule);
 
 router
   .route('/update')
-  .post(updateGroup);
+  .post(updateModule);
 
 router
   .route('/delete')
-  .post(delGroup);
+  .delete(delModule);
 
 router
   .route('/:id')
-  .get(getGroupId);
+  .get(getModuleId);
 
 router
   .route('/')
-  .post(getGroupAll);
+  .get(getModuleAll);
 
 // router.get('/signout', signOut);
 

@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   }
 });
 export default function CreateGroupForm() {
+  const { user } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const classes = useStyles();
   const spec = useSelector((state) => state.specReducer);
@@ -36,7 +37,8 @@ export default function CreateGroupForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // добавить дополнительные проверки
-    dispatch(addGroupThunk(group))
+    console.log('user', user);
+    dispatch(addGroupThunk(group, user._id))
   }
   return (
     <Container maxWidth={false}>

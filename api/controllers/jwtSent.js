@@ -17,7 +17,6 @@ const jwtSend = async (req, res) => {
         groupId: groupId
       };
       const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
-      console.log(token);
       if (token) {
         await sendMsg(emails[i], token);
         const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
