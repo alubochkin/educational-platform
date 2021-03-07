@@ -43,7 +43,7 @@ export default function StudentAuth() {
 
   const token = useParams();
   console.log(token)
- 
+
 
   useEffect(() => {
 
@@ -79,7 +79,7 @@ export default function StudentAuth() {
     const dataStudentAll = {
       firstName: name.value,
       lastName: lastname.value,
-      pass: password.value,
+      password: password.value,
       role: 3,
       groupName: '',
       token,
@@ -89,20 +89,23 @@ export default function StudentAuth() {
     console.log(dataStudentAll)
 
     const sendStudentRegistration = async (path, sendData) => {
+
       try {
-        const response = await fetch(path, {
-          method: 'POST',
+        const response = await fetch('/auth/signup', {
+          method: 'post',
           headers: {
             'Content-Type': 'application/json'
           },
-          credentials: "include",
-          body: JSON.stringify(sendData)
+          body: JSON.stringify(sendData),
+          credentials: "include"
         });
 
+        console.log('***', response)
         if (response.status === 200) return await response.json();
         else return new Error('Err')
       } catch (err) {
         console.log('Error: ', err);
+        return new Error('err');
       }
     }
 

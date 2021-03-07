@@ -4,15 +4,16 @@ const passportLocal = require('passport-local');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
-console.log('>>>>>>>>>>> ser')
+console.log('>>>>>>>>>>>top')
 const LocalStrategy = passportLocal.Strategy;
 
 passport.serializeUser((user, done) => {
-  console.log('>>>>>>>>>>> ser', user)
+  console.log('>>>>>>>>>>> login')
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
+  console.log('>>>>>>>>>>> deserializeUser');
   console.log(id)
   User.findById(id, (err, user) => {
     done(err, { firstName: user.firstName, lastName: user.lastName, id: user._id, email: user.email, role: user.role });

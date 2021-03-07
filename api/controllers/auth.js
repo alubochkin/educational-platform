@@ -4,7 +4,6 @@ const Message = require('../models/Message');
 const Group = require('../models/Group');
 
 const authSignup = async (req, res) => {
-  console.log(req.body)
   let userAuth;
   let group = req.body?.groupName || '';
   const token = req.body?.token || '';
@@ -35,7 +34,7 @@ const authSignup = async (req, res) => {
     return res.json(userAuth);
   } catch
   {
-    return res.status(500).render('error');
+    return res.status(500).json({ err: 'error' });
   }
 };
 

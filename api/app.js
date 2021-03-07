@@ -3,9 +3,8 @@ const session = require('express-session');
 const cors = require('cors');
 const passport = require('passport');
 const morgan = require('morgan');
-const multer = require("multer");
+// const multer = require("multer");
 const { sessionStore } = require('./config/db');
-const userMiddleware = require('./middlewares/user.js');
 const notFoundMiddleware = require('./middlewares/notfound404.js');
 const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
@@ -18,6 +17,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+
+const corsOptions = {
+  // origin: /\.your.domain\.com$/,    // reqexp will match all prefixes
+  origin: '*',
+  methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS",
+  credentials: true,                // required to pass
+  allowedHeaders: "Content-Type, Authorization, X-Requested-With",
+}
+app.use(cors(corsOptions));
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 //   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -28,14 +36,7 @@ app.use(morgan('dev'));
 //   }
 //   next();
 // });
-const corsOptions = {
-  // origin: /\.your.domain\.com$/,    // reqexp will match all prefixes
-  origin: '*',
-  methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS",
-  credentials: true,                // required to pass
-  allowedHeaders: "Content-Type, Authorization, X-Requested-With",
-}
-app.use(cors(corsOptions));
+// app.use(cors());
 // app.use(multer({ dest: "uploads" }).single("filedata"));
 app.use(
   session({
@@ -51,7 +52,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(userMiddleware);
+// app.use(userMiddleware);
 app.use('/auth', authRouter);
 app.use('/sendmsg', sendmsgRouter);
 app.use('/group', groupRouter);
