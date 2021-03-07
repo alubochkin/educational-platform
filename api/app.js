@@ -16,10 +16,13 @@ const groupRouter = require('./routes/group.router');
 const moduleRouter = require('./routes/module.router');
 
 
+
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
 require('./config/passport');
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -31,10 +34,9 @@ app.use((req, res, next) => {
   }
   next();
 });
-// app.use(cors());
-app.use(express.json());
-app.set(express.urlencoded({ extended: true }))
-app.use(multer({ dest: "uploads" }).single("filedata"));
+//  app.use(cors());
+
+// app.use(multer({ dest: "uploads" }).single("filedata"));
 
 app.use(
   session({
@@ -54,7 +56,6 @@ app.use(passport.session());
 
 
 app.use(userMiddleware);
-
 app.use('/auth', authRouter);
 app.use('/sendmsg', sendmsgRouter);
 app.use('/group', groupRouter);

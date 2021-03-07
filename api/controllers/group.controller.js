@@ -1,7 +1,10 @@
 const Group = require('../models/Group');
 
+
 const addGroup = async (req, res) => {
-  const { groupSpec, groupTitle, dateStart, dateFinish, userId } = req.body;
+  console.log('$$$', req.body);
+  const { groupSpec, groupTitle, dateStart, dateFinish } = req.body.group;
+  const userId = req.body.userId;
   try {
     const group = await Group.create({
       groupSpec: groupSpec,

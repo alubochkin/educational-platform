@@ -2,13 +2,13 @@ const Phase = require('../models/Phase');
 const Schedule = require('../models/Schedule');
 
 const addModule = async (req, res) => {
-  const { titleSpec, groupTitle, userId } = req.body;
+  const { titleSpec, groupTitle, phaseId } = req.body;
 
   try {
     const phase = await Phase.create({
       titleSpec: titleSpec,
       title: groupTitle,
-      userId: userId
+      phaseId: phaseId
     });
     return res.json({
       moduleId: phase.id,
