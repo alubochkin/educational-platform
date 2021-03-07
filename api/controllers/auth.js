@@ -4,6 +4,7 @@ const Message = require('../models/Message');
 const Group = require('../models/Group');
 
 const authSignup = async (req, res) => {
+  console.log(req.body)
   let userAuth;
   let group = req.body?.groupName || '';
   const token = req.body?.token || '';

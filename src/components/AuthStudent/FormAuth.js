@@ -72,18 +72,40 @@ export default function StudentAuth() {
   }, [token])
 
 
-  const registrationHandler = (e) => {
+  const registrationHandler = async (e) => {
     e.preventDefault();
     const { name, lastname, password } = e.target;
 
     const dataStudentAll = {
-      firsName: name.value,
+      firstName: name.value,
       lastName: lastname.value,
-      password: password.value,
+      pass: password.value,
+      role: 3,
+      groupName: '',
       ...mailTokenIdgroup
     }
 
-    console.log(dataStudentAll)
+    // console.log(dataStudentAll)
+
+    const sendStudentRegistration = async (path, sendData) => {
+      try {
+        const response = await fetch(path, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sendData)
+        });
+
+        if (response.status === 200) return await response.json();
+        else return new Error(response.err)
+      } catch (err) {
+        console.log('Error: ', err);
+      }
+    }
+
+    sendStudentRegistration('/auth/signup', dataStudentAll)
+      .then((response) => console.log(response))
 
   }
 
@@ -126,10 +148,4 @@ export default function StudentAuth() {
  // password
 // } fetch post /auth/signup
 
-// Для регистрации http://localhost:3100/auth/student/signup body:{firstName=test,
-// lastName=test,
-// email=t1@t1.ru,
-// password=123,
-// role=1,
-// groupName=апрапрпарпа,
-// groupId=5}
+

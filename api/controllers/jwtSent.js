@@ -8,6 +8,7 @@ const jwtSend = async (req, res) => {
 
   console.log(emails)
   let resultArr = [];
+  console.log(emails)
   for (let i = 0; i < emails.length; i += 1) {
 
     try {

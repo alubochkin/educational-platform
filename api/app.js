@@ -40,7 +40,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+// console.log('12')
 
 app.use(userMiddleware);
 
