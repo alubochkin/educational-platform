@@ -5,7 +5,18 @@ const passport = require('passport');
 const morgan = require('morgan');
 const multer = require("multer");
 
+require('./config/passport');
+
 const { sessionStore } = require('./config/db');
+const app = express();
+
+app.use(morgan('dev'));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(multer({ dest: "uploads" }).single("filedata"));
+
+
 
 const userMiddleware = require('./middlewares/user.js');
 const notFoundMiddleware = require('./middlewares/notfound404.js');
@@ -16,14 +27,7 @@ const groupRouter = require('./routes/group.router');
 
 
 // const isAuthMiddleware = require('./middlewares/isAuth.middleware')
-require('./config/passport');
-const app = express();
 
-app.use(morgan('dev'));
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(multer({ dest: "uploads" }).single("filedata"));
 
 app.use(
   session({
