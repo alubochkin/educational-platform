@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ScheduleIcon from '@material-ui/icons/Schedule';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 30,
     padding: '2px 10px',
   },
-  hrSidebar: {
+  divGroup: {
+    display: 'flex',
 
   }
 }));
@@ -55,10 +59,22 @@ const useStyles = makeStyles((theme) => ({
 function GroupMap({ group }) {
   const classes = useStyles();
   return (
+    <div className={classes.divGroup}>
     <ListItem button>
       <ListItemText className={classes.listh3} primary={group.groupTitle} />
-      {/* <div className={classes.small}>{text.description}</div> */}
     </ListItem>
+      <ListItem button
+        component={Link}
+        to="/">
+        < EditIcon />
+      </ListItem>
+       <ListItem button
+        component={Link}
+        to="/">
+        <DeleteIcon />
+      </ListItem>
+      {/* <div className={classes.small}>{text.description}</div> */}
+      </div>
   )
 }
 
