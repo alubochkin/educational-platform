@@ -8,6 +8,7 @@ export const detailsGroupAC = (students) => ({ type: GROUP_DETAILS, payload: { s
 
 export const addGroupThunk = (group, userId) => async (dispatch) => {
   try {
+    console.log('User', userId);
     const response = await fetchMethod({
       path: '/group/add',
       method: 'post',
@@ -24,10 +25,12 @@ export const addGroupThunk = (group, userId) => async (dispatch) => {
   }
 };
 
-export const getGroupsThunk = () => async (dispatch) => {
+export const getGroupsThunk = (userId) => async (dispatch) => {
   try {
-    const response = await fetchGet({
-      path: '/group',
+    const response = await fetchMethod({
+      path: 'http://localhost:3100/group',
+      method: 'post',
+      body: { userId }
     });
     if (!response.error) {
       const groupList = response;

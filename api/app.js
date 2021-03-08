@@ -5,6 +5,7 @@ const passport = require('passport');
 const morgan = require('morgan');
 // const multer = require("multer");
 const { sessionStore } = require('./config/db');
+// const userMiddleware = require('./middlewares/user.js');
 const notFoundMiddleware = require('./middlewares/notfound404.js');
 const errorMiddleware = require('./middlewares/error.js');
 const authRouter = require('./routes/auth');
@@ -20,10 +21,10 @@ app.use(morgan('dev'));
 
 const corsOptions = {
   // origin: /\.your.domain\.com$/,    // reqexp will match all prefixes
-  origin: '*',
+  origin: 'http://localhost:3000',
   methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS",
   credentials: true,                // required to pass
-  allowedHeaders: "Content-Type, Authorization, X-Requested-With",
+  allowedHeaders: "Origin, Content-Type, Authorization, X-Requested-With",
 }
 app.use(cors(corsOptions));
 // app.use((req, res, next) => {

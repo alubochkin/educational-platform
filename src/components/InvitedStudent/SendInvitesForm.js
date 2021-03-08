@@ -105,8 +105,8 @@ export default function SendInvitesForm() {
       }
     }
 
-    requestDataStudent('/sendmsg', dataSend)
-       .then((response) => console.log(response))
+    requestDataStudent('http://localhost:3100/sendmsg', dataSend)
+      .then((response) => console.log(response))
 
   }, [dataSend])
 
