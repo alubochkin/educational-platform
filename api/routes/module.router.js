@@ -24,7 +24,7 @@ router
 
 router
   .route('/')
-  .get(getModuleAll);
+  .post(getModuleAll);
 
 // router.get('/signout', signOut);
 
