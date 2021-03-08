@@ -1,5 +1,4 @@
 export async function fetchMethod({ path, method, body }) {
-
   const response = await fetch(path, {
     method,
     headers: {
@@ -22,7 +21,6 @@ export async function fetchMethod({ path, method, body }) {
 }
 
 export async function fetchGet({ path }) {
-
   const response = await fetch(path);
 
   if (!response.ok) {

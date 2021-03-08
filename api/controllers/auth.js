@@ -34,7 +34,7 @@ const authSignup = async (req, res) => {
     return res.json(userAuth);
   } catch
   {
-    return res.status(500).render('error');
+    return res.status(500).json({ err: 'error' });
   }
 };
 

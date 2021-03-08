@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Container, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { loginUserThunk } from '../redux/actions/actionUser';
+import { addSpecAC } from '../redux/actions/actionSpec';
 
 const useStyles = makeStyles({
   form: {
@@ -39,6 +40,7 @@ export default function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(loginUserThunk(input));
+    dispatch(addSpecAC());
     setInput({ email: '', password: '' })
   }
   return (
@@ -47,7 +49,7 @@ export default function LoginForm() {
         onSubmit={handleSubmit}
         className={classes.form}
         validate="true">
-          
+
         <h2 className={classes.title}>Войдите в систему</h2>
 
         <div className={classes.formItems}>

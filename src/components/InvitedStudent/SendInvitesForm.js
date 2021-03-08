@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr 1fr',
     gap: '30px'
   },
-  buttonSubmit: { 
+  buttonSubmit: {
     display: 'grid',
     marginTop: '30px',
     gridTemplateColumns: '1fr 1fr 1fr',
@@ -58,15 +58,15 @@ export default function SendInvitesForm() {
   const { group } = useSelector(state => state.groupReducer);
 
   console.log(group)
- 
+
   const [dataSend, setDataSend] = useState({});
 
-  const [createdInput, SetCreatedInput] = useState([<MaiiStudentInput className={classes.inputMail}/>]);
+  const [createdInput, SetCreatedInput] = useState([<MaiiStudentInput className={classes.inputMail} />]);
 
   const addInputMail = () => {
     SetCreatedInput((prev) => {
-      return [...prev, <MaiiStudentInput className={classes.inputMail}/>]
-    }) 
+      return [...prev, <MaiiStudentInput className={classes.inputMail} />]
+    })
   }
 
 
@@ -77,11 +77,11 @@ export default function SendInvitesForm() {
       Array.prototype.slice.call(e.target.email).forEach(mailInput => {
         emails.push(mailInput.value);
       })
-    }  else {
+    } else {
       emails = [e.target.email.value];
-    }   
-    setDataSend(() => { 
-     return { emails, groupId: group.groupId }
+    }
+    setDataSend(() => {
+      return { emails, groupId: group.groupId }
     })
   }
 
@@ -104,11 +104,11 @@ export default function SendInvitesForm() {
         console.log('Error: ', err);
       }
     }
-  
-    requestDataStudent('/sendmsg', dataSend)
+
+    requestDataStudent('http://localhost:3100/sendmsg', dataSend)
       .then((response) => console.log(response))
 
-  },[dataSend])
+  }, [dataSend])
 
   return (
     <>
@@ -118,16 +118,16 @@ export default function SendInvitesForm() {
       <form className={classes.formEmail} onSubmit={submitHandler}
         noValidate autoComplete="off">
         <div className={classes.mailCreateInputs}>
-          {createdInput.map((_, i) => <MaiiStudentInput key={i} className={classes.inputMail}/>)}
+          {createdInput.map((_, i) => <MaiiStudentInput key={i} className={classes.inputMail} />)}
         </div>
-        
+
         <div className={classes.groupButton}>
           <div className={classes.addInputMail}>
             <Fab size="small"
-            onClick={addInputMail} 
-            color="secondary" 
-            aria-label="add" 
-            className={classes.margin}>
+              onClick={addInputMail}
+              color="secondary"
+              aria-label="add"
+              className={classes.margin}>
               <AddIcon />
             </Fab>
             Добавить почту
@@ -135,8 +135,8 @@ export default function SendInvitesForm() {
 
           <Button className={classes.buttonivite}
             type="submit"
-            variant="outlined" 
-            size="large" 
+            variant="outlined"
+            size="large"
             color="primary" >
             Отправить приглашения
           </Button>

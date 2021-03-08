@@ -12,14 +12,15 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
+  console.log(id)
   User.findById(id, (err, user) => {
     done(err, { firstName: user.firstName, lastName: user.lastName, id: user._id, email: user.email, role: user.role });
   });
 });
 
 const authenticateuser = async (req, email, pass, done) => {
+  //console.log('>>>>>>PASSPORT<<<<<', req.path);
   const { firstName, lastName, role } = req.body;
-  // console.log('>>>>>>PASSPORT<<<<<', req.path);
 
   try {
     if (/signin/.test(req.path)) {
@@ -28,7 +29,7 @@ const authenticateuser = async (req, email, pass, done) => {
       if (await bcrypt.compare(pass, user.password)) return done(null, user)
       else done(null, false);
     }
-    if (/^.*signup/.test(req.path) && email && pass && role && firstName && lastName) {
+    if (/signup/.test(req.path) && email && pass && role && firstName && lastName) {
       try {
         const hashPass = await bcrypt.hash(pass, 10);
         const newUser = new User({
