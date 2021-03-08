@@ -42,7 +42,7 @@ const TeacherOfficePage = () => {
             <Route exact path={`${path}`}><Redirect to={`${path}/groups`} /></Route>
             <Route path={`${path}/groups`}><GroupsList url={url} /></Route>
             <Route path={`${path}/syllabus`}><Syllabus /></Route>
-            <Route path={`${path}/updateGroup/:${id}`}> update group <GroupUpdate /> </Route>
+            <Route path={`${path}/updateGroup/:${id}`}> <GroupUpdate /> </Route>
           </Switch>
 
         </div>
