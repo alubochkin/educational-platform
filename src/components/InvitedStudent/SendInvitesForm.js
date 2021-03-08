@@ -50,14 +50,16 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr 1fr 1fr 1fr',
     gap: 30,
 
+  },
+  logo: {
+    fontSize: '22px',
+    width: 'max-content',
+    color: '#3f51b5'
   }
 });
 
-export default function SendInvitesForm() {
+export default function SendInvitesForm({ groupId, handleclose }) {
   const classes = useStyles();
-  const { group } = useSelector(state => state.groupReducer);
-
-  console.log(group)
 
   const [dataSend, setDataSend] = useState({});
 
@@ -81,12 +83,11 @@ export default function SendInvitesForm() {
       emails = [e.target.email.value];
     }
     setDataSend(() => {
-      return { emails, groupId: group.groupId }
+      return { emails, groupId }
     })
   }
 
   useEffect(() => {
-
     const requestDataStudent = async (path, sendData) => {
       // loader
       try {
@@ -112,8 +113,9 @@ export default function SendInvitesForm() {
 
   return (
     <>
-      <h2>Группа {group.groupTitle} создана!</h2>
-      <h2>отправить приглашение студентам:</h2>
+      <div className={classes.logo}>
+        Отправить приглашения студентам
+      </div>
 
       <form className={classes.formEmail} onSubmit={submitHandler}
         noValidate autoComplete="off">
