@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useRouteMatch, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -58,27 +58,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Sidebar() {
+export default function SidebarLeft() {
+  const { url } = useRouteMatch();
   const classes = useStyles();
-
-  const { user } = useSelector(state => state.userReducer);
-
-  console.log(user)
 
   const titleCourse = [
     { title: 'Фаза 1', description: 'Javascript' },
     { title: 'Фаза 2', description: 'Backend' },
     { title: 'Фаза 3', description: 'React' }
   ]
+
   return (
     <div className={classes.root}>
-    {user.role === 3 && <>  
+      <>
         <List className={classes.sidebarUl}>
           {titleCourse.map((text, index) => (
             <ListItem button key={text.title}>
-            <ListItemText className={classes.listh3} primary={text.title} />
-            <div className={classes.small}>{text.description}</div>
-        </ListItem>
+              <ListItemText className={classes.listh3} primary={text.title} />
+              <div className={classes.small}>{text.description}</div>
+            </ListItem>
           ))}
         </List>
         <Divider />
@@ -87,20 +85,16 @@ export default function Sidebar() {
           <ListItem button ><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
           <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
           <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
-        </List> 
-      </>}
+        </List>
+      </>
 
-      {user.role === 2 && 
-        <List className={classes.sidebarUl}>
-          <ListItem button ><ListItemText primary='Создать группу' /><ScheduleIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Группа' /><EventNoteOutlinedIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Учебная программа' /><SubjectOutlinedIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Создать тесты' /><SubjectOutlinedIcon /></ListItem>
-        </List>}
+      <List className={classes.sidebarUl}>
+        <ListItem button component={Link} to={`${url}/shedule`}><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
+        {/* <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
+        <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem> */}
+      </List>
 
     </div>
-
-
   );
 }
 

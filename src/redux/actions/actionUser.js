@@ -41,7 +41,7 @@ export const logoutUserThunk = () => async (dispatch) => {
 export const signupUserThunk = (input) => async (dispatch) => {
   try {
     const response = await fetchMethod({
-      path: 'http://localhost:3100/auth/signup',
+      path: '/auth/signup',
       method: 'post',
       body: input
     });
