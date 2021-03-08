@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useRouteMatch, Switch, Route, Redirect, useParams } from 'react-router-dom';
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Sidebar from '../components/Sidebar/TeacherSidebar';
+import AdminSidebar from '../components/Sidebar/AdminSidebar';
+import CreateGroupForm from '../components/InvitedStudent/CreateGroupForm';
+import SendInvitesForm from '../components/InvitedStudent/SendInvitesForm';
 import GroupsList from '../components/teachers/GroupsList';
 import Syllabus from '../components/teachers/Syllabus';
-import GroupUpdate from '../components/teachers/GroupUpdate';
 
-const TeacherOfficePage = () => {
-  const { path, url } = useRouteMatch();
-  const { id } = useParams();
-
+const AdminOffice = () => {
+  const state = useSelector(state => state.groupReducer);
+  const isState = Object.keys(state).length ? true : false;
+  const { path } = useRouteMatch();
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -36,13 +37,13 @@ const TeacherOfficePage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.root} maxWidth={false}>
-        <Sidebar className={classes.sidebar} />
+        <AdminSidebar className={classes.sidebar} />
         <div className={classes.content}>
           <Switch>
             <Route exact path={`${path}`}><Redirect to={`${path}/groups`} /></Route>
-            <Route path={`${path}/groups`}><GroupsList url={url} /></Route>
+            <Route path={`${path}/groups`}><GroupsList /></Route>
+            <Route path={`${path}/groupadd`}><CreateGroupForm /></Route>
             <Route path={`${path}/syllabus`}><Syllabus /></Route>
-            <Route path={`${path}/updateGroup/:${id}`}> update group <GroupUpdate /> </Route>
           </Switch>
 
         </div>
@@ -52,6 +53,6 @@ const TeacherOfficePage = () => {
   )
 }
 
-export default TeacherOfficePage;
+export default AdminOffice;
 
 

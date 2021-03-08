@@ -25,7 +25,8 @@ const MainPage = () => {
       <CssBaseline />
       <Container className={classes.content} maxWidth={false}>
 
-       { (user.role === 2) && <TeacherOfficePage /> }
+        <h2>Главная!</h2>
+        <img src='images/main-page.jpg' alt='danya main-page' />
       </Container>
     </React.Fragment>
 
