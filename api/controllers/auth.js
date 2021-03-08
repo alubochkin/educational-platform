@@ -4,7 +4,7 @@ const Message = require('../models/Message');
 const Group = require('../models/Group');
 
 const authSignup = async (req, res) => {
-  let userAuth;
+
   let group = req.body?.groupName || '';
   const token = req.body?.token || '';
   try {
@@ -23,15 +23,15 @@ const authSignup = async (req, res) => {
       if (req.body.groupId && !group) {
         group = await Group.findById(req.body.groupId);
       }
-      userAuth = await Student.create({
+      await Student.create({
         userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName,
         groupId: req.body.groupId, groupName: group
       });
     }
     else {
-      userAuth = await Teacher.create({ userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName });
+      await Teacher.create({ userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName });
     }
-    return res.json(userAuth);
+    return res.json({ user: req.user });
   } catch
   {
     return res.status(500).json({ err: 'error' });

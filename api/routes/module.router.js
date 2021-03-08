@@ -1,7 +1,7 @@
 const express = require('express');
 
 const {
-  addModule, delModule, updateModule, getModuleId, getModuleAll
+  addModule, delModule, updateModule, getModuleId, getModuleAll, getModuleStudent, getModuleTeacher
 } = require('../controllers/module.controller.js');
 
 const router = express.Router();
@@ -23,8 +23,18 @@ router
   .get(getModuleId);
 
 router
-  .route('/')
-  .get(getModuleAll);
+  .route('/admin')
+  .post(getModuleAll);
+
+router
+  .route('/student')
+  .post(getModuleStudent);
+
+
+router
+  .route('/teacher')
+  .post(getModuleTeacher);
+
 
 // router.get('/signout', signOut);
 
