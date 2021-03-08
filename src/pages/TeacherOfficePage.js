@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Sidebar from '../components/Sidebar/TeacherSidebar';
 import GroupsList from '../components/teachers/GroupsList';
-import Syllabus from '../components/teachers/Syllabus';
+import Syllabus from '../components/admins/AdminSyllabus';
 import GroupUpdate from '../components/teachers/GroupUpdate';
 
 const TeacherOfficePage = () => {
