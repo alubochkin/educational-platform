@@ -79,14 +79,34 @@ const getModuleAll = async (req, res) => {
     return res.json(phase);
   } catch
   {
-    return res.status(500).json({ mass: 'Error not find data to groups' });
+    return res.status(500).json({ mass: 'Error not find data to module' });
   }
 };
 
 const getModuleStudent = async (req, res) => {
   try {
     const phase = await Phase.find({ groupSpec: req.body.groupSpec, isShow: true }).lean();
-    return res.json(phase);
+    const moduleStudent = await Promise.all(phase.map(async (el) => {
+      const schedule = await Schedule.find({ phaseId: el.phaseId }).lean();
+      return { phase: phase, schedule: schedule }
+    }));
+
+    return res.json({ moduleStudent });
+  } catch
+  {
+    return res.status(500).json({ mass: 'Error not find data to groups' });
+  }
+};
+
+const getModuleTeacher = async (req, res) => {
+  try {
+    const phase = await Phase.find({ groupSpec: req.body.groupSpec }).lean();
+    const moduleStudent = await Promise.all(phase.map(async (el) => {
+      const schedule = await Schedule.find({ phaseId: el.phaseId }).lean();
+      return { phase: phase, schedule: schedule }
+    }));
+
+    return res.json({ moduleStudent });
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to groups' });
@@ -94,5 +114,5 @@ const getModuleStudent = async (req, res) => {
 };
 
 module.exports = {
-  addModule, delModule, updateModule, getModuleId, getModuleAll, getModuleStudent, showModule
+  addModule, delModule, updateModule, getModuleId, getModuleAll, getModuleStudent, getModuleTeacher
 };
