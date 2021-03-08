@@ -96,7 +96,6 @@ export default function StudentAuth() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(sendData),
-          credentials: "include"
         });
 
         console.log('***', response)

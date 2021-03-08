@@ -6,7 +6,6 @@ export async function fetchMethod({ path, method, body }) {
       'Content-type': 'application/json'
     },
     body: JSON.stringify(body),
-    credentials: "include",
   });
 
   if (!response.ok) {

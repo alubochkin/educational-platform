@@ -85,30 +85,30 @@ export default function SendInvitesForm() {
     })
   }
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const requestDataStudent = async (path, sendData) => {
-  //     // loader
-  //     try {
-  //       const response = await fetch(path, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify(sendData)
-  //       });
+    const requestDataStudent = async (path, sendData) => {
+      // loader
+      try {
+        const response = await fetch(path, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sendData)
+        });
 
-  //       if (response.status === 200) return await response.json();
-  //       else return new Error(response.err)
-  //     } catch (err) {
-  //       console.log('Error: ', err);
-  //     }
-  //   }
+        if (response.status === 200) return await response.json();
+        else return new Error(response.err)
+      } catch (err) {
+        console.log('Error: ', err);
+      }
+    }
 
-  //   requestDataStudent('/sendmsg', dataSend)
-  //      .then((response) => console.log(response))
+    requestDataStudent('http://localhost:3100/sendmsg', dataSend)
+      .then((response) => console.log(response))
 
-  // }, [dataSend])
+  }, [dataSend])
 
   return (
     <>
