@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow-restricted-names */
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
@@ -36,6 +37,9 @@ export default function GroupUpdate() {
   const { undefined } = useParams();
   const groupId = undefined;
 
+  const { groups } = useSelector(state => state.groupReducer);
+  const group = groups.find((el) => el._id === groupId);
+
   // логика модального окна
   const [open, setOpen] = React.useState(false);
   const [modalStyle] = React.useState(getModalStyle);
@@ -48,7 +52,11 @@ export default function GroupUpdate() {
 
   return (
     <div>
-      {undefined}
+      <span>Название группы: {group.groupTitle}</span><br />
+      <span>ID: {group._id}</span><br />
+      <span>Дата начала: {group.strDateStart}</span><br />
+      <span>Дата окончание: {group.strDateFinish}</span><br />
+
       <Button type="submit"
         variant="outlined"
         size="large"
@@ -70,4 +78,3 @@ export default function GroupUpdate() {
     </div>
   )
 }
-
