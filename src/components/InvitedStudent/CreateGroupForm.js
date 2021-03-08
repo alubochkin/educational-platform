@@ -111,7 +111,8 @@ export default function CreateGroupForm({ handleclose }) {
             variant="outlined"
             size="large"
             color="primary"
-            className={classes.submit}>
+            className={classes.submit}
+            onClick={handleclose}>
             Создать
           </Button>
 
