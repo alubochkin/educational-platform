@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GetGroups({ url }) {
+  const { user } = useSelector(state => state.userReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  useEffect(() => dispatch(getGroupsThunk()), [dispatch]);
+  useEffect(() => dispatch(getGroupsThunk(user._id)), [dispatch]);
   const { groups } = useSelector(state => state.groupReducer);
 
   // логика модального окна

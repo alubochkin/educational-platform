@@ -54,7 +54,7 @@ export default function CreateGroupForm({ handleclose }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // добавить дополнительные проверки
-    dispatch(addGroupThunk(group));
+    dispatch(addGroupThunk(group, user._id));
     backToGroups();
   }
   return (

@@ -65,7 +65,7 @@ export default function StudentAuth() {
     }
 
     (async () => {
-      await requestDataStudent('/sendmsg/token', token)
+      await requestDataStudent('http://localhost:3100/sendmsg/token', token)
         .then((response) => setmailTokenIdgroup(response))
     })()
 
@@ -90,7 +90,7 @@ export default function StudentAuth() {
     const sendStudentRegistration = async (path, sendData) => {
 
       try {
-        const response = await fetch('/auth/signup', {
+        const response = await fetch('http://localhost:3100/auth/signup', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ export default function StudentAuth() {
           body: JSON.stringify(sendData),
         });
 
-        console.log('***', response)
+        // console.log('***', response)
         if (response.status === 200) return await response.json();
         else return new Error(response.err)
       } catch (err) {
@@ -107,7 +107,7 @@ export default function StudentAuth() {
       }
     }
 
-    await sendStudentRegistration('/auth/signup', dataStudentAll)
+    await sendStudentRegistration('http://localhost:3100/auth/signup', dataStudentAll)
       .then((response) => console.log(response))
 
   }

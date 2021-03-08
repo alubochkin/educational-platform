@@ -1,11 +1,11 @@
 export async function fetchMethod({ path, method, body }) {
-
   const response = await fetch(path, {
     method,
     headers: {
       'Content-type': 'application/json'
     },
     body: JSON.stringify(body),
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -21,7 +21,6 @@ export async function fetchMethod({ path, method, body }) {
 }
 
 export async function fetchGet({ path }) {
-
   const response = await fetch(path);
 
   if (!response.ok) {
