@@ -9,13 +9,13 @@ const MaiiStudentInput = () => {
   }
 
   const changeHandler = (e) => {
-   console.log('verification', e.target.value)
+    //  console.log('verification', e.target.value)
   }
-  
+
   return (
     <TextField
-    onChange={changeHandler}
-    name="email" label="E-mail студента" />
+      onChange={changeHandler}
+      name="email" label="E-mail студента" />
   )
 }
 

@@ -6,26 +6,27 @@ const sendMsg = require('../config/sendRegistationStudend');
 const jwtSend = async (req, res) => {
   const { emails, groupId } = req.body;
 
-  console.log(emails)
   let resultArr = [];
-  console.log(emails)
-  for (let i = 0; i < emails.length; i += 1) {
 
-    try {
-      const payload = {
-        email: emails[i],
-        groupId: groupId
-      };
-      const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
-      if (token) {
-        await sendMsg(emails[i], token);
-        const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
-        resultArr.push({ email: msgsend.email, status: true });
+  if (emails) {
+    for (let i = 0; i < emails.length; i += 1) {
+
+      try {
+        const payload = {
+          email: emails[i],
+          groupId: groupId
+        };
+        const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
+        if (token) {
+          await sendMsg(emails[i], token);
+          const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
+          resultArr.push({ email: msgsend.email, status: true });
+        }
+        else
+          resultArr.push({ email: emails[i], status: false, msg: 2 });
+      } catch {
+        resultArr.push({ email: emails[i], status: false, msg: 3 });
       }
-      else
-        resultArr.push({ email: emails[i], status: false, msg: 2 });
-    } catch {
-      resultArr.push({ email: emails[i], status: false, msg: 3 });
     }
   }
   return res.json({ result: resultArr });
