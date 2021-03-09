@@ -23,6 +23,8 @@ const NavigationTopStudent = () => {
   const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.userReducer);
+ 
+  
   const { firstName } = user;
 
   const logoutHandler = () => {
@@ -58,7 +60,7 @@ const NavigationTopStudent = () => {
         icon={<SchoolOutlinedIcon />} />
       <BottomNavigationAction
         component={Link}
-        to="/studentPage"
+        to="/userPage"
         className="nav-item is-top"
         label={firstName}
         icon={<PersonOutlineOutlinedIcon />} />

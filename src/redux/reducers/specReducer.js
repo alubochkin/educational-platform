@@ -1,10 +1,10 @@
 import { ADD_SPEC } from '../actionTypes';
-import { spec } from '../../modelsTemp/spec';
+import { spec, specTeachers } from '../../modelsTemp/spec';
 
 export default function specReducer(state = {}, action) {
   switch (action.type) {
     case ADD_SPEC:
-      return { ...state, spec };
+      return { ...state, spec, specTeachers };
     default:
       return state;
   }

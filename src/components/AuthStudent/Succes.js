@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
@@ -34,6 +35,8 @@ const Succes = () => {
       <div className={classes.subtitle}>Ты теперь студент буткемпа </div>
 
       <Button type="submit" 
+      component={Link}
+      to="/studentoffice"
       variant="outlined" 
       size="large" 
       color="primary" 

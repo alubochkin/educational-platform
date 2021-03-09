@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { apiTokenSendAc,   registrationHandlerAc } from "../../redux/actions/actionsAuthStudent";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -37,81 +39,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StudentAuth() {
 
+  const dispatch = useDispatch();
+  const { dataApi }  = useSelector(state => state.authStudentReducer);
+  const { user }   = useSelector(state => state.answerAuthStudentAPI);
+
+  console.log('formauth', user)
+
   const classes = useStyles();
 
-  const [mailTokenIdgroup, setmailTokenIdgroup] = useState({})
-
   const token = useParams();
-  console.log(token)
-
 
   useEffect(() => {
 
-    const requestDataStudent = async (path, sendData) => {
-      try {
-        const response = await fetch(path, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(sendData)
-        });
+    dispatch(apiTokenSendAc(token))
 
-        if (response.status === 200) return await response.json();
-        else return new Error(response.err)
-      } catch (err) {
-        console.log('Error: ', err);
-      }
-    }
+  }, [token, dispatch])
 
-    (async () => {
-      await requestDataStudent('http://localhost:3100/sendmsg/token', token)
-        .then((response) => setmailTokenIdgroup(response))
-    })()
-
-  }, [token])
-
-
-  const registrationHandler = async (e) => {
-    e.preventDefault();
-    const { name, lastname, password } = e.target;
-
-    const dataStudentAll = {
-      firstName: name.value,
-      lastName: lastname.value,
-      password: password.value,
-      role: 3,
-      groupName: '',
-      ...mailTokenIdgroup
-    }
-
-    // console.log(dataStudentAll)
-
-    const sendStudentRegistration = async (path, sendData) => {
-
-      try {
-        const response = await fetch('http://localhost:3100/auth/signup', {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(sendData),
-        });
-
-        // console.log('***', response)
-        if (response.status === 200) return await response.json();
-        else return new Error(response.err)
-      } catch (err) {
-        console.log('Error: ', err);
-        return new Error('err');
-      }
-    }
-
-    await sendStudentRegistration('http://localhost:3100/auth/signup', dataStudentAll)
-      .then((response) => console.log(response))
-
+  const registrateStudentHandler = (e) => {
+    e.preventDefault()
+    dispatch(registrationHandlerAc(dataApi, e))
   }
-
 
   return (
     <div className={classes.wrappRegisterPage}>
@@ -120,7 +67,7 @@ export default function StudentAuth() {
         <h2>РЕСЕПШЕН БУТКЭМПА</h2>
         <small>Укажите ваши данные для регистрации</small>
       </div>
-      <form onSubmit={registrationHandler} className={classes.root} noValidate autoComplete="off">
+      <form onSubmit={registrateStudentHandler} className={classes.root} noValidate autoComplete="off">
         <div className={classes.groupformItem}>
           <TextField name="name" id="name" label="Ваше имя" />
           <TextField name="lastname" id="last-name" label="Ваша Фамилия" />
@@ -142,13 +89,5 @@ export default function StudentAuth() {
   );
 }
 
-// {
-//   token,
-//   email,
-//   groupId,
-//  firstName
-  // lastName,
- // password
-// } fetch post /auth/signup
 
 

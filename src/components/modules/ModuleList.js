@@ -5,7 +5,11 @@ import ModuleItem from './ModuleItem';
 export default function ModuleList({ spec }) {
   const { modules } = useSelector(state => state.moduleReducer);
 
-  const moduleList = modules.filter((el) => el.titleSpec === spec);
+  let moduleList = [];
+
+  if (modules) {
+    moduleList = modules.filter((el) => el.titleSpec === spec);
+  }
 
   return (
     <div>

@@ -7,27 +7,31 @@ import CreateGroupForm from '../InvitedStudent/CreateGroupForm';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
 
-// стили модального окна
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 const useStyles = makeStyles((theme) => ({
   paper: {
+    alignItems: 'center',
+    display: 'flex',
+    minHeight: '250px',
+    boxShadow: '0 0 30px #33333330',
     position: 'absolute',
+    outline: 'none',
     width: 600,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
+    background: '#fff !important',
     padding: theme.spacing(2, 4, 3),
+    left: '50%',
+    top: '30%',
+    transform:' translate(-50%, -50%)',
+  },
+  title: {
+    marginBottom: 30
+  },
+  modal: {
+    transition: '.3s',
+    '& div[aria-hidden]': {
+      background: '#cccccc7a !important',
+      backdropFilter: 'blur(10px)',
+    }   
   },
 }));
 
@@ -35,12 +39,18 @@ function GetGroups({ url }) {
   const { user } = useSelector(state => state.userReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  useEffect(() => dispatch(getGroupsThunk(user._id)), [user._id, dispatch]);
+  useEffect(() => {
+    if (user.role === 1) {
+      dispatch(getGroupsThunk(user._id, 'admin'));
+    } else if (user.role === 2) {
+      dispatch(getGroupsThunk(user._id, 'teacher'));
+    }
+  }, [user._id, user.role, dispatch]);
   const { groups } = useSelector(state => state.groupReducer);
 
   // логика модального окна
   const [open, setOpen] = React.useState(false);
-  const [modalStyle] = React.useState(getModalStyle);
+ 
   const handleOpen = () => {
     setOpen(true);
   };
@@ -50,24 +60,25 @@ function GetGroups({ url }) {
 
   return (
     <>
-      <h1>Мои группы</h1>
+      <h1 className={classes.title}>Мои группы</h1>
       {
         groups && groups.map((group, i) => {
           return (
             <GroupMap group={group} key={`group-${i}`} url={url} />
           )
         })}
+
       <Button
         variant="outlined"
         color="primary"
         onClick={handleOpen}> Создать группу </Button>
 
       <Modal
+        className={classes.modal}
         open={open}
         onClose={handleClose}
       >
         <div
-          style={modalStyle}
           className={classes.paper}>
           <CreateGroupForm handleclose={handleClose} />
         </div>

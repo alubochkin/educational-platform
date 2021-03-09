@@ -17,8 +17,8 @@ export default function StartPage() {
   const { user } = useSelector(state => state.userReducer);
 
   if (user) {
-    firstName = user.firstName;
-  }
+    firstName = user.firstName 
+  } 
 
   return (
     <div>

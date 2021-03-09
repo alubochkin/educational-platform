@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
+import { useRouteMatch, useParams, Switch, Route, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -10,11 +10,14 @@ import CreateGroupForm from '../components/InvitedStudent/CreateGroupForm';
 import SendInvitesForm from '../components/InvitedStudent/SendInvitesForm';
 import GroupsList from '../components/teachers/GroupsList';
 import AdminSyllabus from '../components/admins/AdminSyllabus';
+import GroupUpdate from '../components/teachers/GroupUpdate';
 
 const AdminOffice = () => {
   const state = useSelector(state => state.groupReducer);
   const isState = Object.keys(state).length ? true : false;
-  const { path } = useRouteMatch();
+  const { path, url } = useRouteMatch();
+  const { id } = useParams();
+
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -40,10 +43,11 @@ const AdminOffice = () => {
         <AdminSidebar className={classes.sidebar} />
         <div className={classes.content}>
           <Switch>
-            {/* <Route exact path={`${path}`}><Redirect to={`${path}/groups`} /></Route> */}
-            {/* <Route path={`${path}/groups`}><GroupsList /></Route> */}
-            {/* <Route path={`${path}/groupadd`}><CreateGroupForm /></Route> */}
+            <Route exact path={`${path}`}><Redirect to={`${path}/syllabus`} /></Route>
+            <Route path={`${path}/groups`}><GroupsList url={url} /></Route>
+            <Route path={`${path}/groupadd`}><CreateGroupForm /></Route>
             <Route path={`${path}/syllabus`}><AdminSyllabus /></Route>
+            <Route path={`${path}/updateGroup/:${id}`}> <GroupUpdate /> </Route>
           </Switch>
 
         </div>

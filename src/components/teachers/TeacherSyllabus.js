@@ -19,10 +19,10 @@ const useStyles = makeStyles({
     gap: '30px'
   },
 });
-function AdminSyllabus() {
+function TeacherSyllabus() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { spec, specTeachers } = useSelector((state) => state.specReducer);
+  const { spec } = useSelector((state) => state.specReducer);
   const { user } = useSelector(state => state.userReducer);
 
   const [syllabus, setSyllabus] = useState({});
@@ -30,7 +30,7 @@ function AdminSyllabus() {
   const [isAdding, setAdding] = useState(false);
 
   useEffect(() => {
-    dispatch(getModulesThunk(user._id, 'admin'));
+    dispatch(getModulesThunk(user._id, 'teacher'));
   }, [dispatch, user._id]);
 
   const handleChange = (event) => {
@@ -50,7 +50,7 @@ function AdminSyllabus() {
     if (isAdding) {
       setAdding(false);
       if (syllabus.moduleTitle) {
-        dispatch(addModulesThunk(syllabus.syllabusSpec, syllabus.moduleTitle, user._id, syllabus.curatorId));
+        dispatch(addModulesThunk(syllabus.syllabusSpec, syllabus.moduleTitle, user._id));
       }
     } else {
       setAdding(true);
@@ -101,26 +101,6 @@ function AdminSyllabus() {
             onChange={handleChange}
             type="text"
             name="moduleTitle" label="Наименование модуля" />
-
-            <div>
-              <span>выбрать куратора</span>
-              <Select
-                required
-                name="curatorId"
-                native
-                value={syllabus.curatorId}
-                onChange={handleChange}
-              >
-                <option aria-label="None" value="" />
-                {specTeachers.map((el) => {
-                  return (
-                    <option key={Math.random()} value={el.userId}>{el.firstName} {el.lastName}</option>
-                  )
-                })}
-              </Select>
-            </div>
-
-
             <Button
               onClick={addModuleHandler}
               variant="outlined"
@@ -143,4 +123,4 @@ function AdminSyllabus() {
     </div>
   );
 }
-export default AdminSyllabus;
+export default TeacherSyllabus;

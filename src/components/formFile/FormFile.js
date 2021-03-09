@@ -2,19 +2,16 @@ import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-
 const useStyles = makeStyles({
   root: {
     width: 'max-content',
     background: 'none',
   },
 });
-
 const FormFile = () => {
   const form = useRef(null);
   const classes = useStyles();
   const { user } = useSelector(state => state.userReducer);
-
   const sendFile = e => {
     e.preventDefault()
     // if (e.target.filedata.value.match(/\.(js).*$/gmi))
@@ -37,7 +34,6 @@ const FormFile = () => {
       <input
         accept="/*"
         id="raised-button-file"
-        multiple
         type="file"
         name="filedata"
       />
@@ -48,5 +44,4 @@ const FormFile = () => {
   )
 
 }
-
 export default FormFile;
