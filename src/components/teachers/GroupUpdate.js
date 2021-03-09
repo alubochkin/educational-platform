@@ -7,20 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, TextField, Button, Select } from '@material-ui/core';
 import { updateGroupThunk, groupDetailsThunk } from '../../redux/actions/actionGroup';
 import SendInvitesForm from '../InvitedStudent/SendInvitesForm';
-// стили модального окна
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -62,7 +49,7 @@ export default function GroupUpdate() {
 
   // логика модального окна
   const [open, setOpen] = React.useState(false);
-  const [modalStyle] = React.useState(getModalStyle);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -168,9 +155,6 @@ export default function GroupUpdate() {
       </ul>}
 
 
-
-
-
       <Button type="submit"
         variant="outlined"
         size="large"
@@ -183,7 +167,6 @@ export default function GroupUpdate() {
         onClose={handleClose}
       >
         <div
-          style={modalStyle}
           className={classes.paper}>
           <SendInvitesForm groupId={groupId} handleclose={handleClose} />
         </div>

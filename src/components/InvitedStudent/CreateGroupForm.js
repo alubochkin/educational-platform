@@ -8,7 +8,6 @@ const useStyles = makeStyles({
   container: {
     marginTop: '20px',
     padding: '5px',
-    border: 'solid 1px #4253AF',
     borderRadius: '5px',
   },
   form: {

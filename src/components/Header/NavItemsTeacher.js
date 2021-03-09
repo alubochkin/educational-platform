@@ -59,7 +59,7 @@ const NavigationTopTeacher = () => {
         icon={<SchoolOutlinedIcon />} />
       <BottomNavigationAction
         component={Link}
-        to="/teacherPage"
+        to="/userPage"
         className="nav-item is-top"
         label={firstName}
         icon={<PersonOutlineOutlinedIcon />} />

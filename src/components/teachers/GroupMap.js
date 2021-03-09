@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteGroupThunk } from '../../redux/actions/actionGroup';
 import ListItem from '@material-ui/core/ListItem';
@@ -42,9 +42,11 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '15px',
       textTransform: 'uppercase',
       color: '#7682c5',
-      borderLeft: '2px solid',
-      paddingLeft: '11px'
+      paddingLeft: '0'
     }
+  },
+  buttonSelectGroup: {
+    paddingLeft: 0
   },
   small: {
     fontSize: 12,
@@ -53,44 +55,45 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 10px',
   },
   divGroup: {
-    display: 'flex',
-
+    display: 'grid',
+    gridTemplateColumns: '90% 1fr 1fr 1fr',
+    alignItems: 'center',
+    borderBottom: '2px solid #cdcdcd',
+  },
+  modal: {
+    transition: '.3s',
+    '& div[aria-hidden]': {
+      background: '#cccccc7a !important',
+      backdropFilter: 'blur(10px)',
+    }   
   },
   paper: {
+    alignItems: 'center',
+    display: 'flex',
+    minHeight: '250px',
+    boxShadow: '0 0 30px #33333330',
     position: 'absolute',
+    outline: 'none',
     width: 600,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
+    background: '#fff !important',
     padding: theme.spacing(2, 4, 3),
+    left: '50%',
+    top: '30%',
+    transform:' translate(-50%, -50%)',
   },
+
 }));
-
-// стили модального окна
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 function GroupMap({ group, url }) {
   const dispatch = useDispatch();
   const id = group._id;
   const classes = useStyles();
+
   const deleteGroupHandler = (id) => {
     dispatch(deleteGroupThunk(id));
   }
 
-  // логика модального окна
   const [open, setOpen] = React.useState(false);
-  const [modalStyle] = React.useState(getModalStyle);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -121,12 +124,12 @@ function GroupMap({ group, url }) {
         <DeleteIcon />
       </ListItem>
       {/* <div className={classes.small}>{text.description}</div> */}
-      <Modal
+       <Modal
+        className={classes.modal}
         open={open}
         onClose={handleClose}
       >
         <div
-          style={modalStyle}
           className={classes.paper}>
           <GroupDetails group={group} />
         </div>

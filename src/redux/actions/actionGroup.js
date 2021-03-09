@@ -11,7 +11,7 @@ export const updateGroupAC = (group) => ({ type: UPDATE_GROUP, payload: { group 
 export const addGroupThunk = (group, userId) => async (dispatch) => {
   try {
     const response = await fetchMethod({
-      path: 'http://localhost:3100/group/add',
+      path: '/group/add',
       method: 'post',
       body: { group, userId }
     });
@@ -45,7 +45,7 @@ export const getGroupsThunk = (userId, role) => async (dispatch) => {
 export const deleteGroupThunk = (id) => async (dispatch) => {
   try {
     const response = await fetchMethod({
-      path: 'http://localhost:3100/group/delete',
+      path: '/group/delete',
       method: 'POST',
       body: { groupId: id }
     });
@@ -62,7 +62,7 @@ export const deleteGroupThunk = (id) => async (dispatch) => {
 
 export const groupDetailsThunk = (id) => async (dispatch) => {
   try {
-    const response = await fetchGet({ path: `http://localhost:3100/group/${id}` });
+    const response = await fetchGet({ path: `/group/${id}` });
 
     if (!response.error) {
       const { students } = response;

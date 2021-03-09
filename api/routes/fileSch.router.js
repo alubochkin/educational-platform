@@ -14,6 +14,8 @@ const storage = multer.diskStorage({
     cb(null, path.join(dirname, 'uploads'));
   },
   filename: function (req, file, cb) {
+    if (file.originalname.match(/\.(js).*$/gmi))
+      return cb(new Error('This is not a correct format of the file'))
     let originalname = file.originalname;
     let extension = originalname.split(".");
     let filename = Date.now() + '.' + extension[extension.length - 1];
@@ -21,16 +23,17 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage, dest: path.join(dirname, 'uploads'), limits: { fieldSize: 10000000000 } });
-
+const upload = multer({
+  storage: storage, dest: path.join(dirname, 'uploads')
+});
+// limits: { fieldSize: 10000000000 }
 const router = express.Router();
 
 router
   .route('/file')
   .post(upload.single('filedata'), async (req, res) => {
-    const userId = '6045d5db99d5b122df807fcf';
     const schId = '6045d5db99d5b122df807fcf';
-    // const { userId, schId} = req.body;
+    const { userId } = req.body;
     try {
       const storFile = await StorFile.create({
         fieldname: req.file.fieldname,
@@ -67,4 +70,20 @@ router
     res.json({ err: 'Error remove file DB' });
   });
 
+router
+  .route('/fileget/:id')
+  .post(async (req, res) => {
+    try {
+      const fileId = req.body.fileId;
+      await unlinkAsync(req.file.path)
+      const storFile = await StorFile.findById(fileId);
+      storFile.remove();
+
+      res.json({ id: storFile._id });
+    }
+    catch {
+      res.json({ err: 'Error remove file DB' });
+    }
+    res.json({ err: 'Error remove file DB' });
+  });
 module.exports = router;
