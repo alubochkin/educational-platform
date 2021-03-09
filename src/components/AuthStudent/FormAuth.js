@@ -40,7 +40,10 @@ const useStyles = makeStyles((theme) => ({
 export default function StudentAuth() {
 
   const dispatch = useDispatch();
-  const dataApi  = useSelector(state => state.dataApi);
+  const { dataApi }  = useSelector(state => state.authStudentReducer);
+  const { user }   = useSelector(state => state.answerAuthStudentAPI);
+
+  console.log('formauth', user)
 
   const classes = useStyles();
 

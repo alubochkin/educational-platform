@@ -49,6 +49,7 @@ export const signupUserThunk = (input) => async (dispatch) => {
     if (!response.error) {
       const userInfo = response;
       dispatch(loginUserAC(userInfo));
+      
     }
 
   } catch (err) {

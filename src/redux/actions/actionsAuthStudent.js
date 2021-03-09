@@ -1,4 +1,7 @@
-import { GET_API_DATA, GET_ANSWER_AUTH_STUDENT } from '../actionTypes';
+/* eslint-disable no-unused-vars */
+import { GET_API_DATA, GET_ANSWER_AUTH_STUDENT, LOGIN_USER, LOGOUT_USER } from '../actionTypes';
+
+export const loginUserAC = (userInfo) => ({ type: LOGIN_USER, payload: { userInfo } });
 
 export const getAncwerAuthStudent = (answerAuthStudentAPI) => ({ 
   type: GET_ANSWER_AUTH_STUDENT, 
@@ -15,6 +18,7 @@ export const apiTokenSendAc =  (token) => async (dispatch) => {
     try {
       const response = await fetch(path, {
         method: 'POST',
+        credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },
@@ -30,7 +34,6 @@ export const apiTokenSendAc =  (token) => async (dispatch) => {
 
   await requestDataStudent('http://localhost:3100/sendmsg/token', token)
     .then((response) => {
-      console.log('Koca: response ', response);
       dispatch(getAPIData(response))
     })
 }
@@ -53,6 +56,7 @@ export const registrationHandlerAc = (dataApi, e) => async (dispatch) => {
     try {
       const response = await fetch('http://localhost:3100/auth/signup', {
         method: 'POST',
+        credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },
@@ -69,6 +73,12 @@ export const registrationHandlerAc = (dataApi, e) => async (dispatch) => {
   }
 
   await sendStudentRegistration('/auth/signup', dataStudentAll)
-    .then((response) => dispatch(getAncwerAuthStudent(response)))
+    .then((response) => {
+      if (response._id) {
+        dispatch(loginUserAC(response))
+        dispatch(getAncwerAuthStudent(response));    
+      }
+
+    })
 
 }

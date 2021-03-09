@@ -17,11 +17,13 @@ import { Container } from '@material-ui/core';
 const App = () => {
 
   let role = 0;
-  const { user } = useSelector(state => state.userReducer);
+  const { user } =  useSelector(state => state.userReducer);
+                    
 
   if (user) {
     role = user.role;
   }
+
 
   return (
 

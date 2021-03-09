@@ -23,6 +23,8 @@ const NavigationTopStudent = () => {
   const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.userReducer);
+ 
+  
   const { firstName } = user;
 
   const logoutHandler = () => {
