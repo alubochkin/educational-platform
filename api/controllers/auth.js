@@ -25,7 +25,7 @@ const authSignup = async (req, res) => {
       }
       await Student.create({
         userId: req.user._id, firstName: req.user.firstName, lastName: req.user.lastName,
-        groupId: req.body.groupId, groupName: group
+        groupId: req.body.groupId, groupName: group.groupTitle
       });
     }
     else {

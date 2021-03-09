@@ -1,7 +1,11 @@
 const express = require('express');
 const {
   addSchedule, delSchedule, updateSchedule, getScheduleId, getScheduleAll, getScheduleFile
-} = require('../controllers/module.controller.js');
+} = require('../controllers/schedule.controller');
+
+// const {
+//   /*addSchedule, delSchedule, updateSchedule, getScheduleId, getScheduleAll, getScheduleFile*/
+// } = require('../controllers/schedule.controller');
 
 const router = express.Router();
 
@@ -25,8 +29,8 @@ router
   .route('/all')
   .post(getScheduleAll);
 
-router
-  .route('/file')
-  .post(getScheduleFile);
+// router
+//   .route('/file')
+//   .post(getScheduleFile);
 
 module.exports = router;
