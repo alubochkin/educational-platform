@@ -108,6 +108,24 @@ const getModuleTeacher = async (req, res) => {
   }
 };
 
+const addModuleArr = async (req, res) => {
+  const { arrModule, titleSpec, userId } = req.body;
+  try {
+    const resPhase = await Promise.all(arrModule.map(async (el) => {
+      return await Phase.create({
+        titleSpec: titleSpec,
+        title: el.groupTitle,
+        userId: userId
+      })
+    }));
+
+    return res.json({ titleSpec: titleSpec, phase: resPhase });
+  } catch
+  {
+    return res.status(500).json({ mass: 'Error adding data to schedule' });
+  }
+};
+
 module.exports = {
-  addModule, delModule, updateModule, getModuleId, getModuleAll, getModuleStudent, getModuleTeacher
+  addModule, delModule, updateModule, getModuleId, getModuleAll, getModuleStudent, getModuleTeacher, addModuleArr
 };

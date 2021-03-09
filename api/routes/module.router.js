@@ -36,6 +36,4 @@ router
   .post(getModuleTeacher);
 
 
-// router.get('/signout', signOut);
-
 module.exports = router;
