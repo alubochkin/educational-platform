@@ -2,20 +2,15 @@ const Phase = require('../models/Phase');
 const Schedule = require('../models/Schedule');
 
 const addModule = async (req, res) => {
-  const { titleSpec, groupTitle, userId } = req.body;
+  const { titleSpec, moduleTitle, userId } = req.body;
 
   try {
     const phase = await Phase.create({
       titleSpec: titleSpec,
-      title: groupTitle,
+      title: moduleTitle,
       userId: userId
     });
-    return res.json({
-      moduleId: phase.id,
-      titleSpec: phase.titleSpec,
-      titleModule: phase.title,
-      isShow: phase.isShow
-    });
+    return res.json(phase);
   } catch
   {
     return res.status(500).json({ mass: 'Error adding data to module' });
@@ -75,7 +70,7 @@ const getModuleId = async (req, res) => {
 
 const getModuleAll = async (req, res) => {
   try {
-    const phase = await Phase.find({ status: 1, userId: req.body.userId }).lean();
+    const phase = await Phase.find({ status: 1 }).lean();
     return res.json(phase);
   } catch
   {
