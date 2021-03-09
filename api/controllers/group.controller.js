@@ -3,7 +3,7 @@ const Student = require('../models/Student');
 
 
 const addGroup = async (req, res) => {
-  console.log('$$$', req.body);
+  console.log('создание новой группы $$$ req.body:', req.body);
   const { groupSpec, groupTitle, dateStart, dateFinish } = req.body.group;
   const userId = req.body.userId;
   try {
