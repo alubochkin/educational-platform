@@ -5,6 +5,6 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const DELETE_GROUP = 'DELETE_GROUP';
 export const GROUP_DETAILS = 'GROUP_DETAILS';
-export const GROUP_UPDATE = 'GROUP_UPDATE';
 export const GET_MODULES = 'GET_MODULES'; 
 export const ADD_MODULE = 'ADD_MODULE'; 
+export const UPDATE_GROUP = 'UPDATE_GROUP';

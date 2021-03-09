@@ -1,14 +1,15 @@
-import { ADD_GROUP, GET_GROUP, DELETE_GROUP, GROUP_DETAILS } from '../actionTypes';
+import { ADD_GROUP, GET_GROUP, DELETE_GROUP, GROUP_DETAILS, UPDATE_GROUP } from '../actionTypes';
 import { fetchGet, fetchMethod } from '../thunkUtils';
 
 export const addGroupAC = (group) => ({ type: ADD_GROUP, payload: { group } });
 export const getGroupsAC = (groups) => ({ type: GET_GROUP, payload: { groups } });
 export const deleteGroupAC = (group) => ({ type: DELETE_GROUP, payload: { group } });
 export const detailsGroupAC = (students) => ({ type: GROUP_DETAILS, payload: { students } });
+export const updateGroupAC = (group) => ({ type: UPDATE_GROUP, payload: { group } });
+
 
 export const addGroupThunk = (group, userId) => async (dispatch) => {
   try {
-    console.log('User', userId);
     const response = await fetchMethod({
       path: 'http://localhost:3100/group/add',
       method: 'post',
@@ -72,3 +73,23 @@ export const groupDetailsThunk = (id) => async (dispatch) => {
     console.log('Err', err);
   }
 }
+export const updateGroupThunk = (group, userId) => async (dispatch) => {
+  const { strDateStart, strDateFinish } = group;
+  group.dateStart = strDateStart;
+  group.dateFinish=strDateFinish;
+  try {
+    const response = await fetchMethod({
+      path: 'http://localhost:3100/group/update',
+      method: 'post',
+      body: { group, userId }
+    });
+
+    if (!response.error) {
+      const groupInfo = response;
+      dispatch(updateGroupAC(groupInfo));
+    }
+
+  } catch (err) {
+    console.log('Err', err);
+  }
+};
