@@ -32,7 +32,6 @@ const addGroup = async (req, res) => {
 };
 
 const updateGroup = async (req, res) => {
-  console.log(req.body)
   const { _id, groupSpec, groupTitle, dateStart, dateFinish } = req.body.group;
   try {
     const group = await Group.findOneAndUpdate({ _id }, {
