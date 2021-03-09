@@ -9,3 +9,5 @@ export const GROUP_UPDATE = 'GROUP_UPDATE';
 
 export const GET_API_DATA = "GET_API_DATA";
 export const GET_ANSWER_AUTH_STUDENT = "GET_ANSWER";
+export const GET_MODULES = 'GET_MODULES'; 
+export const ADD_MODULE = 'ADD_MODULE'; 

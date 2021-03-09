@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGroupsThunk } from '../../redux/actions/actionGroup';
@@ -40,7 +39,7 @@ function GetGroups({ url }) {
   const { user } = useSelector(state => state.userReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  useEffect(() => dispatch(getGroupsThunk(user._id)), [dispatch]);
+  useEffect(() => dispatch(getGroupsThunk(user._id)), [user._id, dispatch]);
   const { groups } = useSelector(state => state.groupReducer);
 
   // логика модального окна
