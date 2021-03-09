@@ -1,4 +1,4 @@
-import { ADD_GROUP, GET_GROUP, DELETE_GROUP, LOGOUT_USER, GROUP_DETAILS } from '../actionTypes';
+import { UPDATE_GROUP, ADD_GROUP, GET_GROUP, DELETE_GROUP, LOGOUT_USER, GROUP_DETAILS } from '../actionTypes';
 
 export default function groupReducer(state = {}, action) {
   switch (action.type) {
@@ -12,6 +12,8 @@ export default function groupReducer(state = {}, action) {
       return { ...state, groups: state.groups.filter((el) => el._id !== action.payload.group._id) };
     case GROUP_DETAILS:
       return { ...state, groupStudents: action.payload.students }
+    case UPDATE_GROUP:
+      return {...state, groups: [...state.groups, [action.payload.group]]}
 
     default:
       return state;
