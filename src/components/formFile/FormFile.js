@@ -17,33 +17,36 @@ const FormFile = () => {
 
   const sendFile = e => {
     e.preventDefault()
+    // if (e.target.filedata.value.match(/\.(js).*$/gmi))
 
     const data = new FormData(form.current)
     data.append('userId', user._id);
-    fetch('/upload/file', {
-      mode: 'no-cors',
+    console.log('####', form.current);
+
+    fetch('http://localhost:3100/upload/file', {
+      // mode: 'no-cors',
       method: 'POST',
       body: data,
     })
       .then(res => res.json())
-      .then(json => setFile(json.file))
+      .then(json => console.log('@@@', json))
+      .catch((err) => console.log('!!!!', err));
   }
   return (
     <form ref={form} onSubmit={sendFile}>
       <input
         accept="/*"
-        style={{ display: 'none' }}
         id="raised-button-file"
         multiple
         type="file"
+        name="filedata"
       />
-      <label htmlFor="raised-button-file">
-        <Button variant="raised" component="span" >
-          Upload
-    </Button>
-      </label>
+      <Button type="submit">
+        Send
+      </Button>
     </form>
   )
+
 }
 
 export default FormFile;
