@@ -1,86 +1,92 @@
 const Phase = require('../models/Phase');
 const Schedule = require('../models/Schedule');
+const StorFile = require('../models/storFileInfo');
 
-const addModule = async (req, res) => {
-  const { titleSpec, groupTitle, phaseId } = req.body;
 
+const addSchedule = async (req, res) => {
+  const { arrSchedule, phaseId } = req.body;
   try {
-    const phase = await Phase.create({
-      titleSpec: titleSpec,
-      title: groupTitle,
-      phaseId: phaseId
-    });
-    return res.json({
-      moduleId: phase.id,
-      titleSpec: phase.titleSpec,
-      titleModule: phase.title
-    });
+    const phase = await Phase.findById({ phaseId }).lean();
+    const resSchedule = await Promise.all(arrSchedule.map(async (el) => {
+      return await Schedule.create({
+        title: el.title,
+        phaseTitle: phase.title,
+        phaseId: phase._id
+      });
+    }));
+
+    return res.json({ phaseId: phaseId, schedule: resSchedule });
   } catch
   {
-    return res.status(500).json({ mass: 'Error adding data to module' });
+    return res.status(500).json({ mass: 'Error adding data to schedule' });
   }
 };
 
-const updateModule = async (req, res) => {
-  const { moduleId, titleModule } = req.body;
+const updateSchedule = async (req, res) => {
+  const { scheduleId, titleSchedule } = req.body;
   try {
-    const phase = await Phase.findOneAndUpdate({ _id: moduleId }, {
+    const schedule = await Schedule.findOneAndUpdate({ _id: scheduleId }, {
       $set: {
-        titleModule: titleModule,
+        titleSchedule: titleSchedule,
       }
     }, { returnOriginal: false }).lean();
-    const schedule = await Schedule.Update({ phaseId: phase._id }, {
-      $set: {
-        phaseTitle: phase.title,
-      }
-    });
 
     return res.json({
-      moduleId: phase.id,
-      titleModule: phase.title,
-      countSchedule: schedule.n
+      moduleId: schedule.id,
+      titleModule: schedule.title
     });
   } catch
   {
-    return res.status(500).json({ mass: 'Error updating data to module' });
+    return res.status(500).json({ mass: 'Error updating data to schedule' });
   }
 };
 
-const delModule = async (req, res) => {
-  const { moduleId } = req.body;
+const delSchedule = async (req, res) => {
+  const { scheduleId } = req.body;
   try {
-    const phase = await Phase.Update({ _id: moduleId }, {
+    const schedule = await Phase.Update({ _id: scheduleId }, {
       $set: {
         status: 0,
       }
     });
-    return res.json({ moduleId: phase._id });
+    return res.json({ moduleId: schedule._id });
   } catch
   {
-    return res.status(500).json({ mass: 'Error deleting data to module' });
+    return res.status(500).json({ mass: 'Error deleting data to schedule' });
   }
 };
-const getModuleId = async (req, res) => {
+const getScheduleId = async (req, res) => {
   const { id } = req.params;
   try {
-    const phase = await Phase.findById(id).lean();
-    return res.json(phase);
+    const schedule = await Schedule.findById(id).lean();
+    return res.json(schedule);
   } catch
   {
-    return res.status(500).json({ mass: 'Error not find data to module' });
+    return res.status(500).json({ mass: 'Error not find data to schedule' });
   }
 };
 
-const getModuleAll = async (req, res) => {
+const getScheduleAll = async (req, res) => {
   try {
     const group = await Phase.find({ status: 1 }).lean();
     return res.json(group);
   } catch
   {
-    return res.status(500).json({ mass: 'Error not find data to groups' });
+    return res.status(500).json({ mass: 'Error not find data to schedule' });
+  }
+};
+
+const getScheduleFile = async (req, res) => {
+  try {
+    const { scheduleId } = req.body;
+    const files = await StorFile.find({ schId: scheduleId }).select('_id', 'path', 'originalname', 'size').lean();
+    return res.json({ files });
+  } catch
+  {
+    return res.status(500).json({ mass: 'Error not find data to schedule File' });
   }
 };
 
 module.exports = {
-  addModule, delModule, updateModule, getModuleId, getModuleAll
+  addSchedule, delSchedule, updateSchedule, getScheduleId, getScheduleAll, getScheduleFile
 };
