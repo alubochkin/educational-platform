@@ -62,7 +62,7 @@ const postSignin = async (req, res) => {
   let groupTitle = '';
   if (req.user.role === 3) {
     groupId = await Student.findOne({ userId: req.user._id });
-    const group = await Group.findOne({ _id: groupId.groupId }).lean();
+    const group = await Group.findOne({ _id: groupId.groupId });
     if (group) {
       groupSpec = group.groupSpec;
       groupTitle = group.groupTitle;
@@ -78,7 +78,7 @@ const postSignin = async (req, res) => {
       avatar: req.user.avatar,
       groupSpec: groupSpec,
       groupTitle: groupTitle,
-      groupId: groupId
+      groupId: groupId.groupId
     }
   });
   //res.json({ user: req.user });
