@@ -39,7 +39,13 @@ function GetGroups({ url }) {
   const { user } = useSelector(state => state.userReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
-  useEffect(() => dispatch(getGroupsThunk(user._id)), [user._id, dispatch]);
+  useEffect(() => {
+    if (user.role === 1) {
+      dispatch(getGroupsThunk(user._id, 'admin'));
+    } else if (user.role === 2) {
+      dispatch(getGroupsThunk(user._id, 'teacher'));
+    }
+  }, [user._id, user.role, dispatch]);
   const { groups } = useSelector(state => state.groupReducer);
 
   // логика модального окна
@@ -61,6 +67,7 @@ function GetGroups({ url }) {
             <GroupMap group={group} key={`group-${i}`} url={url} />
           )
         })}
+
       <Button
         variant="outlined"
         color="primary"

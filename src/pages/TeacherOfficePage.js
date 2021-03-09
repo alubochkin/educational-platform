@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Sidebar from '../components/Sidebar/TeacherSidebar';
 import GroupsList from '../components/teachers/GroupsList';
-import Syllabus from '../components/admins/AdminSyllabus';
+import TeacherSyllabus from '../components/teachers/TeacherSyllabus';
 import GroupUpdate from '../components/teachers/GroupUpdate';
 
 const TeacherOfficePage = () => {
@@ -41,7 +41,7 @@ const TeacherOfficePage = () => {
           <Switch>
             <Route exact path={`${path}`}><Redirect to={`${path}/groups`} /></Route>
             <Route path={`${path}/groups`}><GroupsList url={url} /></Route>
-            <Route path={`${path}/syllabus`}><Syllabus /></Route>
+            <Route path={`${path}/syllabus`}><TeacherSyllabus /></Route>
             <Route path={`${path}/updateGroup/:${id}`}> <GroupUpdate /> </Route>
           </Switch>
 
