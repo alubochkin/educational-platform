@@ -12,11 +12,12 @@ const groupRouter = require('./routes/group.router');
 const moduleRouter = require('./routes/module.router');
 const scheduleRouter = require('./routes/schedule.router');
 const uploadRouter = require('./routes/fileSch.router');
+const userRouter = require('./routes/user.router');
 
 require('./config/passport');
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 const corsOptions = {
@@ -45,6 +46,7 @@ app.use(passport.session());
 
 app.use('/auth', authRouter);
 app.use('/sendmsg', sendmsgRouter);
+app.use('/user', userRouter);
 app.use('/group', groupRouter);
 app.use('/module', moduleRouter);
 app.use('/schedule', scheduleRouter);

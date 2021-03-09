@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var storFileSchema = new mongoose.Schema({
   fieldname: String,
   originalname: String,
-  encoding: String,
   mimeptype: String,
   destination: String,
   filename: String,

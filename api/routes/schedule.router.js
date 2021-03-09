@@ -29,8 +29,8 @@ router
   .route('/all')
   .post(getScheduleAll);
 
-// router
-//   .route('/file')
-//   .post(getScheduleFile);
+router
+  .route('/file')
+  .post(getScheduleFile);
 
 module.exports = router;

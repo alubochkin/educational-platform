@@ -15,10 +15,12 @@ const FormFile = () => {
   const sendFile = e => {
     e.preventDefault()
     // if (e.target.filedata.value.match(/\.(js).*$/gmi))
+
     const data = new FormData(form.current)
     data.append('userId', user._id);
-    console.log('####', data);
-    fetch('http://localhost:3100/user/avatar', {
+    console.log('####', form.current);
+
+    fetch('http://localhost:3100/upload/file', {
       // mode: 'no-cors',
       method: 'POST',
       body: data,
@@ -40,5 +42,6 @@ const FormFile = () => {
       </Button>
     </form>
   )
+
 }
 export default FormFile;
