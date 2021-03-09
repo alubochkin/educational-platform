@@ -2,48 +2,43 @@ import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-
 const useStyles = makeStyles({
   root: {
     width: 'max-content',
     background: 'none',
   },
 });
-
 const FormFile = () => {
   const form = useRef(null);
   const classes = useStyles();
   const { user } = useSelector(state => state.userReducer);
-
   const sendFile = e => {
     e.preventDefault()
-
+    // if (e.target.filedata.value.match(/\.(js).*$/gmi))
     const data = new FormData(form.current)
     data.append('userId', user._id);
-    fetch('/upload/file', {
-      mode: 'no-cors',
+    console.log('####', data);
+    fetch('http://localhost:3100/user/avatar', {
+      // mode: 'no-cors',
       method: 'POST',
       body: data,
     })
       .then(res => res.json())
-      .then(json => setFile(json.file))
+      .then(json => console.log('@@@', json))
+      .catch((err) => console.log('!!!!', err));
   }
   return (
     <form ref={form} onSubmit={sendFile}>
       <input
         accept="/*"
-        style={{ display: 'none' }}
         id="raised-button-file"
-        multiple
         type="file"
+        name="filedata"
       />
-      <label htmlFor="raised-button-file">
-        <Button variant="raised" component="span" >
-          Upload
-    </Button>
-      </label>
+      <Button type="submit">
+        Send
+      </Button>
     </form>
   )
 }
-
 export default FormFile;

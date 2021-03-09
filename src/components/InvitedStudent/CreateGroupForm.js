@@ -54,7 +54,7 @@ export default function CreateGroupForm({ handleclose }) {
     event.preventDefault();
     // добавить дополнительные проверки
     dispatch(addGroupThunk(group, user._id));
-    backToGroups();
+    handleclose();
   }
   return (
     <Container className={classes.container} maxWidth={false}>
@@ -110,12 +110,11 @@ export default function CreateGroupForm({ handleclose }) {
             variant="outlined"
             size="large"
             color="primary"
-            className={classes.submit}
-            onClick={handleclose}>
+            className={classes.submit}>
             Создать
           </Button>
 
-          <Button type="submit"
+          <Button
             variant="outlined"
             size="large"
             color="secondary"

@@ -103,7 +103,8 @@ function GroupMap({ group, url }) {
 
   return (
     <div className={classes.divGroup}>
-      <ListItem className={classes.buttonSelectGroup} button onClick={handleOpen}>
+       
+      <ListItem button component={Link} to={`${url}/updateGroup/${id}`}>
         <ListItemText className={classes.listh3} primary={group.groupTitle} />
       </ListItem>
 

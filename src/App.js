@@ -10,9 +10,11 @@ import StudentOffice from './pages/StudentOffice';
 import TeacherOfficePage from './pages/TeacherOfficePage';
 import AdminOffice from './pages/AdminOffice';
 import CreateGroupForm from './components/InvitedStudent/CreateGroupForm';
+import UserPage from './pages/UserPage';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
 import { Container } from '@material-ui/core';
+import UploadForm from './components/formFile/UploadForm';
 
 const App = () => {
 
@@ -29,6 +31,7 @@ const App = () => {
 
     <Router>
       <Header />
+      <UploadForm />
 
       <Container maxWidth={false}>
 
@@ -53,6 +56,10 @@ const App = () => {
         </Route>
 
         <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
+
+        <Route path="/userPage">
+          {role  ? <UserPage /> : <Redirect to="/startPage" />}
+        </Route>
 
         <Route exact path="/groupadd"><CreateGroupForm /></Route>
         

@@ -3,7 +3,7 @@ const Student = require('../models/Student');
 
 
 const addGroup = async (req, res) => {
-  console.log('$$$', req.body);
+  console.log('создание новой группы $$$ req.body:', req.body);
   const { groupSpec, groupTitle, dateStart, dateFinish } = req.body.group;
   const userId = req.body.userId;
   try {
@@ -32,9 +32,9 @@ const addGroup = async (req, res) => {
 };
 
 const updateGroup = async (req, res) => {
-  const { groupId, groupSpec, groupTitle, dateStart, dateFinish } = req.body;
+  const { _id, groupSpec, groupTitle, dateStart, dateFinish } = req.body.group;
   try {
-    const group = await Group.findOneAndUpdate({ _id: groupId }, {
+    const group = await Group.findOneAndUpdate({ _id }, {
       $set: {
         groupSpec: groupSpec,
         groupTitle: groupTitle,
