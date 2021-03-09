@@ -3,10 +3,6 @@ const {
   addSchedule, delSchedule, updateSchedule, getScheduleId, getScheduleAll, getScheduleFile
 } = require('../controllers/schedule.controller');
 
-// const {
-//   /*addSchedule, delSchedule, updateSchedule, getScheduleId, getScheduleAll, getScheduleFile*/
-// } = require('../controllers/schedule.controller');
-
 const router = express.Router();
 
 router

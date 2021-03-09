@@ -5,7 +5,8 @@ const phaseSchema = new mongoose.Schema({
   titleSpec: { type: String },
   status: { type: Number, default: 1 },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  isShow: { type: Boolean, default: false }
+  isShow: { type: Boolean, default: false },
+  curatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' },
 });
 
 module.exports = mongoose.model('Phase', phaseSchema);

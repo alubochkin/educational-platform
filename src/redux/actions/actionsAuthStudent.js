@@ -3,16 +3,18 @@ import { GET_API_DATA, GET_ANSWER_AUTH_STUDENT, LOGIN_USER, LOGOUT_USER } from '
 
 export const loginUserAC = (userInfo) => ({ type: LOGIN_USER, payload: { userInfo } });
 
-export const getAncwerAuthStudent = (answerAuthStudentAPI) => ({ 
-  type: GET_ANSWER_AUTH_STUDENT, 
-  payload: {answerAuthStudentAPI} });
+export const getAncwerAuthStudent = (answerAuthStudentAPI) => ({
+  type: GET_ANSWER_AUTH_STUDENT,
+  payload: { answerAuthStudentAPI }
+});
 
-export const getAPIData = (dataApi) => ({ 
-  type: GET_API_DATA, 
-  payload: {dataApi} });
+export const getAPIData = (dataApi) => ({
+  type: GET_API_DATA,
+  payload: { dataApi }
+});
 
 
-export const apiTokenSendAc =  (token) => async (dispatch) => {
+export const apiTokenSendAc = (token) => async (dispatch) => {
 
   const requestDataStudent = async (path, sendData) => {
     try {
@@ -72,11 +74,11 @@ export const registrationHandlerAc = (dataApi, e) => async (dispatch) => {
     }
   }
 
-  await sendStudentRegistration('/auth/signup', dataStudentAll)
+  await sendStudentRegistration('http://localhost:3100/auth/signup', dataStudentAll)
     .then((response) => {
       if (response._id) {
         dispatch(loginUserAC(response))
-        dispatch(getAncwerAuthStudent(response));    
+        dispatch(getAncwerAuthStudent(response));
       }
 
     })

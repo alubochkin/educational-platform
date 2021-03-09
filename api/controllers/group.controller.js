@@ -32,7 +32,7 @@ const addGroup = async (req, res) => {
 };
 
 const updateGroup = async (req, res) => {
-  const { _id, groupSpec, groupTitle, dateStart, dateFinish } = req.body.group;
+  const { _id, groupSpec, groupTitle, dateStart, dateFinish, curatorId } = req.body.group;
   try {
     const group = await Group.findOneAndUpdate({ _id }, {
       $set: {
@@ -42,6 +42,7 @@ const updateGroup = async (req, res) => {
         dateFinish: Date(dateFinish),
         strDateStart: dateStart,
         strDateFinish: dateFinish,
+        curatorId
       }
     }, { returnOriginal: false }).lean();
     return res.json({
@@ -51,7 +52,8 @@ const updateGroup = async (req, res) => {
       dateStart: group.dateStart,
       dateFinish: group.dateFinish,
       strDateStart: group.strDateStart,
-      strDateFinish: group.strDateFinish
+      strDateFinish: group.strDateFinish,
+      curatorId
     });
   } catch
   {
@@ -83,10 +85,15 @@ const getGroupId = async (req, res) => {
 };
 
 const getGroupAll = async (req, res) => {
-  const { userId } = req.body;
+  const { userId, role } = req.body;
   try {
-    const group = await Group.find({ userId: userId }).lean();
-    return res.json(group);
+    if (role === 'admin') {
+      const group = await Group.find().lean();
+      return res.json(group);
+    } else if (role === 'teacher') {
+      const group = await Group.find({ curatorId: userId }).lean();
+      return res.json(group);
+    }
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to groups' });
