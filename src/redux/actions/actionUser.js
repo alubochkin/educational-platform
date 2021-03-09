@@ -8,7 +8,7 @@ export const logoutUserAC = () => ({ type: LOGOUT_USER });
 export const loginUserThunk = (input) => async (dispatch) => {
   try {
     const response = await fetchMethod({
-      path: '/auth/signin',
+      path: 'http://localhost:3100/auth/signin',
       method: 'post',
       body: input
     });
@@ -49,7 +49,7 @@ export const signupUserThunk = (input) => async (dispatch) => {
     if (!response.error) {
       const userInfo = response;
       dispatch(loginUserAC(userInfo));
-      
+
     }
 
   } catch (err) {
