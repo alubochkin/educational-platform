@@ -4,18 +4,20 @@ const StorFile = require('../models/storFileInfo');
 
 
 const addSchedule = async (req, res) => {
+
   const { arrSchedule, phaseId } = req.body;
   try {
-    const phase = await Phase.findById({ phaseId }).lean();
-    const resSchedule = await Promise.all(arrSchedule.map(async (el) => {
-      return await Schedule.create({
-        title: el.title,
+    const phase = await Phase.findById(phaseId);
+
+    const schedule = await Promise.all(arrSchedule.map(async (el) => {
+      const sch = await Schedule.create({
+        title: arrSchedule,
         phaseTitle: phase.title,
         phaseId: phase._id
       });
+      return sch;
     }));
-
-    return res.json({ phaseId: phaseId, schedule: resSchedule });
+    return res.json({ phaseId: phaseId, schedule: schedule });
   } catch
   {
     return res.status(500).json({ mass: 'Error adding data to schedule' });
@@ -68,8 +70,8 @@ const getScheduleId = async (req, res) => {
 
 const getScheduleAll = async (req, res) => {
   try {
-    const group = await Phase.find({ status: 1 }).lean();
-    return res.json(group);
+    const phase = await Phase.find({ status: 1 });
+    return res.json(phase);
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to schedule' });
