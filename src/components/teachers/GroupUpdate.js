@@ -1,10 +1,10 @@
 /* eslint-disable no-shadow-restricted-names */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
+import { Container, TextField, Button, Select } from '@material-ui/core';
 import { updateGroupThunk, groupDetailsThunk } from '../../redux/actions/actionGroup';
 import SendInvitesForm from '../InvitedStudent/SendInvitesForm';
 // стили модального окна
@@ -38,11 +38,12 @@ export default function GroupUpdate() {
   const { undefined } = useParams();
   const groupId = undefined;
   const { user } = useSelector((state) => state.userReducer);
+  const { specTeachers } = useSelector((state) => state.specReducer);
   const history = useHistory();
-
   const { groups } = useSelector(state => state.groupReducer);
   const group = groups.find((el) => el._id === groupId);
   const [groupUpdated, setGroupUpdated] = useState(group);
+
   const backToGroups = () => {
     if (user.role === 1) {
       history.push('/adminOffice/groups');
@@ -58,7 +59,7 @@ export default function GroupUpdate() {
       })
     })
   }
-  console.log(groupUpdated)
+
   // логика модального окна
   const [open, setOpen] = React.useState(false);
   const [modalStyle] = React.useState(getModalStyle);
@@ -68,11 +69,11 @@ export default function GroupUpdate() {
   const handleClose = () => {
     setOpen(false);
   };
-   useEffect(() => {
+  useEffect(() => {
     dispatch(groupDetailsThunk(group._id));
   }, [dispatch, group._id]);
   const { groupStudents } = useSelector(state => state.groupReducer)
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // добавить дополнительные проверки
@@ -82,65 +83,89 @@ export default function GroupUpdate() {
 
   return (
 
-     <Container className={classes.container} maxWidth={false}>
-       <form
+    <Container className={classes.container} maxWidth={false}>
+      <form
         onSubmit={handleSubmit}
         className={classes.form}
         validate="true">
-      <TextField
-        onChange={handleChange}
-        value={groupUpdated.groupTitle}
-        name="groupTitle"
-        label="Название группы"
-        InputLabelProps={{
-              shrink: true,
-            }}
-        required
-      />
-      <div className={classes.formItems}>
         <TextField
-          value={groupUpdated.strDateStart}
-          className={classes.textField}
-          required
+          onChange={handleChange}
+          value={groupUpdated.groupTitle}
+          name="groupTitle"
+          label="Название группы"
           InputLabelProps={{
             shrink: true,
           }}
-          onChange={handleChange}
-          type="date"
-          name="strDateStart"
-          label="Дата старта"
-        />
-        <TextField
-          value={String(groupUpdated.strDateFinish)}
-          className={classes.textField}
           required
-          InputLabelProps={{
+        />
+        <div className={classes.formItems}>
+          <TextField
+            value={groupUpdated.strDateStart}
+            className={classes.textField}
+            required
+            InputLabelProps={{
               shrink: true,
-          }}
-          onChange={handleChange}
-          type="date"
-          name="strDateFinish"
-          label="Дата окончания"
+            }}
+            onChange={handleChange}
+            type="date"
+            name="strDateStart"
+            label="Дата старта"
+          />
+          <TextField
+            value={String(groupUpdated.strDateFinish)}
+            className={classes.textField}
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+            type="date"
+            name="strDateFinish"
+            label="Дата окончания"
           />
         </div>
+
+
+
+        {user.role === 1 &&
+          // добавление куратора
+          <div>
+            <span>выбрать куратора группы</span>
+            <Select
+              required
+              name="curatorId"
+              native
+              value={groupUpdated.curatorId}
+              onChange={handleChange}
+            >
+              <option aria-label="None" value="" />
+              {specTeachers.map((el) => {
+                return (
+                  <option key={Math.random()} value={el.userId}>{el.firstName} {el.lastName}</option>
+                )
+              })}
+            </Select>
+          </div>
+        }
+
+
         <Button type="submit"
           variant="outlined"
           size="small"
           color="primary">
-          Сохранить 
+          Сохранить
         </Button>
       </form>
-     
+
       {groupStudents && <ul>
         {groupStudents.map((student) => {
-          return (<>
+          return (<div key={Math.random()}>
             <span>{student.firstName}</span>
             <span>{student.lastName}</span>
             <br />
-          </>)
+          </div>)
         })}
       </ul>}
-      
 
 
 

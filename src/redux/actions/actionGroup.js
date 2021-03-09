@@ -26,12 +26,12 @@ export const addGroupThunk = (group, userId) => async (dispatch) => {
   }
 };
 
-export const getGroupsThunk = (userId) => async (dispatch) => {
+export const getGroupsThunk = (userId, role) => async (dispatch) => {
   try {
     const response = await fetchMethod({
       path: 'http://localhost:3100/group',
       method: 'post',
-      body: { userId }
+      body: { userId, role }
     });
     if (!response.error) {
       const groupList = response;
@@ -76,7 +76,7 @@ export const groupDetailsThunk = (id) => async (dispatch) => {
 export const updateGroupThunk = (group, userId) => async (dispatch) => {
   const { strDateStart, strDateFinish } = group;
   group.dateStart = strDateStart;
-  group.dateFinish=strDateFinish;
+  group.dateFinish = strDateFinish;
   try {
     const response = await fetchMethod({
       path: 'http://localhost:3100/group/update',
@@ -86,6 +86,7 @@ export const updateGroupThunk = (group, userId) => async (dispatch) => {
 
     if (!response.error) {
       const groupInfo = response;
+      console.log('groupInfo', groupInfo);
       dispatch(updateGroupAC(groupInfo));
     }
 

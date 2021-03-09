@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, TextField, Button, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,14 +28,6 @@ const useStyles = makeStyles({
 });
 export default function CreateGroupForm({ handleclose }) {
   const { user } = useSelector((state) => state.userReducer);
-  const history = useHistory();
-  const backToGroups = () => {
-    if (user.role === 1) {
-      history.push('/adminOffice/groups');
-    } else if (user.role === 2) {
-      history.push('/teacheroffice/groups');
-    }
-  }
   const dispatch = useDispatch();
   const classes = useStyles();
   const { spec } = useSelector((state) => state.specReducer);
