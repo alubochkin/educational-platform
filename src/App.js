@@ -14,6 +14,7 @@ import UserPage from './pages/UserPage';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
 import { Container } from '@material-ui/core';
+import CalendarShedule from './pages/CalendarShedule'
 import FormFile from './components/formFile/FormFile';
 
 const App = () => {
@@ -31,7 +32,6 @@ const App = () => {
 
     <Router>
       <Header />
-      <FormFile />
 
       <Container maxWidth={false}>
 
@@ -60,6 +60,13 @@ const App = () => {
         <Route path="/userPage">
           {role  ? <UserPage /> : <Redirect to="/startPage" />}
         </Route>
+{/* 
+        <Route path="/calendarShedule" componrnt={CalendarShedule}>
+          {role  ?  <CalendarShedule />  : <Redirect to="/startPage" />}
+        </Route> */}
+
+
+
 
         <Route exact path="/groupadd"><CreateGroupForm /></Route>
         

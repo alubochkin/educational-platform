@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   rootContainer: {
@@ -46,8 +47,20 @@ export default function SimpleContainer() {
       <div className={classes.l_Block} >
         <div className={classes.userAvatar}>
           <img className={classes.avatarImg}
-            src={`data:image/png;base64,${user.avatar}`} />
+            src={user.avatar              
+              ? `data:image/png;base64,${user.avatar}`
+              : "https://yt3.ggpht.com/a/AATXAJyxpFPD238s9pNQ6Yp1IZOdkk0NH1uQRVRSYQ=s900-c-k-c0xffffffff-no-rj-mo"
+              
+              } />
         </div>
+
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          className={classes.update}>
+          Редактировать данные
+        </Button>
       </div>
 
       <div className={classes.r_Block}>

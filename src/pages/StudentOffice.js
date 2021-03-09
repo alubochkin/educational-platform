@@ -33,11 +33,9 @@ const StudentOffice = () => {
       <Container className={classes.root} maxWidth={false}>
         <SidebarLeft className={classes.sidebar} />
         <div className={classes.content}>
+
           <Switch>
-            <Route exact path={`${path}`}><Redirect to={`${path}/shedule`} /></Route>
             <Route path={`${path}/shedule`}><Shedule /></Route>
-            {/* <Route path={`${path}/groupadd`}>{!isState ? <CreateGroupForm /> : <SendInvitesForm />}</Route>
-            <Route path={`${path}/syllabus`}><Syllabus /></Route> */}
           </Switch>
         </div>
 
