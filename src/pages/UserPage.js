@@ -12,13 +12,19 @@ const useStyles = makeStyles((theme) => ({
   },
   l_Block: {
     width: '15%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   r_Block: {
     width: '85%',
-    padding: '30px 50px',
+    padding: '0 50px',
+    display: 'flex',
+    flexDirection: 'column',
   },
   r_Block_item: {
-    
+    padding: '15px 0',
+    fontSize: 22
   },
 
   userAvatar: {
@@ -28,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     overflow: 'hidden',
     boxSizing: 'border-box',
+    marginBottom: 30
   },
   avatarImg: {
     maxWidth: 200
@@ -59,7 +66,7 @@ export default function SimpleContainer() {
           size="large"
           color="primary"
           className={classes.update}>
-          Редактировать данные
+          Изменить данные
         </Button>
       </div>
 

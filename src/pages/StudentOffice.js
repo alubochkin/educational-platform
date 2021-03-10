@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import SidebarLeft from '../components/Sidebar/StudentSidebar';
-import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
 import Shedule from '../components/students/Shedule.js';
+import { fetchMethod } from '../redux/thunkUtils';
 
 const StudentOffice = () => {
+  const { user } =  useSelector(state => state.userReducer);
   const { path } = useRouteMatch();
 
   const useStyles = makeStyles({
@@ -27,6 +30,22 @@ const StudentOffice = () => {
     }
   });
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log(user.groupId)
+    
+    try {
+      fetchMethod({
+        path: `/schedule/${user.groupId}`,
+        method: 'GET',
+        // body: { groupId: user.groupId }
+      }).then((res) => console.log(res) )
+  
+    } catch (err) {
+      console.log('Err', err);
+    }
+  }, [])
+
   return (
     <React.Fragment>
       <CssBaseline />

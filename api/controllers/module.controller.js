@@ -56,6 +56,7 @@ const delModule = async (req, res) => {
 
 const getModuleId = async (req, res) => {
   const { id } = req.params;
+  console.log(id)
   try {
     const phase = await Phase.findById(id).lean();
     const schedule = await Schedule.find({ phaseId: id });
