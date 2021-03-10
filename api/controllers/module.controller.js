@@ -79,10 +79,10 @@ const getModuleAll = async (req, res) => {
 
 const getModuleStudent = async (req, res) => {
   try {
-    const phase = await Phase.find({ groupSpec: req.body.groupSpec, isShow: true }).lean();
+    const phase = await Phase.find({ titleSpec: req.body.titleSpec, isShow: true }).lean();
     const moduleStudent = await Promise.all(phase.map(async (el) => {
-      const schedule = await Schedule.find({ phaseId: el.phaseId }).lean();
-      return { phase: phase, schedule: schedule }
+      const schedule = await Schedule.find({ phaseId: el._id }).lean();
+      return { id: el._id, title: el.title, titleSpec: el.titleSpec, schedule: schedule }
     }));
 
     return res.json({ moduleStudent });
@@ -94,8 +94,13 @@ const getModuleStudent = async (req, res) => {
 
 const getModuleTeacher = async (req, res) => {
   try {
-    const phase = await Phase.find({ curatorId: req.body.userId }).lean();
-    return res.json(phase);
+    const phase = await Phase.find({ titleSpec: req.body.titleSpec }).lean();
+    const moduleStudent = await Promise.all(phase.map(async (el) => {
+      const schedule = await Schedule.find({ phaseId: el._id }).lean();
+      return { id: el._id, title: el.title, titleSpec: el.titleSpec, schedule: schedule }
+    }));
+
+    return res.json({ moduleStudent });
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to groups' });
