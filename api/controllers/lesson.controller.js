@@ -2,7 +2,7 @@ const Lection = require('../models/Lection');
 
 const addLection = async (req, res) => {
 
-  const { groupId, phaseId, phaseTitle, schId, schTitle, week, dayWeek, dayWeekText, task, typeDay } = req.body;
+  const { groupId, phaseId, phaseTitle, schId, schTitle, week, dayWeek, dayWeekText, task } = req.body;
   try {
     const lesson = await Lection.create({
       groupId: groupId,

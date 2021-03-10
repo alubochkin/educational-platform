@@ -5,6 +5,7 @@ const htmlMail = require('../config/mailHtml');
 dotenv.config();
 
 module.exports = (email, token) => {
+  let mass = '';
   let smtpTransport = nodemailer.createTransport({
     host: process.env.MSG_HOST,
     port: process.env.MSG_PORT,
@@ -21,12 +22,12 @@ module.exports = (email, token) => {
     html: htmlMail(token),
   }
   if (email) {
-    return smtpTransport.sendMail(options, function (error, response) {
-      if (error) { console.log(error); return 0; }
+    smtpTransport.sendMail(options, function (error, response) {
+      if (error) { console.log(error); mass = error; }
       else {
         console.log("Message sent: Сообщения отправленны");
-        return 1;
       }
     });
-  } else return 0;
+  }
+  return mass;
 };

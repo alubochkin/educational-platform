@@ -7,7 +7,7 @@ const jwtSend = async (req, res) => {
   const { emails, groupId } = req.body;
 
   let resultArr = [];
-
+  console.log('emails', emails);
   if (emails) {
     for (let i = 0; i < emails.length; i += 1) {
 
@@ -18,9 +18,13 @@ const jwtSend = async (req, res) => {
         };
         const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: process.env.TOKEN_DATE });
         if (token) {
-          await sendMsg(emails[i], token);
+          const mess = await sendMsg(emails[i], token);
+
           const msgsend = await Message.create({ jwtnum: token, email: payload.email, groupId: payload.groupId });
-          resultArr.push({ email: msgsend.email, status: true });
+          if (mess)
+            resultArr.push({ email: msgsend.email, status: false, msg: mess });
+          else
+            resultArr.push({ email: msgsend.email, status: true });
         }
         else
           resultArr.push({ email: emails[i], status: false, msg: 2 });
@@ -51,7 +55,7 @@ const jwtReceive = async (req, res) => {
       console.log('>>>>>>>>>>>>>>>else')
       res.json({ msg: 'Error1' });
     }
-      
+
   } catch {
     res.json({ msg: 'Error2' });
   }

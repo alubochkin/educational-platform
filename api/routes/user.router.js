@@ -17,8 +17,6 @@ const avatar = multer({
 
 router.post('/avatar', avatar.single('avatar'), async (req, res) => {
   const { userId } = req.body;
-  console.log('@@@', req.bod);
-  console.log('*******', req.file)
   if (req.file.buffer) {
     const user = await User.findByIdAndUpdate({ _id: userId }, { $set: { avatar: req.file.buffer } })
     res.json({ id: user.id, avatar: user.avatar })
