@@ -21,7 +21,6 @@ export async function fetchMethod({ path, method, body }) {
 }
 
 export async function fetchGet({ path }) {
-  console.log(path)
   const response = await fetch(path);
 
   if (!response.ok) {

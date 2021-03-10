@@ -9,9 +9,19 @@ export default function moduleReducer(state = initState, action) {
     case ADD_MODULE:
       return { ...state, modules: [...state.modules, action.payload.moduleInfo] };
     case UPDATE_MODULE:
-      const modulesPrev = state.modules.filter(el => el._id !== action.payload.moduleInfo._id);
-      return { ...state, modules: [...modulesPrev, action.payload.moduleInfo] };
-        
+
+      let foundIndex = state.modules.findIndex(el => el._id === action.payload.moduleInfo._id);
+
+
+      const module1 = state.modules.slice(0, foundIndex);
+      const module2 = state.modules.slice(foundIndex + 1, state.modules.lenght);
+
+
+
+      return { ...state, modules: [...module1, action.payload.moduleInfo, ...module2] };
+
+
+
     default:
       return state;
   }

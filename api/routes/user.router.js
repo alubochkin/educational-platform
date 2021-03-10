@@ -10,7 +10,6 @@ const avatar = multer({
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
       return cb(new Error('This is not a correct format of the file'))
-    console.log('&&&');
     cb(null, true)
   }
 })

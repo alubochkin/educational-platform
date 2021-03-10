@@ -32,8 +32,8 @@ const router = express.Router();
 router
   .route('/file')
   .post(upload.single('filedata'), async (req, res) => {
-    const schId = '6045d5db99d5b122df807fcf';
-    const { userId } = req.body;
+    const { userId, schId } = req.body;
+    // const schId = '6045d5db99d5b122df807fcf';
     try {
       const storFile = await StorFile.create({
         fieldname: req.file.fieldname,
@@ -86,4 +86,25 @@ router
     }
     res.json({ err: 'Error remove file DB' });
   });
+
+// получение файла опр урока
+router
+  .route('/filesch')
+  .post(async (req, res) => {
+    try {
+      const { schId } = req.body;
+      // await unlinkAsync(req.file.path);
+      const storFile = await StorFile.find({ schId: schId });
+      if (storFile.length !== 0) {
+        res.json(storFile);
+      } else {
+        res.status(200);
+      }
+    }
+    catch {
+      res.json({ message: 'File not found' });
+    }
+  });
+
+
 module.exports = router;

@@ -7,7 +7,8 @@ import authStudentReducer from './reducers/authStudentReducer';
 
 import moduleReducer from './reducers/moduleReducer';
 import scheduleReducer from './reducers/scheduleReducer';
+import fileReducer from './reducers/fileReducer';
 
-const rootReducer = combineReducers({ specReducer, groupReducer, userReducer, moduleReducer, authStudentReducer, scheduleReducer });
+const rootReducer = combineReducers({ specReducer, groupReducer, userReducer, moduleReducer, authStudentReducer, scheduleReducer, fileReducer });
 
 export default rootReducer;
