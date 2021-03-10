@@ -32,8 +32,9 @@ const router = express.Router();
 router
   .route('/file')
   .post(upload.single('filedata'), async (req, res) => {
-    const schId = '6045d5db99d5b122df807fcf';
-    const { userId } = req.body;
+    console.log(req.body)
+    const { userId, schId } = req.body;
+    // const schId = '6045d5db99d5b122df807fcf';
     try {
       const storFile = await StorFile.create({
         fieldname: req.file.fieldname,

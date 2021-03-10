@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     background: 'none',
   },
 });
-const FormFile = () => {
+const FormFile = ({ schId }) => {
   const form = useRef(null);
   const classes = useStyles();
   const { user } = useSelector(state => state.userReducer);
@@ -18,12 +18,13 @@ const FormFile = () => {
 
     const data = new FormData(form.current)
     data.append('userId', user._id);
+    data.append('schId', schId);
     console.log('####', form.current);
 
     fetch('http://localhost:3100/upload/file', {
       // mode: 'no-cors',
       method: 'POST',
-      body: data,
+      body: data
     })
       .then(res => res.json())
       .then(json => console.log('@@@', json))

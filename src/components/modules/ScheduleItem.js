@@ -3,7 +3,6 @@ import FormFile from '../formFile/FormFile';
 
 export default function ScheduleItem({ schedule }) {
   const [isAddingFile, setAddingFile] = useState(false);
-
   const addFileHandler = () => {
     if (isAddingFile) {
       setAddingFile(false);
@@ -19,7 +18,7 @@ export default function ScheduleItem({ schedule }) {
         <span onClick={addFileHandler}>Добавить материалы</span>
 
         {isAddingFile &&
-          <FormFile />
+          <FormFile schId={schedule._id} />
         }
       </div>
     </div>

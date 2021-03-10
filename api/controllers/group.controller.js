@@ -14,14 +14,16 @@ const addGroup = async (req, res) => {
       dateFinish: Date(dateFinish),
       strDateStart: dateStart,
       strDateFinish: dateFinish,
+      curatorId: userId,
       userId: userId
     });
     return res.json({
-      groupId: group.id,
+      _id: group.id,
       groupSpec: group.groupSpec,
       groupTitle: group.groupTitle,
       dateStart: group.dateStart,
       dateFinish: group.dateFinish,
+      curatorId: group.curatorId,
       strDateStart: group.strDateStart,
       strDateFinish: group.strDateFinish
     });
