@@ -9,10 +9,10 @@ export default function moduleReducer(state = initState, action) {
     case ADD_MODULE:
       return { ...state, modules: [...state.modules, action.payload.moduleInfo] };
     case UPDATE_MODULE:
-      console.log('action.payload.module', action.payload.module);
-      return { ...state, modules: [...state.modules, [action.payload.module]] };
+      const modulesPrev = state.modules.filter(el => el._id !== action.payload.moduleInfo._id);
+      return { ...state, modules: [...modulesPrev, action.payload.moduleInfo] };
+        
     default:
       return state;
   }
 }
-

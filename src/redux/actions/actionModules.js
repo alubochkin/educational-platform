@@ -3,7 +3,7 @@ import { fetchMethod } from '../thunkUtils';
 
 export const addModuleAC = (moduleInfo) => ({ type: ADD_MODULE, payload: { moduleInfo } });
 export const getModulesAC = (modules) => ({ type: GET_MODULES, payload: { modules } });
-export const updModuleAC = (module) => ({ type: UPDATE_MODULE, payload: { module } });
+export const updModuleAC = (moduleInfo) => ({ type: UPDATE_MODULE, payload: { moduleInfo } });
 
 export const getModulesThunk = (userId, role) => async (dispatch) => {
   try {
@@ -12,6 +12,7 @@ export const getModulesThunk = (userId, role) => async (dispatch) => {
       method: 'post',
       body: { userId }
     });
+    
     if (!response.error) {
       const modulList = response;
       dispatch(getModulesAC(modulList));
@@ -46,13 +47,12 @@ export const updateModuleThunk = (module) => async (dispatch) => {
       method: 'post',
       body: { moduleId: module._id, titleModule: module.title }
     });
-
     if (!response.error) {
       const moduleInfo = response;
-      console.log('moduleInfo', moduleInfo);
       dispatch(updModuleAC(moduleInfo));
     }
   } catch (err) {
     console.log('Err', err);
   }
 }
+
