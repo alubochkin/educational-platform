@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable no-shadow-restricted-names */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,17 +12,11 @@ import { updateGroupThunk, groupDetailsThunk } from '../../redux/actions/actionG
 import SendInvitesForm from '../InvitedStudent/SendInvitesForm';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 800,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
   form: {
     display: 'grid',
     gridTemplateColumns: '1fr 2fr',
     gap: '50px 30px',
+    width: '100%'
   },
   listStudents: {
     display: 'flex',
@@ -33,6 +28,28 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonSave: {
     width: 'max-content'
+  },
+  modal: {
+    transition: '.3s',
+    '& div[aria-hidden]': {
+      background: '#cccccc7a !important',
+      backdropFilter: 'blur(10px)',
+    }
+  },
+  paper: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '250px',
+    boxShadow: '0 0 30px #33333330',
+    position: 'absolute',
+    outline: 'none',
+    width: '70%',
+    background: '#fff !important',
+    padding: '50px 30px',
+    left: '50%',
+    top: '30%',
+    transform: ' translate(-50%, -50%)',
   },
 }));
 
@@ -188,7 +205,7 @@ export default function GroupUpdate() {
         onClick={handleOpen}>
         Пригласить студентов
         </Button>
-      <Modal
+      <Modal className={classes.modal}
         open={open}
         onClose={handleClose}
       >
