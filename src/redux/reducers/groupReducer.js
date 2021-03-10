@@ -13,8 +13,7 @@ export default function groupReducer(state = {}, action) {
     case GROUP_DETAILS:
       return { ...state, groupStudents: action.payload.students }
     case UPDATE_GROUP:
-       console.log("action.payload.group", action.payload.group)
-      return {...state, groups: [...state.groups, [action.payload.group]]}
+      return { ...state, groups: [...state.groups, [action.payload.group]] }
 
     default:
       return state;

@@ -65,8 +65,7 @@ export const getModuleStudent = (groupSpec) => (dispatch) => {
       method: 'POST',
       body: { titleSpec: groupSpec }
     }).then((res) => {
-      console.log(res)
-      dispatch(getModuleStudentAC(res)) 
+      dispatch(getModuleStudentAC(res))
     })
 
   } catch (err) {

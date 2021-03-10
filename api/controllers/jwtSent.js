@@ -42,10 +42,8 @@ const jwtReceive = async (req, res) => {
 
     const token = req.body.token;
     if (token) {
-      console.log(token)
       const msg = await Message.findOne({ jwtnum: token }).lean();
 
-      console.log(msg)
       if (msg) {
         console.log('>>>>>>>>>>>>>>>msg', msg)
         res.json({ token: msg.jwtnum, email: msg.email, groupId: msg.groupId });
