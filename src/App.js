@@ -11,10 +11,10 @@ import TeacherOfficePage from './pages/TeacherOfficePage';
 import AdminOffice from './pages/AdminOffice';
 import CreateGroupForm from './components/InvitedStudent/CreateGroupForm';
 import UserPage from './pages/UserPage';
-
 import RegisterStudentToken from './pages/RegisterStudentToken';
 import { Container } from '@material-ui/core';
-//import FormFile from './components/formFile/FormFile';
+
+
 
 const App = () => {
 
@@ -30,7 +30,7 @@ const App = () => {
   return (
 
     <Router>
-      <Header />
+      {user && <Header />}
 
       <Container maxWidth={false}>
 

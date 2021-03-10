@@ -78,7 +78,7 @@ const postSignin = async (req, res) => {
       avatar: req.user.avatar,
       groupSpec: groupSpec,
       groupTitle: groupTitle,
-      groupId: groupId.groupId
+      groupId: groupId?.groupId
     }
   });
   //res.json({ user: req.user });

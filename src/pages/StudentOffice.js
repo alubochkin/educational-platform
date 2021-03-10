@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import SidebarLeft from '../components/Sidebar/StudentSidebar';
-import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
 import Shedule from '../components/students/Shedule.js';
+import CalendarShedule from '../components/students/CalendarShedule';
+import { fetchMethod } from '../redux/thunkUtils';
+import { getModuleStudent } from '../redux/actions/actionUser';
 
 const StudentOffice = () => {
+  
+  const { user } =  useSelector(state => state.userReducer);
   const { path } = useRouteMatch();
+  const dispatch = useDispatch();
 
   const useStyles = makeStyles({
     root: {
@@ -27,17 +34,22 @@ const StudentOffice = () => {
     }
   });
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getModuleStudent(user.groupSpec))
+   
+  }, [])
+
   return (
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.root} maxWidth={false}>
         <SidebarLeft className={classes.sidebar} />
         <div className={classes.content}>
+
           <Switch>
-            <Route exact path={`${path}`}><Redirect to={`${path}/shedule`} /></Route>
-            <Route path={`${path}/shedule`}><Shedule /></Route>
-            {/* <Route path={`${path}/groupadd`}>{!isState ? <CreateGroupForm /> : <SendInvitesForm />}</Route>
-            <Route path={`${path}/syllabus`}><Syllabus /></Route> */}
+            <Route path={`${path}/calendarShedule`}><CalendarShedule /></Route>
+            <Route path={`${path}/shedule/:idModule`}><Shedule /></Route>
           </Switch>
         </div>
 

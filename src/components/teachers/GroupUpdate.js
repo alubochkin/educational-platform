@@ -1,20 +1,56 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable no-shadow-restricted-names */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, TextField, Button, Select } from '@material-ui/core';
 import { updateGroupThunk, groupDetailsThunk } from '../../redux/actions/actionGroup';
 import SendInvitesForm from '../InvitedStudent/SendInvitesForm';
 
 const useStyles = makeStyles((theme) => ({
+  form: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 2fr',
+    gap: '50px 30px',
+    width: '100%'
+  },
+  listStudents: {
+    display: 'flex',
+    margin: '30px 0',
+    flexWrap: 'wrap',
+    width: '100%'
+  },
+  listStudentsItem: {
+    marginRight: 15,
+  },
+  buttonSave: {
+    width: 'max-content'
+  },
+  modal: {
+    transition: '.3s',
+    '& div[aria-hidden]': {
+      background: '#cccccc7a !important',
+      backdropFilter: 'blur(10px)',
+    }
+  },
   paper: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '250px',
+    boxShadow: '0 0 30px #33333330',
     position: 'absolute',
-    width: 800,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    outline: 'none',
+    width: '70%',
+    background: '#fff !important',
+    padding: '50px 30px',
+    left: '50%',
+    top: '30%',
+    transform: ' translate(-50%, -50%)',
   },
 }));
 
@@ -71,6 +107,8 @@ export default function GroupUpdate() {
   return (
 
     <Container className={classes.container} maxWidth={false}>
+
+     
       <form
         onSubmit={handleSubmit}
         className={classes.form}
@@ -137,6 +175,7 @@ export default function GroupUpdate() {
 
 
         <Button type="submit"
+        className={classes.buttonSave}
           variant="outlined"
           size="small"
           color="primary">
@@ -144,15 +183,20 @@ export default function GroupUpdate() {
         </Button>
       </form>
 
-      {groupStudents && <ul>
-        {groupStudents.map((student) => {
-          return (<div key={Math.random()}>
-            <span>{student.firstName}</span>
-            <span>{student.lastName}</span>
-            <br />
-          </div>)
-        })}
-      </ul>}
+      {groupStudents && 
+        <div className={classes.listStudents}>
+          {groupStudents.map((student) => {
+            return ( 
+            <Chip
+              className={classes.listStudentsItem}
+              avatar={<FaceIcon>M</FaceIcon>}
+              label={`${student.firstName} ${student.lastName}`}
+              clickable
+              key={Math.random()}
+              color="primary"
+            />)
+          })}
+        </div>}
 
 
       <Button type="submit"
@@ -162,7 +206,7 @@ export default function GroupUpdate() {
         onClick={handleOpen}>
         Пригласить студентов
         </Button>
-      <Modal
+      <Modal className={classes.modal}
         open={open}
         onClose={handleClose}
       >

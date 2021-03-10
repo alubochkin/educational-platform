@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -13,7 +14,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    borderRight: '1px solid',
+    borderRight: '1px solid #3f51b6',
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -61,42 +62,58 @@ const useStyles = makeStyles((theme) => ({
 export default function SidebarLeft() {
   const { url } = useRouteMatch();
   const classes = useStyles();
+  const { moduleStudent } = useSelector(state => state.userReducer);
 
-  const titleCourse = [
-    { title: 'Фаза 1', description: 'Javascript' },
-    { title: 'Фаза 2', description: 'Backend' },
-    { title: 'Фаза 3', description: 'React' }
-  ]
+
+  // блоки обучения если нет в localstorage забрать с базы > в reducer
+  // 
+  // передавать 
+
+  console.log(moduleStudent)
+
 
   return (
     <div className={classes.root}>
       <>
         <List className={classes.sidebarUl}>
-          {titleCourse.map((text, index) => (
-            <ListItem button key={text.title}>
-              <ListItemText className={classes.listh3} primary={text.title} />
-              <div className={classes.small}>{text.description}</div>
+          {moduleStudent?.map((text, index) => (
+            <ListItem 
+              component={Link} to={`${url}/shedule/${text.id}`}
+              button key={text.title}>
+                <ListItemText className={classes.listh3} primary={`Фаза ${index + 1}`} />
+                <div className={classes.small}>{text.title}</div>
             </ListItem>
           ))}
         </List>
         <Divider />
 
         <List className={classes.sidebarUl}>
-          <ListItem button ><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
+        <ListItem 
+          button component={Link} to={`${url}/calendarShedule`}>
+            <ListItemText primary='Расписание' /><ScheduleIcon />
+        </ListItem>
           <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
           <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
         </List>
       </>
 
-      <List className={classes.sidebarUl}>
-        <ListItem button component={Link} to={`${url}/shedule`}><ListItemText primary='Расписание' /><ScheduleIcon /></ListItem>
-        {/* <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
-        <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem> */}
-      </List>
+
 
     </div>
   );
 }
+
+// spec = {
+//    phase: [
+      
+//     { title: 'Фаза 1', description: 'Javascript', 
+//       shedul: или _id или весь obj
+//     },
+//     { title: 'Фаза 2', description: 'Backend' },
+//     { title: 'Фаза 3', description: 'React' }
+//   ]
+// }
+
 
 // Расписание Заметки Тесты
 

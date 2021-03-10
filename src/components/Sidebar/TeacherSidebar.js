@@ -11,7 +11,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    borderRight: '1px solid',
+    borderRight: '1px solid #3f51b6',
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,

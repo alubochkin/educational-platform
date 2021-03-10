@@ -19,6 +19,9 @@ const useStyles = makeStyles({
     gridTemplateColumns: '1fr',
     gap: '30px'
   },
+  title: {
+    color: '#3f51b5'
+  },
   submit: {
     marginTop: '50px',
     maxWidth: 'max-content',

@@ -20,6 +20,7 @@ const addModule = async (req, res) => {
 
 const updateModule = async (req, res) => {
   const { moduleId, titleModule } = req.body;
+  console.log(req.body)
   try {
     const phase = await Phase.findOneAndUpdate({ _id: moduleId }, {
       $set: {
@@ -31,8 +32,9 @@ const updateModule = async (req, res) => {
     //     phaseTitle: phase.title,
     //   }
     // });
-
-    return res.json(phase);
+console.log(phase)
+    return res.json(phase)
+    
   } catch
   {
     return res.status(500).json({ mass: 'Error updating data to module' });
@@ -56,6 +58,7 @@ const delModule = async (req, res) => {
 
 const getModuleId = async (req, res) => {
   const { id } = req.params;
+  console.log(id)
   try {
     const phase = await Phase.findById(id).lean();
     const schedule = await Schedule.find({ phaseId: id });
