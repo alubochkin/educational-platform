@@ -11,16 +11,15 @@ import TeacherOfficePage from './pages/TeacherOfficePage';
 import AdminOffice from './pages/AdminOffice';
 import CreateGroupForm from './components/InvitedStudent/CreateGroupForm';
 import UserPage from './pages/UserPage';
-
 import RegisterStudentToken from './pages/RegisterStudentToken';
 import { Container } from '@material-ui/core';
-import FormFile from './components/formFile/FormFile';
+
 
 const App = () => {
 
   let role = 0;
-  const { user } =  useSelector(state => state.userReducer);
-                    
+  const { user } = useSelector(state => state.userReducer);
+
 
   if (user) {
     role = user.role;
@@ -31,7 +30,6 @@ const App = () => {
 
     <Router>
       <Header />
-      <FormFile />
 
       <Container maxWidth={false}>
 
@@ -57,14 +55,14 @@ const App = () => {
 
           <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
 
-        <Route path="/userPage">
-          {role  ? <UserPage /> : <Redirect to="/startPage" />}
-        </Route>
+          <Route path="/userPage">
+            {role ? <UserPage /> : <Redirect to="/startPage" />}
+          </Route>
 
-        <Route exact path="/groupadd"><CreateGroupForm /></Route>
-        
-        <Route path="/" component={Page404} />
-      </Switch>
+          <Route exact path="/groupadd"><CreateGroupForm /></Route>
+
+          <Route path="/" component={Page404} />
+        </Switch>
       </Container>
     </Router>
 

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid',
     marginLeft: '200px',
   },
-   paper: {
+  paper: {
     position: 'absolute',
     width: 800,
     backgroundColor: theme.palette.background.paper,
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ModuleItem({ module }) {
   const classes = useStyles();
   const [isUpdating, setUpdating] = useState(false);
+  const [isLooking, setLooking] = useState(false);
   const [moduleUpd, setModuleUpd] = useState(module);
   const dispatch = useDispatch();
 
@@ -34,6 +35,14 @@ export default function ModuleItem({ module }) {
       setUpdating(false);
     } else {
       setUpdating(true);
+    }
+  }
+
+  const lookingHandler = () => {
+    if (isLooking) {
+      setLooking(false);
+    } else {
+      setLooking(true);
     }
   }
 
@@ -60,40 +69,50 @@ export default function ModuleItem({ module }) {
     setOpen(false);
   };
   return (
-    
+
     <div>
-      <ScheduleList id={module._id}/>
-      {module.title}
-    
+
+      <Button
+        size="small"
+        variant="outlined"
+        color="primary"
+        onClick={lookingHandler}>
+        {module.title}
+      </Button>
+
+      {isLooking &&
+        <div className={classes.update}>Уроки:
+        <ScheduleList id={module._id} />
+        </div>}
+
       {!isUpdating &&
         <>
-        <Button
-          size="small"
-          variant="outlined"
-          color="primary"
-          onClick={updateHandler}>
-          < EditIcon />
-        </Button>
-        <Button type="submit"
-          variant="outlined"
-          size="large"
-          color="primary"
-          
-          onClick={handleOpen}>
+          <Button
+            size="small"
+            variant="outlined"
+            color="primary"
+            onClick={updateHandler}>
+            < EditIcon />
+          </Button>
+          <Button type="submit"
+            variant="outlined"
+            size="large"
+            color="primary"
+
+            onClick={handleOpen}>
             Добавить уроки
         </Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
+          <Modal
+            open={open}
+            onClose={handleClose}
           >
-          <div
-            className={classes.paper}>
-            <SceduleCreate id={module._id} title={ module.title } handleclose={handleClose} />
-          </div>
+            <div
+              className={classes.paper}>
+              <SceduleCreate id={module._id} title={module.title} handleclose={handleClose} />
+            </div>
 
-        </Modal>
-        </>
-      }
+          </Modal>
+        </>}
 
       {isUpdating &&
         <div className={classes.update}>

@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, TextField } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-// import { updateModuleThunk } from '../../redux/actions/actionModules';
-// import Modal from '@material-ui/core/Modal';
-// import SceduleCreate from './SceduleCreate';
-
-
-const useStyles = makeStyles((theme) => ({
-  update: {
-    border: '1px solid',
-    marginLeft: '200px',
-  },
-  
-}));
+import FormFile from '../formFile/FormFile';
 
 export default function ScheduleItem({ schedule }) {
-  const classes = useStyles();
-  
-  const dispatch = useDispatch();
+  const [isAddingFile, setAddingFile] = useState(false);
 
-  
+  const addFileHandler = () => {
+    if (isAddingFile) {
+      setAddingFile(false);
+    } else {
+      setAddingFile(true);
+    }
+  }
+
   return (
     <div>
-    {schedule.title}  
+      {schedule.title}
+      <div >
+        <span onClick={addFileHandler}>Добавить материалы</span>
+
+        {isAddingFile &&
+          <FormFile />
+        }
+      </div>
     </div>
 
-      
+
   )
 }
 

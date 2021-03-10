@@ -1,5 +1,5 @@
 import { ADD_SCHEDULE, GET_SCHEDULE } from '../actionTypes';
-import { fetchMethod, fetchGet } from '../thunkUtils';
+import { fetchMethod } from '../thunkUtils';
 
 export const addScheduleAC = (scheduleInfo) => ({ type: ADD_SCHEDULE, payload: { scheduleInfo } });
 export const getShedulesAC = (schedulesList) => ({ type: GET_SCHEDULE, payload: { schedulesList } });
@@ -12,14 +12,10 @@ export const createSchedulsThunk = (schedules, moduleId) => async (dispatch) => 
       body: { arrSchedule: schedules, phaseId: moduleId }
     });
     if (!response.error) {
-      console.log(response.shedule);
+      
       const scheduleInfo = response.schedule;
 
       dispatch(addScheduleAC(scheduleInfo));
-
-// title: el.title,
-//         phaseTitle: phase.title,
-//         phaseId: phase._id
 
     }
   } catch (err) {
@@ -32,16 +28,16 @@ export const createSchedulsThunk = (schedules, moduleId) => async (dispatch) => 
 
 export const getSchedulesThunk = (moduleId) => async (dispatch) => {
   try {
-    
+
     const response = await fetchMethod({
       path: 'http://localhost:3100/schedule/all',
-       method: 'POST',
+      method: 'POST',
       body: { moduleId }
 
     });
     if (!response.error) {
       const schedulesList = response;
-      console.log(schedulesList)
+      
       dispatch(getShedulesAC(schedulesList));
     }
 

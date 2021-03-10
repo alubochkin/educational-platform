@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Container, TextField, Button, Fab } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import Sceduls from './Sceduls';
@@ -63,7 +63,6 @@ export default function SceduleCreate({ id, title }) {
   const classes = useStyles();
 
   const [dataSend, setDataSend] = useState({});
-
   const [createdInput, SetCreatedInput] = useState([<Sceduls className={classes.inputMail} />]);
 
   const addInputMail = () => {
@@ -82,37 +81,9 @@ export default function SceduleCreate({ id, title }) {
       });
       setDataSend(scedules);
       dispatch(createSchedulsThunk(dataSend, id));
-     
-    } else {
-      // scedules = [e.target.scedule.value];
-      // setDataSend(scedules);
 
     }
   }
-  // useEffect(() => {
-  //   const createSchedules = async (path, sendData, id) => {
-  //     // loader
-  //     try {
-  //       const response = await fetch(path, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify(sendData, id)
-  //       });
-  //         console.log(response.json())
-  //       if (response.status === 200) return await response.json();
-        
-  //       else return new Error(response.err)
-  //     } catch (err) {
-  //       console.log('Error: ', err);
-  //     }
-  //   }
-
-  //   createSchedules('http://localhost:3100/schedule/add', dataSend, id)
-  //     .then((response) => console.log(response))
-
-  // }, [dataSend])
 
   return (
     <>
@@ -143,7 +114,7 @@ export default function SceduleCreate({ id, title }) {
             variant="outlined"
             size="large"
             color="primary" >
-            Сохранить
+            Сохранить (click twice)
           </Button>
         </div>
       </form>

@@ -4,17 +4,19 @@ import ScheduleItem from './ScheduleItem';
 import { getSchedulesThunk } from '../../redux/actions/actionSchedule';
 
 
-export default function SchedulesList({ moduleId }) {
+
+export default function SchedulesList({ id }) {
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
     dispatch(getSchedulesThunk());
   }, [dispatch]);
+
   const { schedules } = useSelector(state => state.scheduleReducer);
   let schedulesList = [];
 
   if (schedules) {
-    schedulesList = schedules.filter((el) => el.phaseId === moduleId);
+    schedulesList = schedules.filter((el) => el.phaseId === id);
   }
 
   return (
@@ -23,6 +25,7 @@ export default function SchedulesList({ moduleId }) {
         return (
           <div key={Math.random()}>
             <ScheduleItem schedule={el} />
+
           </div>
         )
       })}
