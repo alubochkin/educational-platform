@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
@@ -29,7 +29,7 @@ export default function ModuleItem({ module }) {
   const [isLooking, setLooking] = useState(false);
   const [moduleUpd, setModuleUpd] = useState(module);
   const dispatch = useDispatch();
-
+  const { user }= useSelector(state=>state.userReducer)
   const updateHandler = () => {
     if (isUpdating) {
       setUpdating(false);
@@ -80,28 +80,28 @@ export default function ModuleItem({ module }) {
         {module.title}
       </Button>
 
-      {isLooking &&
-        <div className={classes.update}>Уроки:
+      {!isLooking &&
+        <div className={classes.update}>
         <ScheduleList id={module._id} />
         </div>}
 
       {!isUpdating &&
         <>
-          <Button
+          {user.role===1 && <><Button
             size="small"
             variant="outlined"
             color="primary"
             onClick={updateHandler}>
             < EditIcon />
           </Button>
-          <Button type="submit"
-            variant="outlined"
-            size="large"
-            color="primary"
+        <Button type="submit"
+          variant="outlined"
+          size="small"
+          color="primary"
 
-            onClick={handleOpen}>
-            Добавить уроки
-        </Button>
+          onClick={handleOpen}>
+          Добавить уроки
+        </Button></>}
           <Modal
             open={open}
             onClose={handleClose}
