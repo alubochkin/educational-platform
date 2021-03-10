@@ -12,7 +12,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  console.log(id)
   User.findById(id, (err, user) => {
     done(err, { firstName: user.firstName, lastName: user.lastName, id: user._id, email: user.email, role: user.role });
   });

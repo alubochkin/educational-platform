@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -77,21 +77,21 @@ export default function SidebarLeft() {
       <>
         <List className={classes.sidebarUl}>
           {moduleStudent?.map((text, index) => (
-            <ListItem 
+            <ListItem
               component={Link} to={`${url}/shedule/${text.id}`}
               button key={text.title}>
-                <ListItemText className={classes.listh3} primary={`Фаза ${index + 1}`} />
-                <div className={classes.small}>{text.title}</div>
+              <ListItemText className={classes.listh3} primary={`Фаза ${index + 1}`} />
+              <div className={classes.small}>{text.title}</div>
             </ListItem>
           ))}
         </List>
         <Divider />
 
         <List className={classes.sidebarUl}>
-        <ListItem 
-          button component={Link} to={`${url}/calendarShedule`}>
+          <ListItem
+            button component={Link} to={`${url}/calendarShedule`}>
             <ListItemText primary='Расписание' /><ScheduleIcon />
-        </ListItem>
+          </ListItem>
           <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
           <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
         </List>
@@ -105,7 +105,7 @@ export default function SidebarLeft() {
 
 // spec = {
 //    phase: [
-      
+
 //     { title: 'Фаза 1', description: 'Javascript', 
 //       shedul: или _id или весь obj
 //     },

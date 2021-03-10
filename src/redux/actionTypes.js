@@ -9,11 +9,13 @@ export const GROUP_UPDATE = 'GROUP_UPDATE';
 
 export const GET_API_DATA = "GET_API_DATA";
 export const GET_ANSWER_AUTH_STUDENT = "GET_ANSWER";
-export const GET_MODULES = 'GET_MODULES'; 
-export const ADD_MODULE = 'ADD_MODULE'; 
+export const GET_MODULES = 'GET_MODULES';
+export const ADD_MODULE = 'ADD_MODULE';
 export const UPDATE_GROUP = 'UPDATE_GROUP';
 export const UPDATE_MODULE = 'UPDATE_MODULE';
 
 export const GET_MODULE_STUDENT = 'GET_MODULE_STUDENT';
 export const ADD_SCHEDULE = 'ADD_SCHEDULE';
 export const GET_SCHEDULE = 'GET_SCHEDULE';
+
+export const GET_FILES = 'GET_FILES';
