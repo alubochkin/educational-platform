@@ -9,8 +9,31 @@ import StudentAuth from '../components/AuthStudent/FormAuth';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+  image: {
+    width: 128,
+    height: 128,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
   container_menu: {
     display: "flex",
     flexDirection: "column",
@@ -47,7 +70,7 @@ const useStyles = makeStyles({
     height: "80px",
     fontSize: "70px",
   }
-});
+}));
 
 
 const MainPage = () => {
@@ -61,29 +84,50 @@ const MainPage = () => {
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.content} maxWidth={false}>
-        <div className={classes.container_menu}>
-          <img src='images/main-page.jpg' alt='danya main-page' />
-          {user.role === 3 && <div className={classes.menu}>
-            <a className={classes.link} href="/userPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>
-            <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>
-            <a className={classes.link} href="/studentoffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Кампус</a>
-          </div>}
-          {user.role === 2 && <div className={classes.menu}>
-            <a className={classes.link} href="/userPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>
-            <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>
-            <a className={classes.link} href="/teacheroffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Офис</a>
-          </div>}
-          {user.role === 1 && <div className={classes.menu}>
-            <a className={classes.link} href="/adminPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>
-            <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>
-            <a className={classes.link} href="/adminOffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Офис</a>
-          </div>}
-        </div>
-        <div className={classes.boxNew}>
-          <div><h1>Новости Elbrus Coding Bootcamp</h1></div>
-          <div><h2>Встреча выпускников</h2></div>
-          <div><h3>Курс алгоритмов</h3></div>
-        </div>
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <ButtonBase className={classes.image}>
+                <img className={classes.img} alt="danya main-page" src="images/main-page.jpg" />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={6} sm container>
+              <Grid item xs container direction="column">
+                <Grid item>
+                  {user.role === 3 && <a className={classes.link} href="/userPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>}
+                  {user.role === 2 && <a className={classes.link} href="/userPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>}
+                  {user.role === 1 && <a className={classes.link} href="/adminPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>}
+                  <Typography variant="body2" gutterBottom>
+                    Новости Elbrus Coding Bootcamp
+                </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Встреча выпускников
+                </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                    Курс по алгоритмам
+                </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                    Встреча с психологом
+                </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs>
+                {user.role === 3 && <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>}
+                {user.role === 2 && <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>}
+                {user.role === 1 && <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>}
+              </Grid>
+              <Grid item xs>
+                {user.role === 3 && <a className={classes.link} href="/studentoffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Кампус</a>}
+                {user.role === 2 && <a className={classes.link} href="/teacheroffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Офис</a>}
+                {user.role === 1 && <a className={classes.link} href="/adminOffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Офис</a>}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
       </Container>
     </React.Fragment>
 

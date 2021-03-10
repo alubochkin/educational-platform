@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const isEmail = require('../middlewares/checkEmailUser');
 
 const {
   postSignin, signOut, authSignup
@@ -9,7 +10,7 @@ const router = express.Router();
 
 router
   .route('/signup')
-  .post(passport.authenticate('local'), authSignup);
+  .post(isEmail, passport.authenticate('local'), authSignup);
 
 router
   .route('/signin')
