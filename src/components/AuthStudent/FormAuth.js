@@ -41,13 +41,15 @@ export default function StudentAuth() {
 
   const dispatch = useDispatch();
   const { dataApi }  = useSelector(state => state.authStudentReducer);
-  const { user }   = useSelector(state => state.answerAuthStudentAPI);
+  // const { user }   = useSelector(state => state.answerAuthStudentAPI);
 
-  console.log('formauth', user)
+ 
 
   const classes = useStyles();
 
   const token = useParams();
+
+  console.log('token', token)
 
   useEffect(() => {
 

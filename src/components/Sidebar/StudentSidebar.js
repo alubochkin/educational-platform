@@ -43,8 +43,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '15px',
       textTransform: 'uppercase',
       color: '#7682c5',
-      borderLeft: '2px solid',
-      paddingLeft: '11px'
     }
 
   },
