@@ -57,7 +57,7 @@ const authSignup = async (req, res) => {
 };
 
 const postSignin = async (req, res) => {
-  let groupId;
+  let groupId = '';
   let groupSpec = '';
   let groupTitle = '';
   if (req.user.role === 3) {

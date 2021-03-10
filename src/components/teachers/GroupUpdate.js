@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, TextField, Button, Select } from '@material-ui/core';
 import { updateGroupThunk, groupDetailsThunk } from '../../redux/actions/actionGroup';
@@ -15,6 +18,22 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  form: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 2fr',
+    gap: '50px 30px',
+  },
+  listStudents: {
+    display: 'flex',
+    margin: '30px 0',
+    flexWrap: 'wrap',
+  },
+  listStudentsItem: {
+    marginRight: 15,
+  },
+  buttonSave: {
+    width: 'max-content'
   },
 }));
 
@@ -71,6 +90,8 @@ export default function GroupUpdate() {
   return (
 
     <Container className={classes.container} maxWidth={false}>
+
+     
       <form
         onSubmit={handleSubmit}
         className={classes.form}
@@ -137,6 +158,7 @@ export default function GroupUpdate() {
 
 
         <Button type="submit"
+        className={classes.buttonSave}
           variant="outlined"
           size="small"
           color="primary">
@@ -144,15 +166,20 @@ export default function GroupUpdate() {
         </Button>
       </form>
 
-      {groupStudents && <ul>
-        {groupStudents.map((student) => {
-          return (<div key={Math.random()}>
-            <span>{student.firstName}</span>
-            <span>{student.lastName}</span>
-            <br />
-          </div>)
-        })}
-      </ul>}
+      {groupStudents && 
+        <div className={classes.listStudents}>
+          {groupStudents.map((student) => {
+            return ( 
+            <Chip
+              className={classes.listStudentsItem}
+              avatar={<FaceIcon>M</FaceIcon>}
+              label={`${student.firstName} ${student.lastName}`}
+              clickable
+              key={Math.random()}
+              color="primary"
+            />)
+          })}
+        </div>}
 
 
       <Button type="submit"

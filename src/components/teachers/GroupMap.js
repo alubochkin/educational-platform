@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteGroupThunk } from '../../redux/actions/actionGroup';
 import ListItem from '@material-ui/core/ListItem';
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     '& div[aria-hidden]': {
       background: '#cccccc7a !important',
       backdropFilter: 'blur(10px)',
-    }   
+    }
   },
   paper: {
     alignItems: 'center',
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
     left: '50%',
     top: '30%',
-    transform:' translate(-50%, -50%)',
+    transform: ' translate(-50%, -50%)',
   },
 
 }));
@@ -103,7 +103,7 @@ function GroupMap({ group, url }) {
 
   return (
     <div className={classes.divGroup}>
-       
+
       <ListItem button component={Link} to={`${url}/updateGroup/${id}`}>
         <ListItemText className={classes.listh3} primary={group.groupTitle} />
       </ListItem>
@@ -124,7 +124,7 @@ function GroupMap({ group, url }) {
         <DeleteIcon />
       </ListItem>
       {/* <div className={classes.small}>{text.description}</div> */}
-       <Modal
+      <Modal
         className={classes.modal}
         open={open}
         onClose={handleClose}

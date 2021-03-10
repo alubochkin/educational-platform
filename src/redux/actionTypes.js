@@ -15,3 +15,5 @@ export const UPDATE_GROUP = 'UPDATE_GROUP';
 export const UPDATE_MODULE = 'UPDATE_MODULE';
 
 export const GET_MODULE_STUDENT = 'GET_MODULE_STUDENT';
+export const ADD_SCHEDULE = 'ADD_SCHEDULE';
+export const GET_SCHEDULE = 'GET_SCHEDULE';

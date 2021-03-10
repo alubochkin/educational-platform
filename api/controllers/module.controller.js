@@ -20,6 +20,7 @@ const addModule = async (req, res) => {
 
 const updateModule = async (req, res) => {
   const { moduleId, titleModule } = req.body;
+  console.log(req.body)
   try {
     const phase = await Phase.findOneAndUpdate({ _id: moduleId }, {
       $set: {
@@ -31,8 +32,9 @@ const updateModule = async (req, res) => {
     //     phaseTitle: phase.title,
     //   }
     // });
-
-    return res.json(phase);
+console.log(phase)
+    return res.json(phase)
+    
   } catch
   {
     return res.status(500).json({ mass: 'Error updating data to module' });

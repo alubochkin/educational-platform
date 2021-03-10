@@ -13,6 +13,8 @@ const moduleRouter = require('./routes/module.router');
 const scheduleRouter = require('./routes/schedule.router');
 const uploadRouter = require('./routes/fileSch.router');
 const userRouter = require('./routes/user.router');
+const lessonRouter = require('./routes/lesson.router');
+
 
 require('./config/passport');
 const app = express();
@@ -51,6 +53,7 @@ app.use('/group', groupRouter);
 app.use('/module', moduleRouter);
 app.use('/schedule', scheduleRouter);
 app.use('/upload', uploadRouter);
+app.use('/lesson', lessonRouter);
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 

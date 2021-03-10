@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   logo: {
     fontSize: '22px',
     width: 'max-content',
-    color: '#3f51b5'
+    color: '#fff'
   }
 });
 

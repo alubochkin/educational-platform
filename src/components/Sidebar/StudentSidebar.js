@@ -76,7 +76,7 @@ export default function SidebarLeft() {
     <div className={classes.root}>
       <>
         <List className={classes.sidebarUl}>
-          {moduleStudent.map((text, index) => (
+          {moduleStudent?.map((text, index) => (
             <ListItem 
               component={Link} to={`${url}/shedule/${text.id}`}
               button key={text.title}>
