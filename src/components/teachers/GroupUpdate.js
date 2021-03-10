@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     margin: '30px 0',
     flexWrap: 'wrap',
+    width: '100%'
   },
   listStudentsItem: {
     marginRight: 15,
