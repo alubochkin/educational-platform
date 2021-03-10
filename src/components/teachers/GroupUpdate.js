@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
-import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import { makeStyles } from '@material-ui/core/styles';
