@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     background: 'none',
   },
   header: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#3f51b5',
     height: 'max-content',
     padding: '10px 30px',
     display: 'flex',

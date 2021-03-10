@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react';
 import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import SidebarLeft from '../components/Sidebar/StudentSidebar';
 import Shedule from '../components/students/Shedule.js';
+import CalendarShedule from '../components/students/CalendarShedule';
 import { fetchMethod } from '../redux/thunkUtils';
+import { getModuleStudent } from '../redux/actions/actionUser';
 
 const StudentOffice = () => {
+  
   const { user } =  useSelector(state => state.userReducer);
   const { path } = useRouteMatch();
+  const dispatch = useDispatch();
 
   const useStyles = makeStyles({
     root: {
@@ -32,18 +36,8 @@ const StudentOffice = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(user.groupId)
-    
-    try {
-      fetchMethod({
-        path: `/schedule/${user.groupId}`,
-        method: 'GET',
-        // body: { groupId: user.groupId }
-      }).then((res) => console.log(res) )
-  
-    } catch (err) {
-      console.log('Err', err);
-    }
+    dispatch(getModuleStudent(user.groupSpec))
+   
   }, [])
 
   return (
@@ -54,7 +48,8 @@ const StudentOffice = () => {
         <div className={classes.content}>
 
           <Switch>
-            <Route path={`${path}/shedule`}><Shedule /></Route>
+            <Route path={`${path}/calendarShedule`}><CalendarShedule /></Route>
+            <Route path={`${path}/shedule/:idModule`}><Shedule /></Route>
           </Switch>
         </div>
 

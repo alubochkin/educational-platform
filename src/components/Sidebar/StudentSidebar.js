@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +14,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    borderRight: '1px solid',
+    borderRight: '1px solid #3f51b6',
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -62,32 +62,26 @@ const useStyles = makeStyles((theme) => ({
 export default function SidebarLeft() {
   const { url } = useRouteMatch();
   const classes = useStyles();
-  const { user } = useSelector(state => state.userReducer);
+  const { moduleStudent } = useSelector(state => state.userReducer);
 
 
   // блоки обучения если нет в localstorage забрать с базы > в reducer
   // 
   // передавать 
 
-  console.log(user)
+  console.log(moduleStudent)
 
-  const titleCourse = [
-
-    { title: 'Фаза 1', description: 'Javascript' },
-    { title: 'Фаза 2', description: 'Backend' },
-    { title: 'Фаза 3', description: 'React' }
-  ]
 
   return (
     <div className={classes.root}>
       <>
         <List className={classes.sidebarUl}>
-          {titleCourse.map((text, index) => (
+          {moduleStudent.map((text, index) => (
             <ListItem 
-              component={Link} to={`${url}/shedule`}
+              component={Link} to={`${url}/shedule/${text.id}`}
               button key={text.title}>
                 <ListItemText className={classes.listh3} primary={`Фаза ${index + 1}`} />
-                <div className={classes.small}>{text.description}</div>
+                <div className={classes.small}>{text.title}</div>
             </ListItem>
           ))}
         </List>

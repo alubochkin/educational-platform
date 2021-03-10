@@ -22,9 +22,21 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  personalData: {
+    fontSize: 20,
+    padding: '15px 0'
+  },
   r_Block_item: {
     padding: '15px 0',
-    fontSize: 22
+    fontSize: 16,
+    borderBottom: '1px solid #ccc'
+  },
+  faculty: {
+    marginBottom: 20,
+    width: 'max-content',
+    fontSize: 24,
+    borderBottom: '1px solid #3f51b5',
+    color: '#3f51b5'
   },
 
   userAvatar: {
@@ -37,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 30
   },
   avatarImg: {
-    maxWidth: 200
+    maxWidth: 120
   }
 }));
 
@@ -71,9 +83,19 @@ export default function SimpleContainer() {
       </div>
 
       <div className={classes.r_Block}>
+      {user.role === 3 &&  
+        <div className={classes.faculty}> 
+          Вы студент буткемпа на факультете {user.groupSpec}
+        </div> }
+        <div className={classes.personalData}>Персоналяные данные</div>
         <div className={classes.r_Block_item}> 
-          <span>{user.firstName} </span> <span>{user.lastName}</span>
-          </div>
+          <span>{user.firstName} </span> 
+          <span>{user.lastName}</span>
+        </div>
+
+        <div className={classes.r_Block_item}> {user.email}</div>
+        
+
         <div className={classes.r_Block_item}> {user.email}</div>
       </div>
         

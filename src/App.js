@@ -14,8 +14,9 @@ import UserPage from './pages/UserPage';
 
 import RegisterStudentToken from './pages/RegisterStudentToken';
 import { Container } from '@material-ui/core';
-import CalendarShedule from './pages/CalendarShedule'
+import CalendarShedule from './components/students/CalendarShedule'
 import FormFile from './components/formFile/FormFile';
+import Shedule from './components/students/Shedule';
 
 const App = () => {
 
@@ -31,7 +32,7 @@ const App = () => {
   return (
 
     <Router>
-      <Header />
+      {user && <Header />}
 
       <Container maxWidth={false}>
 
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/studentoffice">
             {role === 3 ? <StudentOffice /> : <Redirect to="/startPage" />}
           </Route>
+
 
           <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
 
