@@ -57,7 +57,7 @@ const App = () => {
           <Route exact path="/studentregistration/:token" component={RegisterStudentToken} />
 
           <Route path="/userPage">
-            {role  ? <UserPage /> : <Redirect to="/startPage" />}
+            {role ? <UserPage /> : <Redirect to="/startPage" />}
           </Route>
 
           <Route exact path="/groupadd"><CreateGroupForm /></Route>
