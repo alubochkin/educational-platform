@@ -11,7 +11,7 @@ const dirname = path.resolve();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(dirname, 'uploads'));
+    cb(null, path.join(dirname, 'public/uploads'));
   },
   filename: function (req, file, cb) {
     if (file.originalname.match(/\.(js).*$/gmi))

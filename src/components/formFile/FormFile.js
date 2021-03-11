@@ -8,10 +8,11 @@ import { Button } from '@material-ui/core';
 //     background: 'none',
 //   },
 // });
-const FormFile = ({ schId }) => {
+const FormFile = ({ schId, clickTrig }) => {
   const form = useRef(null);
   // const classes = useStyles();
   const { user } = useSelector(state => state.userReducer);
+
   const sendFile = e => {
     e.preventDefault()
     // if (e.target.filedata.value.match(/\.(js).*$/gmi))
@@ -29,6 +30,7 @@ const FormFile = ({ schId }) => {
       .then(res => res.json())
       .then(json => console.log('@@@', json))
       .catch((err) => console.log('!!!!', err));
+    clickTrig();
   }
   return (
     <form ref={form} onSubmit={sendFile}>

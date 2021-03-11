@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import FormFile from '../formFile/FormFile';
-import { getFilesThunk } from '../../redux/actions/actionFiles';
+// import { getFilesThunk } from '../../redux/actions/actionFiles';
 
 export default function ScheduleItem({ schedule }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { files } = useSelector(state => state.fileReducer);
 
   let fileList = [];
@@ -13,10 +13,13 @@ export default function ScheduleItem({ schedule }) {
     fileList = files.filter((el) => el.schId === schedule._id);
   }
 
+  const [filesInput, setFilesInput] = useState([]);
+  const [click, setClick] = useState(false);
+  const clickTrig = () => { setClick(prev => !prev) };
+
   useEffect(() => {
-    // танк фетч запрос файла
-    dispatch(getFilesThunk(schedule._id));
-  }, [dispatch, schedule._id]);
+    setFilesInput(fileList);
+  }, [click]);
 
   const [isAddingFile, setAddingFile] = useState(false);
   const addFileHandler = () => {
@@ -32,9 +35,9 @@ export default function ScheduleItem({ schedule }) {
       {schedule.title}
       <div >
 
-        {fileList && fileList.map((el) => {
+        {filesInput && filesInput.map((el) => {
           return (<div key={Math.random()}>
-            <a href={`uploads/${el.filename}`}>
+            <a href={`/uploads/${el.filename}`} download>
               {el.originalname}
             </a> <br />
           </div>)
@@ -43,7 +46,7 @@ export default function ScheduleItem({ schedule }) {
         <span onClick={addFileHandler}>Добавить материалы</span>
 
         {isAddingFile &&
-          <FormFile schId={schedule._id} />
+          <FormFile schId={schedule._id} clickTrig={clickTrig} />
         }
       </div>
     </div>

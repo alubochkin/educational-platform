@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import ScheduleItem from './ScheduleItem';
-import { getSchedulesThunk } from '../../redux/actions/actionSchedule';
+// import { getSchedulesThunk } from '../../redux/actions/actionSchedule';
 
 export default function SchedulesList({ id }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getSchedulesThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getSchedulesThunk());
+  // }, [dispatch]);
 
   const { schedules } = useSelector(state => state.scheduleReducer);
   let schedulesList = [];
