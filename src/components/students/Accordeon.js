@@ -74,6 +74,8 @@ const Accordeon = ({index,  itemModule}) => {
     getSheduleItem(id, isExpanded)
   };
 
+ 
+
 
   return (
 
@@ -91,7 +93,9 @@ const Accordeon = ({index,  itemModule}) => {
         </AccordionSummary>
         <AccordionDetails>
           <div className={classes.video}>
-          <iframe width="350" height="200" src="https://www.youtube.com/embed/nbaCw0iborI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          { expanded &&
+            <iframe width="350" height="200" src="https://www.youtube.com/embed/nbaCw0iborI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          }
           </div>
           <Typography className={classes.textMaterials}>
             {data }

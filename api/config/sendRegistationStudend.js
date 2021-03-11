@@ -6,16 +6,16 @@ dotenv.config();
 
 module.exports = (email, token) => {
   let smtpTransport = nodemailer.createTransport({
-    host: process.env.MSG_HOST,
-    port: process.env.MSG_PORT,
+    host: 'smtp.yandex.ru',
+    port: 465,
     secure: true,
     auth: {
-      user: process.env.MSG_USER,
-      pass: process.env.MSG_PASS,
+      user: 'bootcampedu',
+      pass: 'bootcamp12345678@',
     },
   });
   const options = {
-    from: `"Буткемп" <${process.env.MSG_USER}>`,
+    from: `"Буткемп" <bootcampedu@yandex.ru>`,
     to: `<${email}>`,
     subject: 'Привет это письмо от Буткемп',
     html: htmlMail(token),
