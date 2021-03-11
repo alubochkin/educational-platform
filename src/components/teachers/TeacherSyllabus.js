@@ -25,8 +25,9 @@ function TeacherSyllabus() {
   const { spec } = useSelector((state) => state.specReducer);
   const { user } = useSelector(state => state.userReducer);
 
-  const [syllabus, setSyllabus] = useState({});
-  const [isSelecting, setSelecting] = useState(false);
+  const [syllabus, setSyllabus] = useState({syllabusSpec: "Fullstack JS"
+  });
+  const [isSelecting, setSelecting] = useState(true);
 
   useEffect(() => {
     dispatch(getModulesThunk(user._id, 'admin'));

@@ -19,8 +19,8 @@ router
   .delete(delModule);
 
 router
-  .route('/:id')
-  .get(getModuleId);
+  .route('/get')
+  .post(getModuleId);
 
 router
   .route('/admin')
