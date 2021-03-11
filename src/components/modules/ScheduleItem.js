@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import FormFile from '../formFile/FormFile';
@@ -31,9 +32,8 @@ export default function ScheduleItem({ schedule }) {
   }
 
   return (
-    <div>
-      {schedule.title}
-      <div >
+    <>
+      <Typography >{schedule.title}</Typography>
 
         {filesInput && filesInput.map((el) => {
           return (<div key={Math.random()}>
@@ -48,8 +48,7 @@ export default function ScheduleItem({ schedule }) {
         {isAddingFile &&
           <FormFile schId={schedule._id} clickTrig={clickTrig} />
         }
-      </div>
-    </div>
+    </>
 
 
   )

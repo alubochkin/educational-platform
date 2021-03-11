@@ -5,29 +5,28 @@ const htmlMail = require('../config/mailHtml');
 dotenv.config();
 
 module.exports = (email, token) => {
-  let mass = '';
   let smtpTransport = nodemailer.createTransport({
-    host: 'smtp.yandex.ru',
-    port: 465,
+    host: process.env.MSG_HOST,
+    port: process.env.MSG_PORT,
     secure: true,
     auth: {
-      user: 'bootcampedu',
-      pass: 'bootcamp12345678@',
+      user: process.env.MSG_USER,
+      pass: process.env.MSG_PASS,
     },
   });
   const options = {
-    from: `"Буткемп" <bootcampedu@yandex.ru>`,
+    from: `"Буткемп" <${process.env.MSG_USER}>`,
     to: `<${email}>`,
     subject: 'Привет это письмо от Буткемп',
     html: htmlMail(token),
   }
   if (email) {
-    smtpTransport.sendMail(options, function (error, response) {
-      if (error) { console.log('***', error); mass = error; }
+    return smtpTransport.sendMail(options, function (error, response) {
+      if (error) { console.log(error); return 'Err 0'; }
       else {
         console.log("Message sent: Сообщения отправленны");
+        return 1;
       }
     });
-  }
-  return mass;
+  } else return 0;
 };
