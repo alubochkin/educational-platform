@@ -11,7 +11,7 @@ export default function ModuleList({ spec }) {
   if (modules.length > 0) {
     moduleList = modules.filter((el) => el.titleSpec === spec);
   }
-
+console.log(moduleList);
   return (
     <div>
       {moduleList && moduleList.map((el) => {
