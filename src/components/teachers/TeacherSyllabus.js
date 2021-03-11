@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Container, Button, Select, InputLabel } from '@material-ui/core';
+import { Container, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getModulesThunk, addModulesThunk } from '../../redux/actions/actionModules';
+import { getModulesThunk } from '../../redux/actions/actionModules';
 import ModuleList from '../modules/ModuleList';
 
 const useStyles = makeStyles({
@@ -27,10 +27,9 @@ function TeacherSyllabus() {
 
   const [syllabus, setSyllabus] = useState({});
   const [isSelecting, setSelecting] = useState(false);
-  const [isAdding, setAdding] = useState(false);
 
   useEffect(() => {
-    dispatch(getModulesThunk(user._id, 'teacher'));
+    dispatch(getModulesThunk(user._id, 'admin'));
   }, [dispatch, user._id]);
 
   const handleChange = (event) => {
@@ -44,17 +43,6 @@ function TeacherSyllabus() {
         [event.target.name]: event.target.value,
       })
     });
-  }
-
-  const addModuleHandler = () => {
-    if (isAdding) {
-      setAdding(false);
-      if (syllabus.moduleTitle) {
-        dispatch(addModulesThunk(syllabus.syllabusSpec, syllabus.moduleTitle, user._id));
-      }
-    } else {
-      setAdding(true);
-    }
   }
 
   return (
@@ -83,39 +71,6 @@ function TeacherSyllabus() {
         {isSelecting && <>
 
           <ModuleList spec={syllabus.syllabusSpec} />
-
-          <Button
-            onClick={addModuleHandler}
-            variant="outlined"
-            size="large"
-            color="primary">
-            Добавить модуль
-          </Button>
-
-          {isAdding && <div> <TextField
-            className={classes.textField}
-            required
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-            type="text"
-            name="moduleTitle" label="Наименование модуля" />
-            <Button
-              onClick={addModuleHandler}
-              variant="outlined"
-              size="small"
-              color="primary">
-              ОК
-              </Button>
-            <Button
-              onClick={addModuleHandler}
-              variant="outlined"
-              size="small"
-              color="secondary">
-              X
-              </Button>
-          </div>}
 
         </>}
 

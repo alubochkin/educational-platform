@@ -1,11 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import News from '../components/InfoBlocksMainPage/News'
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import TeacherOfficePage from './TeacherOfficePage';
 import StudentAuth from '../components/AuthStudent/FormAuth';
+import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
+import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 const useStyles = makeStyles({
@@ -19,6 +27,14 @@ const useStyles = makeStyles({
     left: 0,
     zIndex: -1,
     filter:' blur(3px)',
+  },
+  content: {
+    marginTop: 50
+  },
+  paper: {
+    backgroundColor: '#ffffffd1',
+    backdropFilter: 'blur(15px)',
+    margin: 30
   }
 });
 
@@ -29,18 +45,32 @@ const MainPage = () => {
 
   const classes = useStyles();
 
-  return (
+  const dataNews = ['1 новость', '2 новость']
 
-    <React.Fragment>
+  return (<>
+
       <div className={classes.mainPageBack}></div>
-      <Container className={classes.content} maxWidth={false}>
 
-        <h2>Главная!</h2>
+      <Grid className={classes.content} container spacing={3}>
+        <Grid className={classes.paper} item xs={3}>
+          <News titleComponent="Новости" dataComponent={dataNews}/>
+        </Grid>
 
-      </Container>
-    </React.Fragment>
+        <Grid className={classes.paper} item xs={3}>
+          <News />
+        </Grid>
 
-  )
+        <Grid className={classes.paper} item xs={3}>
+          <News titleComponent="Новости" dataComponent={dataNews}/>
+        </Grid>
+
+        <Grid className={classes.paper} item xs={3}>
+          <News />
+        </Grid>
+    </Grid>
+
+
+</>)
 }
 
 export default MainPage;

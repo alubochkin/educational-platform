@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
+import { useRouteMatch, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,12 +7,11 @@ import Container from '@material-ui/core/Container';
 import SidebarLeft from '../components/Sidebar/StudentSidebar';
 import Shedule from '../components/students/Shedule.js';
 import CalendarShedule from '../components/students/CalendarShedule';
-import { fetchMethod } from '../redux/thunkUtils';
 import { getModuleStudent } from '../redux/actions/actionUser';
 
 const StudentOffice = () => {
-  
-  const { user } =  useSelector(state => state.userReducer);
+
+  const { user } = useSelector(state => state.userReducer);
   const { path } = useRouteMatch();
   const dispatch = useDispatch();
 
@@ -37,8 +36,8 @@ const StudentOffice = () => {
 
   useEffect(() => {
     dispatch(getModuleStudent(user.groupSpec))
-   
-  }, [])
+
+  }, [dispatch, user.groupSpec]);
 
   return (
     <React.Fragment>

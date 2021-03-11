@@ -4,10 +4,9 @@ const StorFile = require('../models/storFileInfo');
 const addSchedule = async (req, res) => {
 
   const { arrSchedule, phaseId } = req.body;
-  console.log("пришла", arrSchedule, phaseId)
+
   try {
     const phase = await Phase.findById(phaseId);
-    console.log(phase)
     const schedule = await Promise.all(arrSchedule.map(async (el) => {
       const sch = await Schedule.create({
         title: el,

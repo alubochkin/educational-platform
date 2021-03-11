@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,19 +31,18 @@ const useStyles = makeStyles((theme) => ({
 
 function Shedule() {
   const classes = useStyles();
-  const {idModule} = useParams();
+  const { idModule } = useParams();
   const { moduleStudent } = useSelector(state => state.userReducer);
 
   const module = moduleStudent.filter(module => {
-    if(module.id === idModule) return module
+    if (module.id === idModule) return module
   })
 
-  console.log(module)
 
 
-  const lessonDescriptionHandler = (id, title) => {
+  // const lessonDescriptionHandler = (id, title) => {
     
-  }
+  // }
   
   return (
 

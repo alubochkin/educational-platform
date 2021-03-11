@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 export default function StudentAuth() {
 
   const { user }   = useSelector(state => state.userReducer);
-  console.log(user)
 
   return (
 

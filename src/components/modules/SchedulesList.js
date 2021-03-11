@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import ScheduleItem from './ScheduleItem';
 import { getSchedulesThunk } from '../../redux/actions/actionSchedule';
 
-
-
 export default function SchedulesList({ id }) {
   const dispatch = useDispatch();
 
