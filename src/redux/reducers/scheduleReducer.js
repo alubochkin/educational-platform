@@ -5,7 +5,7 @@ export default function scheduleReducer(state = initState, action) {
     case LOGOUT_USER:
       return { schedules: [] };
     case GET_SCHEDULE:
-      return { ...state, schedules: [...state.schedules, ...action.payload.schedulesList] };
+      return { ...state, schedules: action.payload.schedulesList };
     case ADD_SCHEDULE:
       return { ...state, schedules: [...state.schedules, ...action.payload.scheduleInfo] };
     // case UPDATE_MODULE:

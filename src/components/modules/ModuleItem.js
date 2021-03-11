@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import { updateModuleThunk, getModInfoThunk } from '../../redux/actions/actionModules';
+import { updateModuleThunk } from '../../redux/actions/actionModules';
 import Modal from '@material-ui/core/Modal';
 import SceduleCreate from './SceduleCreate';
 import ScheduleList from './SchedulesList'
@@ -30,12 +30,6 @@ export default function ModuleItem({ module }) {
   const [moduleUpd, setModuleUpd] = useState(module);
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.userReducer)
-
-
-  //  танк-фетч для получение всей инфы об этом модуле
-  useEffect(() => {
-    dispatch(getModInfoThunk(module._id));
-  }, [dispatch, module._id]);
 
 
   const updateHandler = () => {

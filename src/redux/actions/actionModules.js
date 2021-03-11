@@ -16,8 +16,11 @@ export const getModulesThunk = (userId, role) => async (dispatch) => {
     });
 
     if (!response.error) {
-      const modulList = response;
-      dispatch(getModulesAC(modulList));
+      const { phase, schedule, files } = response;
+
+      dispatch(getShedulesAC(schedule));
+      dispatch(getModulesAC(phase));
+      dispatch(getFilesAC(files));
     }
 
   } catch (err) {
@@ -34,13 +37,9 @@ export const getModInfoThunk = (modId) => async (dispatch) => {
     });
 
     if (!response.error) {
-      // const modulList = response;
-      // dispatch(getModulesAC(modulList));
-      console.log('response', response);
-      const { schedule, files } = response;
+      const { schedule } = response;
+      console.log('schedule', schedule);
 
-      dispatch(getShedulesAC(schedule));
-      dispatch(getFilesAC(files));
     }
 
   } catch (err) {

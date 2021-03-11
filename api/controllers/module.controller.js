@@ -61,22 +61,7 @@ const getModuleId = async (req, res) => {
     const phase = await Phase.findById(modId).lean();
     const schedule = await Schedule.find({ phaseId: modId });
 
-    const files = await Promise.all(schedule.map(async (el) => {
-      const storFile = await StorFile.find({ schId: el._id });
-      let result = [];
-      if (storFile.length > 0) {
-        console.log('storFile', storFile)
-        result.push(storFile);
-        console.log('result', result)
-      }
-      return result;
-    }));
-
-    files.flat(3);
-
-    console.log('files', files);
-
-    return res.json({ phase, schedule, files });
+    return res.json({ phase, schedule });
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to module' });
@@ -85,8 +70,11 @@ const getModuleId = async (req, res) => {
 
 const getModuleAll = async (req, res) => {
   try {
+    // забирает на клиента все модули и все! файлы
     const phase = await Phase.find({ status: 1 }).lean();
-    return res.json(phase);
+    const schedule = await Schedule.find();
+    const files = await StorFile.find();
+    return res.json({ phase, schedule, files });
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to module' });
