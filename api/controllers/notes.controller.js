@@ -1,9 +1,10 @@
 const Notes = require('../models/Notes');
 
 const addNewNotes = async (req, res) => {
-  const { title, content, userId } = req.body;
-  const newNotes = await Notes.create({ title: title, content: content, userId: userId });
-  return res.json(newNotes);
+  const { note, userId } = req.body;
+
+  const newNotes = await Notes.create({ title: note.title, content: note.content, userId: userId });
+  return res.json({ note: newNotes });
 }
 const getNotes = async (req, res) => {
   const { userId } = req.body;

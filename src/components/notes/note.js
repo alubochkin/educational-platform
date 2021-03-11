@@ -14,17 +14,17 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Note({ id, title, content, editClickOpen }) {
+export default function Note({ _id, title, content, editClickOpen }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const delNote = async (event) => {
     event.preventDefault();
-    dispatch(removeNotesThunk(id));
+    dispatch(removeNotesThunk(_id));
   };
 
   const editNote = () => {
-    editClickOpen({ id: id, title: title, content: content });
+    editClickOpen({ _id: _id, title: title, content: content });
   }
 
   return (

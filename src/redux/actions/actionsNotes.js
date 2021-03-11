@@ -15,6 +15,7 @@ export const addNotesThunk = (userId, note) => async (dispatch) => {
       body: { note, userId }
     });
     const result = await response.json();
+    console.log('result', result);
     if (response.ok) {
       dispatch(addNoteAC({ ...note, result }));
     } else {
@@ -51,7 +52,6 @@ export const getNotesThunk = (userId) => async (dispatch) => {
 
     if (!response.error) {
       const notesList = response;
-      console.log('^^^^', notesList);
       dispatch(getNoteAC(notesList));
     }
   } catch (err) {

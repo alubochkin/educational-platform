@@ -20,7 +20,7 @@ export const NoteList = ({ editClickOpen }) => {
 
   return (
     <div>
-      { typeof notes === 'array' && notes.map((el) => <Note key={el.id} {...el} editClickOpen={editClickOpen} />)}
+      {notes.map((el) => <Note key={el._id} {...el} editClickOpen={editClickOpen} />)}
     </div>
   )
 };
