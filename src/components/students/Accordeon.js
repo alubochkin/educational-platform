@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -54,7 +55,7 @@ const Accordeon = ({index,  itemModule}) => {
     if (isExpanded) {
       try {
         const response = await fetchMethod({
-          path: `http://localhost:3100/lesson/${id}`,
+          path: `http://localhost:3100/schedule/${id}`,
           method: 'GET',
       });
       if (!response.error) {

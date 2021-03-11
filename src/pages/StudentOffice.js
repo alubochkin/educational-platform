@@ -8,6 +8,7 @@ import SidebarLeft from '../components/Sidebar/StudentSidebar';
 import Shedule from '../components/students/Shedule.js';
 import CalendarShedule from '../components/students/CalendarShedule';
 import { getModuleStudent } from '../redux/actions/actionUser';
+import { MainNote } from '../components/notes/MainNote';
 
 const StudentOffice = () => {
 
@@ -49,6 +50,7 @@ const StudentOffice = () => {
           <Switch>
             <Route path={`${path}/calendarShedule`}><CalendarShedule /></Route>
             <Route path={`${path}/shedule/:idModule`}><Shedule /></Route>
+            <Route path={`${path}/notes`}><MainNote /></Route>
           </Switch>
         </div>
 

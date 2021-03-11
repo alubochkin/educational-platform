@@ -70,9 +70,25 @@ export default function SendInvitesForm({ groupId, handleclose }) {
       return [...prev, <MaiiStudentInput className={classes.inputMail} />]
     })
   }
+  const requestDataStudent = async (path, sendData) => {
+    // loader
+    try {
+      const response = await fetch(path, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sendData),
+        credentials: "include"
+      });
+      if (response.status === 200) return await response.json();
+      else return new Error(response.err)
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+  }
 
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     let emails = []
     if (e.target.email.length > 0) {
@@ -82,33 +98,18 @@ export default function SendInvitesForm({ groupId, handleclose }) {
     } else {
       emails = [e.target.email.value];
     }
+    // setDataSend({ emails, groupId });
     setDataSend(() => {
       return { emails, groupId }
     })
   }
 
   useEffect(() => {
-    const requestDataStudent = async (path, sendData) => {
-      // loader
-      try {
-        const response = await fetch(path, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(sendData)
-        });
 
-        if (response.status === 200) return await response.json();
-        else return new Error(response.err)
-      } catch (err) {
-        console.log('Error: ', err);
-      }
+    if (Object.entries(dataSend).length !== 0) {
+      requestDataStudent('http://localhost:3100/sendmsg', dataSend)
+        .then((response) => console.log(response)).catch((err) => console.log(err))
     }
-
-    requestDataStudent('http://localhost:3100/sendmsg', dataSend)
-      .then((response) => console.log(response))
-
   }, [dataSend])
 
   return (

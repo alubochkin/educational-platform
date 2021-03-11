@@ -67,8 +67,6 @@ export default function SidebarLeft() {
   // 
   // передавать 
 
-  console.log(moduleStudent)
-
 
   return (
     <div className={classes.root}>
@@ -90,11 +88,12 @@ export default function SidebarLeft() {
             button component={Link} to={`${url}/calendarShedule`}>
             <ListItemText primary='Расписание' /><ScheduleIcon />
           </ListItem>
-          <ListItem button ><ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
+          <ListItem 
+             button component={Link} to={`${url}/notes`}>
+            <ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
           <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
         </List>
       </>
-
 
 
     </div>
