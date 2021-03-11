@@ -1,7 +1,9 @@
 import { GET_FILES } from '../actionTypes';
+import { ADD_FILE } from '../actionTypes';
 import { fetchMethod } from '../thunkUtils';
 
 export const getFilesAC = (fileInfo) => ({ type: GET_FILES, payload: { fileInfo } });
+export const addFileAC = (fileInfo) => ({ type: ADD_FILE });
 
 export const getFilesThunk = (schId) => async (dispatch) => {
   try {

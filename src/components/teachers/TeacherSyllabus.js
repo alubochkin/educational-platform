@@ -29,10 +29,6 @@ function TeacherSyllabus() {
   });
   const [isSelecting, setSelecting] = useState(true);
 
-  useEffect(() => {
-    dispatch(getModulesThunk(user._id, 'admin'));
-  }, [dispatch, user._id]);
-
   const handleChange = (event) => {
     setSelecting(true);
     if (event.target.value === '') {
