@@ -5,8 +5,9 @@ module.exports = async (req, res, next) => {
   if (email) {
     const user = await User.findOne({ email: email });
     if (user) {
-      return res.status(401).render('user with this email is already registered');
+      return res.status(401).send('user with this email is already registered');
     }
-  } else return res.status(401).render('invalid email');
+  } 
+  // else return res.status(401).send('invalid email');
   next();
 };

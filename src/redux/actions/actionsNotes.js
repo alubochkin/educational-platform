@@ -2,11 +2,12 @@ import { UPDATE_NOTES, ADD_NOTES, GET_NOTES, DELETE_NOTES } from '../actionTypes
 import { fetchMethod, fetchGet } from '../thunkUtils';
 
 export const addNoteAC = (note) => ({ type: ADD_NOTES, payload: { note } });
-export const getModulesAC = (notes) => ({ type: GET_NOTES, payload: { notes } });
-export const updNotesAC = (note) => ({ type: UPDATE_NOTES, payload: { note } });
+export const getNoteAC = (notes) => ({ type: GET_NOTES, payload: { notes } });
+export const updateNoteAC = (note) => ({ type: UPDATE_NOTES, payload: { note } });
 export const removeAC = (note) => ({ type: DELETE_NOTES, payload: { note } });
 
 export const addNotesThunk = (userId, note) => async (dispatch) => {
+  console.log('Koca: note ', note);
   try {
     const response = await fetch(`http://localhost:3100/notes/add`, {
       method: 'post',
@@ -35,7 +36,7 @@ export const updateNotesThunk = (note) => async (dispatch) => {
     });
     if (!response.error) {
       const note = response;
-      dispatch(updNotesAC(note));
+      dispatch(updateNoteAC(note));
     }
   } catch (err) {
     console.log('Err', err);
@@ -52,7 +53,7 @@ export const getNotesThunk = (userId) => async (dispatch) => {
 
     if (!response.error) {
       const notesList = response;
-      dispatch(getModulesAC(notesList));
+      dispatch(getNoteAC(notesList));
     }
   } catch (err) {
     console.log('Err', err);

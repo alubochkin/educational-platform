@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
+import AvatarFormUpdaate from '../components/formFile/AvatarFormUpdate';
 
 const useStyles = makeStyles((theme) => ({
   rootContainer: {
@@ -32,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     borderBottom: '1px solid #ccc'
   },
+  update: {
+    width: 'max-content',
+    alignSelf: 'flex-end',
+  },
   faculty: {
     marginBottom: 10,
     width: 'max-content',
@@ -50,20 +55,23 @@ const useStyles = makeStyles((theme) => ({
     padding: '20px',
     border: '15px solid #f0f0f0',
     borderRadius: '50%',
-    overflow: 'hidden',
     boxSizing: 'border-box',
-    marginBottom: 30
+    marginBottom: 30,
+    position: 'relative'
   },
   avatarImg: {
     maxWidth: 120
+  },
+  updateAvatar: {
+    position: 'absolute',
+    bottom: 15,
+    left: 15,
   }
 }));
 
 export default function SimpleContainer() {
   const classes = useStyles();
   const { user } = useSelector(state => state.userReducer);
-
-  console.log('avatar', typeof user.avatar)
 
   return (
 
@@ -77,15 +85,11 @@ export default function SimpleContainer() {
               : "https://yt3.ggpht.com/a/AATXAJyxpFPD238s9pNQ6Yp1IZOdkk0NH1uQRVRSYQ=s900-c-k-c0xffffffff-no-rj-mo"
               
               } />
+
+              <AvatarFormUpdaate className={classes.updateAvatar}/>
         </div>
 
-        <Button
-          variant="outlined"
-          size="large"
-          color="primary"
-          className={classes.update}>
-          Изменить данные
-        </Button>
+
       </div>
 
       <div className={classes.r_Block}>
@@ -106,6 +110,14 @@ export default function SimpleContainer() {
         </div>
 
         <div className={classes.r_Block_item}> {user.email}</div>
+
+        <Button
+          variant="outlined"
+          size="small"
+          color="primary"
+          className={classes.update}>
+          Изменить данные
+        </Button>
         
       </div>
         

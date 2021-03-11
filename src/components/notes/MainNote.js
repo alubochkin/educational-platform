@@ -1,9 +1,9 @@
 import React from 'react';
-import { NoteList } from '../notes/noteList'
-import NewNote from '../notes/newNote'
+import { NoteList } from './noteList'
+import NewNote from './newNote'
 import Button from '@material-ui/core/Button';
 
-export const Main = () => {
+export const MainNote = () => {
   const [open, setOpen] = React.useState({
     isOpen: false,
     isAdd: true,

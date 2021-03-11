@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import News from '../components/InfoBlocksMainPage/News'
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -14,63 +15,28 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+
+const useStyles = makeStyles({
+  mainPageBack: {
+    background: 'url(https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?cs=srgb&dl=pexels-olia-danilevich-4974915.jpg&fm=jpg)',
+    backgroundSize: '100%',
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    left: 0,
+    zIndex: -1,
+    filter:' blur(3px)',
+  },
+  content: {
+    marginTop: 50
   },
   paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: "100%",
-    maxHeight: "100%",
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
-  container_menu: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: "20px"
-  },
-  menu: {
-    display: "flex",
-    marginTop: "30px",
-    width: "1200px",
-    margin: "30px auto",
-    textAlign: "center",
-  },
-  boxNew:
-  {
-    display: "flex",
-    flexDirection: "row",
-    maxWidth: "100%"
-  },
-  link: {
-    width: "400px",
-    height: "150px",
-    margin: "0 40px 40px 0",
-    padding: "15px 10px",
-    lineHeight: "40px",
-    fontSize: "24px",
-    textAlign: "center",
-    border: "1px solid",
-    borderRadius: "15px",
-    textDecoration: "none"
-  },
-  logo: {
-    display: "inline-block",
-    verticalAlign: "middle",
-    height: "80px",
-    fontSize: "70px",
+    backgroundColor: '#ffffffd1',
+    backdropFilter: 'blur(15px)',
+    margin: 30
   }
-}));
+});
 
 
 const MainPage = () => {
@@ -79,59 +45,32 @@ const MainPage = () => {
 
   const classes = useStyles();
 
-  return (
+  const dataNews = ['1 новость', '2 новость']
 
-    <React.Fragment>
-      <CssBaseline />
-      <Container className={classes.content} maxWidth={false}>
-        <Paper className={classes.paper}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="danya main-page" src="images/main-page.jpg" />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={6} sm container>
-              <Grid item xs container direction="column">
-                <Grid item>
-                  {user.role === 3 && <a className={classes.link} href="/userPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>}
-                  {user.role === 2 && <a className={classes.link} href="/userPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>}
-                  {user.role === 1 && <a className={classes.link} href="/adminPage"><span className={classes.logo}>{<PersonOutlineOutlinedIcon />}</span>Личный кабинет</a>}
-                  <Typography variant="body2" gutterBottom>
-                    Новости Elbrus Coding Bootcamp
-                </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Встреча выпускников
-                </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    Курс по алгоритмам
-                </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    Встреча с психологом
-                </Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs>
-                {user.role === 3 && <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>}
-                {user.role === 2 && <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>}
-                {user.role === 1 && <a className={classes.link} href="/notifications"><span className={classes.logo}>{<NotificationsNoneOutlinedIcon />}</span>Оповещения</a>}
-              </Grid>
-              <Grid item xs>
-                {user.role === 3 && <a className={classes.link} href="/studentoffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Кампус</a>}
-                {user.role === 2 && <a className={classes.link} href="/teacheroffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Офис</a>}
-                {user.role === 1 && <a className={classes.link} href="/adminOffice"><span className={classes.logo}>{<SchoolOutlinedIcon />}</span>Офис</a>}
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
-    </React.Fragment>
+  return (<>
 
-  )
+      <div className={classes.mainPageBack}></div>
+
+      <Grid className={classes.content} container spacing={3}>
+        <Grid className={classes.paper} item xs={3}>
+          <News titleComponent="Новости" dataComponent={dataNews}/>
+        </Grid>
+
+        <Grid className={classes.paper} item xs={3}>
+          <News />
+        </Grid>
+
+        <Grid className={classes.paper} item xs={3}>
+          <News titleComponent="Новости" dataComponent={dataNews}/>
+        </Grid>
+
+        <Grid className={classes.paper} item xs={3}>
+          <News />
+        </Grid>
+    </Grid>
+
+
+</>)
 }
 
 export default MainPage;

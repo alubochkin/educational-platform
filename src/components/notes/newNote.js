@@ -18,6 +18,8 @@ export default function NewNote(props) {
     content: '',
   });
 
+  console.log(note)
+
   const noteChange = (event) => {
     setNote({ ...note, [event.target.name]: event.target.value })
   };
