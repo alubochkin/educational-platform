@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  addLection, getWeekLection, getAllLection, getPhaseLection
+  addLection, getWeekLection, getAllLection, getPhaseLection, getItemLection
 } = require('../controllers/lesson.controller');
 const router = express.Router();
 
@@ -14,12 +14,15 @@ router
 
 router
   .route('/getphase')
-  .post(getWeekLection);
+  .post(getPhaseLection);
 
 router
   .route('/getweek')
-  .post(getPhaseLection);
+  .post(getWeekLection);
 
+router
+  .route('/getitem')
+  .post(getItemLection);
 
 
 module.exports = router;

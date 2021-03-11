@@ -14,9 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StudentAuth() {
 
-  // const { user } = useSelector(state => state.userReducer);
-  const { user }   = useSelector(state => state.authStudentReducer.answerAuthStudentAPI);
-  console.log(user)
+  const { user }   = useSelector(state => state.userReducer);
 
   return (
 

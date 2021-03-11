@@ -80,3 +80,17 @@ export const updateModuleThunk = (module) => async (dispatch) => {
   }
 }
 
+// const getSheduleItemThunk = (id) => async (dispatch) => {
+//   try {
+//     const response = await fetchMethod({
+//       path: `http://localhost:3100/schedule/${id}`,
+//       method: 'GET',
+//     });
+//     if (!response.error) {
+//       console.log(response)
+//      ;
+//     }
+//   } catch (err) {
+//     console.log('Err', err);
+//   }
+// }

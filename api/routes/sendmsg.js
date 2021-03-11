@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(isEmail, jwtSend);
+  .post(jwtSend);
 
 router
   .route('/token')

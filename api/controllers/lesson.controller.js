@@ -2,7 +2,7 @@ const Lection = require('../models/Lection');
 
 const addLection = async (req, res) => {
 
-  const { groupId, phaseId, phaseTitle, schId, schTitle, week, dayWeek, dayWeekText, task, typeDay } = req.body;
+  const { groupId, phaseId, phaseTitle, schId, schTitle, week, dayWeek, dayWeekText, task } = req.body;
   try {
     const lesson = await Lection.create({
       groupId: groupId,
@@ -69,6 +69,20 @@ const getWeekLection = async (req, res) => {
     return res.status(500).json({ mass: 'Error getting data to lesson' });
   }
 };
+
+const getItemLection = async (req, res) => {
+
+  const { id } = req.params;
+  try {
+    const lesson = await Lection.findById(id).lean();
+
+    return res.json(lesson);
+  } catch
+  {
+    return res.status(500).json({ mass: 'Error getting data to lesson' });
+  }
+};
+
 module.exports = {
-  addLection, getWeekLection, getAllLection, getPhaseLection
+  addLection, getWeekLection, getAllLection, getPhaseLection, getItemLection
 };
