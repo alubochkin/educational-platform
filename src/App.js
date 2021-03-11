@@ -65,6 +65,7 @@ const App = () => {
           <Route path="/" component={Page404} />
         </Switch>
       </Container>
+      <footer></footer>
     </Router>
 
 

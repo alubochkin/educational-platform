@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   divGroup: {
     display: 'grid',
-    gridTemplateColumns: '90% 1fr 1fr 1fr',
+    gridTemplateColumns: 'calc(100% - 150px) 50px 50px 50px',
     alignItems: 'center',
     borderBottom: '2px solid #cdcdcd',
   },

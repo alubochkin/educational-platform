@@ -23,9 +23,10 @@ const useStyles = makeStyles({
     zIndex: 100,
   },
   logo: {
-    fontSize: '22px',
+    fontSize: '18px',
     width: 'max-content',
-    color: '#fff'
+    color: '#fff',
+    textDecoration: 'none',
   }
 });
 
@@ -40,14 +41,14 @@ const Header = () => {
   }
 
   return (
-    <div className={classes.header}>
-      <div className={classes.logo}>
+    <a className={classes.header}>
+      <a href="/" className={classes.logo}>
         Онлайн образование
-      </div>
+      </a>
       {role === 3 && <NavigationTopStudent />}
       {role === 2 && <NavigationTopTeacher />}
       {role === 1 && <NavigationTopAdmin />}
-    </div>
+    </a>
   )
 }
 

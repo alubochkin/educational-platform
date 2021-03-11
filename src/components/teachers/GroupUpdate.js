@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
     top: '30%',
     transform: ' translate(-50%, -50%)',
   },
+  textField: {
+    width: '30%',
+    marginRight: 50,
+  },
+
 }));
 
 export default function GroupUpdate() {
