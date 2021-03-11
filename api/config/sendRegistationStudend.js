@@ -23,7 +23,7 @@ module.exports = (email, token) => {
   }
   if (email) {
     smtpTransport.sendMail(options, function (error, response) {
-      if (error) { console.log(error); mass = error; }
+      if (error) { console.log('***', error); mass = error; }
       else {
         console.log("Message sent: Сообщения отправленны");
       }

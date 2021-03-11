@@ -69,6 +69,20 @@ const getWeekLection = async (req, res) => {
     return res.status(500).json({ mass: 'Error getting data to lesson' });
   }
 };
+
+const getItemLection = async (req, res) => {
+
+  const { id } = req.params;
+  try {
+    const lesson = await Lection.findById(id).lean();
+
+    return res.json(lesson);
+  } catch
+  {
+    return res.status(500).json({ mass: 'Error getting data to lesson' });
+  }
+};
+
 module.exports = {
-  addLection, getWeekLection, getAllLection, getPhaseLection
+  addLection, getWeekLection, getAllLection, getPhaseLection, getItemLection
 };
