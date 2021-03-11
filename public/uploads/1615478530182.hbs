@@ -1,0 +1,46 @@
+<div class="wrapper">
+
+  <div class="card mb-3" style="max-width: 500px; height: 150px">
+    {{#if user.cart}}
+
+    {{#each user.cart}}
+    <div class="row no-gutters">
+
+
+      <div class="col-md-4">
+        <img src="{{this.photolink}}" class="card-img" alt="some image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+
+
+          <h5 class="card-title">{{this.title}}</h5>
+          <form action="" method="POST">
+            <div class="form-row">
+              <div class="col">
+                <input type="number" name="quantity" class="form-control" placeholder="quantity" required>
+              </div>
+              <div class="col">
+                <span class="form-control"><b>$ {{this.price}} </b></span>
+              </div>
+              <div class="col">
+                <button class="form-control btn btn-secondary">buy</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+
+    </div>
+    {{/each}}
+
+    {{else}}
+    <h4>Hello, {{user.username}}!</h4>
+    <p>your shopping cart is empty</p>
+    {{/if}}
+  </div>
+
+
+</div>

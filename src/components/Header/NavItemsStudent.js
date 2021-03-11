@@ -5,7 +5,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+// import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined';
 import LocalLibraryOutlinedIcon from '@material-ui/icons/LocalLibraryOutlined';
 import { Link } from 'react-router-dom';
@@ -23,8 +23,8 @@ const NavigationTopStudent = () => {
   const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.userReducer);
- 
-  
+
+
   const { firstName } = user;
 
   const logoutHandler = () => {
@@ -46,15 +46,15 @@ const NavigationTopStudent = () => {
         className="nav-item is-top"
         label="Главная"
         icon={<LocalLibraryOutlinedIcon />} />
-      <BottomNavigationAction
+      {/* <BottomNavigationAction
         component={Link}
         to="/notifications"
         className="nav-item is-top"
         label="Оповещения"
-        icon={<NotificationsNoneOutlinedIcon />} />
+        icon={<NotificationsNoneOutlinedIcon />} /> */}
       <BottomNavigationAction
         component={Link}
-        to="/studentoffice"
+        to="/studentoffice/calendarShedule"
         className="nav-item is-top"
         label="Кампус"
         icon={<SchoolOutlinedIcon />} />

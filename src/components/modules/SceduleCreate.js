@@ -114,7 +114,7 @@ export default function SceduleCreate({ id, title }) {
             variant="outlined"
             size="large"
             color="primary" >
-            Сохранить (click twice)
+            Сохранить
           </Button>
         </div>
       </form>

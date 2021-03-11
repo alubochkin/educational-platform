@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouteMatch, Switch, Route, Redirect, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,10 +9,13 @@ import Sidebar from '../components/Sidebar/TeacherSidebar';
 import GroupsList from '../components/teachers/GroupsList';
 import TeacherSyllabus from '../components/teachers/TeacherSyllabus';
 import GroupUpdate from '../components/teachers/GroupUpdate';
+import { getModulesThunk } from '../redux/actions/actionModules';
 
 const TeacherOfficePage = () => {
+  const dispatch = useDispatch();
   const { path, url } = useRouteMatch();
   const { id } = useParams();
+  const { user } = useSelector(state => state.userReducer);
 
   const useStyles = makeStyles({
     root: {
@@ -32,6 +35,13 @@ const TeacherOfficePage = () => {
     }
   });
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getModulesThunk(user._id, 'admin'));
+  }, [dispatch, user._id]);
+
+
+
   return (
     <React.Fragment>
       <CssBaseline />
