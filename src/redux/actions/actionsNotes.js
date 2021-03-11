@@ -3,21 +3,18 @@ import { fetchMethod, fetchGet } from '../thunkUtils';
 
 export const addNoteAC = (note) => ({ type: ADD_NOTES, payload: { note } });
 export const getNoteAC = (notes) => ({ type: GET_NOTES, payload: { notes } });
-export const updateNoteAC = (note) => ({ type: UPDATE_NOTES, payload: { note } });
-export const removeAC = (note) => ({ type: DELETE_NOTES, payload: { note } });
+export const updateNoteAC = (note) => ({ type: UPDATE_NOTES, payload: note });
+export const removeNoteAC = (id) => ({ type: DELETE_NOTES, payload: { id } });
 
 export const addNotesThunk = (userId, note) => async (dispatch) => {
-  console.log('Koca: note ', note);
   try {
     const response = await fetchMethod({
       path: 'http://localhost:3100/notes/add',
       method: 'post',
       body: { note, userId }
     });
-    const result = await response.json();
-    console.log('result', result);
-    if (response.ok) {
-      dispatch(addNoteAC({ ...note, result }));
+    if (!response.error) {
+      dispatch(addNoteAC(response));
     } else {
       console.log('err');
     }
@@ -31,11 +28,10 @@ export const updateNotesThunk = (note) => async (dispatch) => {
     const response = await fetchMethod({
       path: 'http://localhost:3100/notes/update',
       method: 'post',
-      body: { id: note._id, title: note.title, content: note.content }
+      body: { _id: note._id, title: note.title, content: note.content }
     });
     if (!response.error) {
-      const note = response;
-      dispatch(updateNoteAC(note));
+      dispatch(updateNoteAC(response));
     }
   } catch (err) {
     console.log('Err', err);
@@ -58,11 +54,11 @@ export const getNotesThunk = (userId) => async (dispatch) => {
     console.log('Err', err);
   }
 }
-export const removeNotesThunk = (notesId) => async (dispatch) => {
+export const removeNotesThunk = (_id) => async (dispatch) => {
   try {
-    const response = await fetchGet({ path: `http://localhost:3100/notes/${notesId}` });
+    const response = await fetchGet({ path: `http://localhost:3100/notes/${_id}` });
     if (!response.error) {
-      dispatch(removeAC(notesId));
+      dispatch(removeNoteAC(_id));
     }
   } catch (err) {
     console.log('Err', err);
