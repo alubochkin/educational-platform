@@ -5,13 +5,19 @@ export default function notesReducer(state = {}, action) {
     case LOGOUT_USER:
       return { notes: [] };
     case ADD_NOTES:
-      return { ...state, notes: [...state.notes, action.payload.notes] };
+      return { ...state, notes: [...state.notes, action.payload.note] };
     case GET_NOTES:
       return { ...state, notes: action.payload.notes };
     case DELETE_NOTES:
-      return { ...state, notes: state.notes.filter((el) => el._id !== action.payload.notes._id) };
+      return { ...state, notes: state.notes.filter((el) => el._id !== action.payload.id) };
     case UPDATE_NOTES:
-      return { ...state, notes: [...state.notes, [action.payload.notes]] }
+      return {
+        ...state,
+        notes: state.notes.map((el) => {
+          return (el._id === action.payload._id) ? { ...action.payload } : el
+        }
+        )
+      }
     default:
       return state;
   }

@@ -12,8 +12,6 @@ export const NoteList = ({ editClickOpen }) => {
   const { notes } = useSelector(state => state.notesReducer);
   const { user } = useSelector(state => state.userReducer);
 
-  console.log('notes', notes)
-
   useEffect(() => {
     dispatch(getNotesThunk(user._id));
   }, [dispatch]);
