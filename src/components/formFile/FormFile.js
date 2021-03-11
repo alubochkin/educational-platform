@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { addFileAC } from '../../redux/actions/actionFiles';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // const useStyles = makeStyles({
 //   root: {
 //     width: 'max-content',
@@ -32,9 +33,9 @@ const FormFile = ({ schId, clickTrig }) => {
       .then(res => {
         res.json();
         console.log(res)
-      } )
+      })
       .then(json => {
-        
+
 
         dispatch(addFileAC(json));
       })
@@ -49,8 +50,12 @@ const FormFile = ({ schId, clickTrig }) => {
         type="file"
         name="filedata"
       />
-      <Button type="submit">
-        Send
+      <Button
+        variant="contained"
+        size="small"
+        color="primary"
+        type="submit">
+        <CloudUploadIcon />
       </Button>
     </form>
   )

@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0 0 30px #33333330',
     position: 'absolute',
     outline: 'none',
-    width: 600,
+    width: 500,
     background: '#fff !important',
     padding: theme.spacing(2, 4, 3),
     left: '50%',
     top: '30%',
-    transform:' translate(-50%, -50%)',
+    transform: ' translate(-50%, -50%)',
   },
   title: {
     marginBottom: 30
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     '& div[aria-hidden]': {
       background: '#cccccc7a !important',
       backdropFilter: 'blur(10px)',
-    }   
+    }
   },
 }));
 
@@ -50,7 +50,7 @@ function GetGroups({ url }) {
 
   // логика модального окна
   const [open, setOpen] = React.useState(false);
- 
+
   const handleOpen = () => {
     setOpen(true);
   };

@@ -35,19 +35,20 @@ export default function ScheduleItem({ schedule }) {
 
   return (
     <>
+
+      <Typography >{schedule.title}</Typography>
+
       { user.role === 2 && <Button type="submit"
         onClick={addFileHandler}
         variant="outlined"
         size="small"
         color="primary">
-        Добавить материалы
-        </Button>}
+        добавить материалы
+      </Button>}
 
       {isAddingFile &&
         <FormFile schId={schedule._id} clickTrig={clickTrig} />
       }
-
-      <Typography >{schedule.title}</Typography>
 
       {filesInput && filesInput.map((el) => {
         return (<div key={Math.random()}>

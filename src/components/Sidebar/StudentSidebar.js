@@ -8,7 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import EventNoteOutlinedIcon from '@material-ui/icons/EventNoteOutlined';
-import SubjectOutlinedIcon from '@material-ui/icons/SubjectOutlined';
+// import SubjectOutlinedIcon from '@material-ui/icons/SubjectOutlined';
 
 const drawerWidth = 240;
 
@@ -88,10 +88,10 @@ export default function SidebarLeft() {
             button component={Link} to={`${url}/calendarShedule`}>
             <ListItemText primary='Расписание' /><ScheduleIcon />
           </ListItem>
-          <ListItem 
-             button component={Link} to={`${url}/notes`}>
+          <ListItem
+            button component={Link} to={`${url}/notes`}>
             <ListItemText primary='Заметки' /><EventNoteOutlinedIcon /></ListItem>
-          <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem>
+          {/* <ListItem button ><ListItemText primary='Тесты' /><SubjectOutlinedIcon /></ListItem> */}
         </List>
       </>
 
