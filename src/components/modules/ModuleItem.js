@@ -29,7 +29,9 @@ export default function ModuleItem({ module }) {
   const [isLooking, setLooking] = useState(false);
   const [moduleUpd, setModuleUpd] = useState(module);
   const dispatch = useDispatch();
-  const { user }= useSelector(state=>state.userReducer)
+  const { user } = useSelector(state => state.userReducer)
+
+
   const updateHandler = () => {
     if (isUpdating) {
       setUpdating(false);
@@ -82,25 +84,25 @@ export default function ModuleItem({ module }) {
 
       {!isLooking &&
         <div className={classes.update}>
-        <ScheduleList id={module._id} />
+          <ScheduleList id={module._id} />
         </div>}
 
       {!isUpdating &&
         <>
-          {user.role===1 && <><Button
+          {user.role === 1 && <><Button
             size="small"
             variant="outlined"
             color="primary"
             onClick={updateHandler}>
             < EditIcon />
           </Button>
-        <Button type="submit"
-          variant="outlined"
-          size="small"
-          color="primary"
+            <Button type="submit"
+              variant="outlined"
+              size="small"
+              color="primary"
 
-          onClick={handleOpen}>
-          Добавить уроки
+              onClick={handleOpen}>
+              Добавить уроки
         </Button></>}
           <Modal
             open={open}
