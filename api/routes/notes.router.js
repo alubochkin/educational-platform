@@ -3,7 +3,7 @@ const { addNewNotes, getNotes, delNotes, updateNotes } = require('../controllers
 const router = express.Router();
 
 router.route('/')
-  .get(getNotes);
+  .post(getNotes);
 
 router.route('/add')
   .post(addNewNotes);

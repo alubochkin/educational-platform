@@ -9,7 +9,7 @@ import { getNotesThunk } from '../../redux/actions/actionsNotes'
 
 export const NoteList = ({ editClickOpen }) => {
   const dispatch = useDispatch();
-  const notes = useSelector(state => state.notesReducer);
+  const { notes } = useSelector(state => state.notesReducer);
   const { user } = useSelector(state => state.userReducer);
 
   console.log('notes', notes)
@@ -20,7 +20,7 @@ export const NoteList = ({ editClickOpen }) => {
 
   return (
     <div>
-      { typeof notes === 'array' && notes.map((el) => <Note key={el.id} {...el} editClickOpen={editClickOpen} />)}
+      {notes.map((el) => <Note key={el._id} {...el} editClickOpen={editClickOpen} />)}
     </div>
   )
 };

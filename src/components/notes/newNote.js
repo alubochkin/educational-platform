@@ -18,8 +18,6 @@ export default function NewNote(props) {
     content: '',
   });
 
-  console.log(note)
-
   const noteChange = (event) => {
     setNote({ ...note, [event.target.name]: event.target.value })
   };
@@ -36,16 +34,16 @@ export default function NewNote(props) {
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3100/notes`, {
+      const response = await fetch(`http://localhost:3100/notes/update`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...note, id: open.note.id })
+        body: JSON.stringify({ ...note, _id: open.note._id })
       });
       const result = await response.json();
       if (response.ok) {
-        dispatch(updateNoteAC({ ...note, id: open.note.id }));
+        dispatch(updateNoteAC({ ...note, _id: open.note._id }));
       } else {
         console.log('err');
       }
@@ -76,7 +74,7 @@ export default function NewNote(props) {
           autoFocus
           margin="dense"
           id="text"
-          name="text"
+          name="content"
           label={open.isAdd ? 'Text' : ''}
           fullWidth
           multiline

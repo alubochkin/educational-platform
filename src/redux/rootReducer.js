@@ -8,7 +8,7 @@ import authStudentReducer from './reducers/authStudentReducer';
 import moduleReducer from './reducers/moduleReducer';
 import scheduleReducer from './reducers/scheduleReducer';
 import fileReducer from './reducers/fileReducer';
-import notesReducer from './reducers/fileReducer';
+import notesReducer from './reducers/notesReducer';
 
 const rootReducer = combineReducers({
   specReducer, groupReducer, userReducer,
