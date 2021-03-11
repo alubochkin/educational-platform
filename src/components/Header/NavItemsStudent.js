@@ -54,7 +54,7 @@ const NavigationTopStudent = () => {
         icon={<NotificationsNoneOutlinedIcon />} />
       <BottomNavigationAction
         component={Link}
-        to="/studentoffice"
+        to="/studentoffice/calendarShedule"
         className="nav-item is-top"
         label="Кампус"
         icon={<SchoolOutlinedIcon />} />

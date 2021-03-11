@@ -1,10 +1,8 @@
+import { Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import FormFile from '../formFile/FormFile';
 import { Button } from '@material-ui/core';
-
-
-// import { getFilesThunk } from '../../redux/actions/actionFiles';
 
 export default function ScheduleItem({ schedule }) {
   const { user } = useSelector(state => state.userReducer)
@@ -36,8 +34,7 @@ export default function ScheduleItem({ schedule }) {
   }
 
   return (
-    <div>
-      {schedule.title}
+    <>
       { user.role === 2 && <Button type="submit"
         onClick={addFileHandler}
         variant="outlined"
@@ -45,23 +42,21 @@ export default function ScheduleItem({ schedule }) {
         color="primary">
         Добавить материалы
         </Button>}
-      <div >
-        {isAddingFile &&
-          <FormFile schId={schedule._id} clickTrig={clickTrig} />
-        }
 
-        {filesInput && filesInput.map((el) => {
-          return (<div key={Math.random()}>
-            <a href={`/uploads/${el.filename}`} download>
-              {el.originalname}
-            </a> <br />
-          </div>)
-        })}
-      
-      </div>
-    </div>
+      {isAddingFile &&
+        <FormFile schId={schedule._id} clickTrig={clickTrig} />
+      }
 
+      <Typography >{schedule.title}</Typography>
 
+      {filesInput && filesInput.map((el) => {
+        return (<div key={Math.random()}>
+          <a href={`/uploads/${el.filename}`} download>
+            {el.originalname}
+          </a> <br />
+        </div>)
+      })}
+    </>
   )
 }
 

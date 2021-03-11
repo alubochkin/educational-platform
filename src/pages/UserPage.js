@@ -103,7 +103,7 @@ export default function SimpleContainer() {
           </div> 
         </>
         }
-        <div className={classes.personalData}>Персоналяные данные</div>
+        <div className={classes.personalData}>Персональные данные</div>
         <div className={classes.r_Block_item}> 
           <span>{user.firstName} </span> 
           <span>{user.lastName}</span>

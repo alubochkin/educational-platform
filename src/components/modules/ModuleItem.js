@@ -11,8 +11,10 @@ import ScheduleList from './SchedulesList'
 
 const useStyles = makeStyles((theme) => ({
   update: {
-    border: '1px solid',
-    marginLeft: '200px',
+    borderTop: '2px solid #3f51b6',
+    padding: 20,
+    display: 'grid',
+    gap: 25,
   },
   paper: {
     position: 'absolute',
@@ -21,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  more: {
+    padding: '14px 0',
+    fontSize: 18,
+    background: '#3f51b62e',
+
+  }
 }));
 
 export default function ModuleItem({ module }) {
@@ -64,6 +72,7 @@ export default function ModuleItem({ module }) {
     setUpdating(false);
   }
   const [open, setOpen] = React.useState(false);
+  
   const handleOpen = () => {
     setOpen(true);
   };
@@ -72,11 +81,10 @@ export default function ModuleItem({ module }) {
   };
   return (
 
-    <div>
+    <>
 
-      <Button
+      <Button className={classes.more}
         size="small"
-        variant="outlined"
         color="primary"
         onClick={lookingHandler}>
         {module.title}
@@ -150,7 +158,7 @@ export default function ModuleItem({ module }) {
 
         </div>
       }
-    </div>
+    </>
   )
 }
 
