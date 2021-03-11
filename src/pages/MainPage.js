@@ -19,8 +19,9 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 const useStyles = makeStyles({
   mainPageBack: {
     background: 'url(https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?cs=srgb&dl=pexels-olia-danilevich-4974915.jpg&fm=jpg)',
-    backgroundSize: '100%',
+    backgroundSize: 'cover',
     position: 'absolute',
+    backgroundRepeat: 'no-repeat',
     height: '100%',
     width: '100%',
     top: 0,
@@ -29,7 +30,9 @@ const useStyles = makeStyles({
     filter:' blur(3px)',
   },
   content: {
-    marginTop: 50
+    marginTop: 50,
+    display: "grid",
+    gridTemplateColumns: '1fr 1fr'
   },
   paper: {
     backgroundColor: '#ffffffd1',
@@ -47,25 +50,31 @@ const MainPage = () => {
 
   const dataNews = ['1 новость', '2 новость']
 
+  const newsTeacher = ['1 новость', '2 новость']
+
+  const today = ['1 новость', '2 новость']
+
+  const notes = ['1 новость', '2 новость']
+
   return (<>
 
       <div className={classes.mainPageBack}></div>
 
-      <Grid className={classes.content} container spacing={3}>
-        <Grid className={classes.paper} item xs={3}>
-          <News titleComponent="Новости" dataComponent={dataNews}/>
+      <Grid className={classes.content} container >
+        <Grid className={classes.paper}>
+          <News titleComponent="Новости в Bootcamp" dataComponent={dataNews}/>
         </Grid>
 
-        <Grid className={classes.paper} item xs={3}>
-          <News />
+        <Grid className={classes.paper}>
+          <News titleComponent="Оповещения от преподователя" dataComponent={newsTeacher}/>
         </Grid>
 
-        <Grid className={classes.paper} item xs={3}>
-          <News titleComponent="Новости" dataComponent={dataNews}/>
+        <Grid className={classes.paper} >
+          <News titleComponent="Коротко о сегодня" dataComponent={today}/>
         </Grid>
 
-        <Grid className={classes.paper} item xs={3}>
-          <News />
+        <Grid className={classes.paper} >
+          <News titleComponent="Последние заметки" dataComponent={notes}/>
         </Grid>
     </Grid>
 

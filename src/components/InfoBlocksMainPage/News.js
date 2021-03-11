@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     backgroundColor: '#ffffff00',
-    padding: 30
+    padding: '10px 15px 30px 15px'
   },
   bullet: {
     display: 'inline-block',
@@ -20,6 +20,8 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 20,
+    color: '#3f51b6',
+    fontWeight: '600'
   },
   pos: {
     marginBottom: 12,
