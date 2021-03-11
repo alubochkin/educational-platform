@@ -36,7 +36,7 @@ export default function NewNote(props) {
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3100/notes`, {
+      const response = await fetch(`http://localhost:3100/notes/update`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

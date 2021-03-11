@@ -9,16 +9,14 @@ export const removeAC = (note) => ({ type: DELETE_NOTES, payload: { note } });
 export const addNotesThunk = (userId, note) => async (dispatch) => {
   console.log('Koca: note ', note);
   try {
-    const response = await fetch(`http://localhost:3100/notes/add`, {
+    const response = await fetchMethod({
+      path: 'http://localhost:3100/notes/add',
       method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: { note, userId }
     });
     const result = await response.json();
     if (response.ok) {
-      dispatch(addNoteAC({ ...note, id: result.id }));
+      dispatch(addNoteAC({ ...note, result }));
     } else {
       console.log('err');
     }
@@ -53,6 +51,7 @@ export const getNotesThunk = (userId) => async (dispatch) => {
 
     if (!response.error) {
       const notesList = response;
+      console.log('^^^^', notesList);
       dispatch(getNoteAC(notesList));
     }
   } catch (err) {

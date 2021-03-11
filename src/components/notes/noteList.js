@@ -9,7 +9,7 @@ import { getNotesThunk } from '../../redux/actions/actionsNotes'
 
 export const NoteList = ({ editClickOpen }) => {
   const dispatch = useDispatch();
-  const notes = useSelector(state => state.notesReducer);
+  const { notes } = useSelector(state => state.notesReducer);
   const { user } = useSelector(state => state.userReducer);
 
   console.log('notes', notes)
