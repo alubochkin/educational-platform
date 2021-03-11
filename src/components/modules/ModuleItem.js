@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import { updateModuleThunk } from '../../redux/actions/actionModules';
+import { updateModuleThunk, getModInfoThunk } from '../../redux/actions/actionModules';
 import Modal from '@material-ui/core/Modal';
 import SceduleCreate from './SceduleCreate';
 import ScheduleList from './SchedulesList'
@@ -29,7 +29,15 @@ export default function ModuleItem({ module }) {
   const [isLooking, setLooking] = useState(false);
   const [moduleUpd, setModuleUpd] = useState(module);
   const dispatch = useDispatch();
-  const { user }= useSelector(state=>state.userReducer)
+  const { user } = useSelector(state => state.userReducer)
+
+
+  //  танк-фетч для получение всей инфы об этом модуле
+  useEffect(() => {
+    dispatch(getModInfoThunk(module._id));
+  }, [dispatch, module._id]);
+
+
   const updateHandler = () => {
     if (isUpdating) {
       setUpdating(false);
@@ -82,25 +90,25 @@ export default function ModuleItem({ module }) {
 
       {!isLooking &&
         <div className={classes.update}>
-        <ScheduleList id={module._id} />
+          <ScheduleList id={module._id} />
         </div>}
 
       {!isUpdating &&
         <>
-          {user.role===1 && <><Button
+          {user.role === 1 && <><Button
             size="small"
             variant="outlined"
             color="primary"
             onClick={updateHandler}>
             < EditIcon />
           </Button>
-        <Button type="submit"
-          variant="outlined"
-          size="small"
-          color="primary"
+            <Button type="submit"
+              variant="outlined"
+              size="small"
+              color="primary"
 
-          onClick={handleOpen}>
-          Добавить уроки
+              onClick={handleOpen}>
+              Добавить уроки
         </Button></>}
           <Modal
             open={open}

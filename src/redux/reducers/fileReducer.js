@@ -5,7 +5,7 @@ export default function fileReducer(state = initState, action) {
     case LOGOUT_USER:
       return { files: [] };
     case GET_FILES:
-      return { ...state, files: [...action.payload.fileInfo] };
+      return { ...state, files: [...state.files, ...action.payload.fileInfo] };
 
     default:
       return state;

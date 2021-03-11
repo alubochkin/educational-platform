@@ -1,5 +1,6 @@
 const Phase = require('../models/Phase');
 const Schedule = require('../models/Schedule');
+const StorFile = require('../models/storFileInfo');
 
 const addModule = async (req, res) => {
   const { titleSpec, moduleTitle, userId, curatorId } = req.body;
@@ -32,7 +33,7 @@ const updateModule = async (req, res) => {
     //   }
     // });
     return res.json(phase)
-    
+
   } catch
   {
     return res.status(500).json({ mass: 'Error updating data to module' });
@@ -55,11 +56,27 @@ const delModule = async (req, res) => {
 };
 
 const getModuleId = async (req, res) => {
-  const { id } = req.params;
+  const { modId } = req.body;
   try {
-    const phase = await Phase.findById(id).lean();
-    const schedule = await Schedule.find({ phaseId: id });
-    return res.json({ phase, schedule });
+    const phase = await Phase.findById(modId).lean();
+    const schedule = await Schedule.find({ phaseId: modId });
+
+    const files = await Promise.all(schedule.map(async (el) => {
+      const storFile = await StorFile.find({ schId: el._id });
+      let result = [];
+      if (storFile.length > 0) {
+        console.log('storFile', storFile)
+        result.push(storFile);
+        console.log('result', result)
+      }
+      return result;
+    }));
+
+    files.flat(3);
+
+    console.log('files', files);
+
+    return res.json({ phase, schedule, files });
   } catch
   {
     return res.status(500).json({ mass: 'Error not find data to module' });

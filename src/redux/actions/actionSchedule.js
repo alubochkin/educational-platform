@@ -12,7 +12,7 @@ export const createSchedulsThunk = (schedules, moduleId) => async (dispatch) => 
       body: { arrSchedule: schedules, phaseId: moduleId }
     });
     if (!response.error) {
-      
+
       const scheduleInfo = response.schedule;
 
       dispatch(addScheduleAC(scheduleInfo));
@@ -37,7 +37,7 @@ export const getSchedulesThunk = (moduleId) => async (dispatch) => {
     });
     if (!response.error) {
       const schedulesList = response;
-      
+
       dispatch(getShedulesAC(schedulesList));
     }
 

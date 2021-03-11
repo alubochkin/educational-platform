@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FormFile from '../formFile/FormFile';
-import { getFilesThunk } from '../../redux/actions/actionFiles';
+// import { getFilesThunk } from '../../redux/actions/actionFiles';
 
 export default function ScheduleItem({ schedule }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { files } = useSelector(state => state.fileReducer);
-  
+
   let fileList = [];
-  
+
   if (files.length > 0) {
     fileList = files.filter((el) => el.schId === schedule._id);
   }
-  
+
   const [filesInput, setFilesInput] = useState([]);
   const [click, setClick] = useState(false);
   const clickTrig = () => { setClick(prev => !prev) };
+
   useEffect(() => {
-    
     // танк фетч запрос файла
-    dispatch(getFilesThunk(schedule._id));
+    // dispatch(getFilesThunk(schedule._id));
     setFilesInput(fileList);
-  }, [dispatch, click]);
-  
+  }, [click]);
+
   const [isAddingFile, setAddingFile] = useState(false);
   const addFileHandler = () => {
     if (isAddingFile) {

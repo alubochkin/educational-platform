@@ -1,5 +1,7 @@
 import { GET_MODULES, ADD_MODULE, UPDATE_MODULE } from '../actionTypes';
 import { fetchMethod } from '../thunkUtils';
+import { getShedulesAC } from './actionSchedule';
+import { getFilesAC } from './actionFiles';
 
 export const addModuleAC = (moduleInfo) => ({ type: ADD_MODULE, payload: { moduleInfo } });
 export const getModulesAC = (modules) => ({ type: GET_MODULES, payload: { modules } });
@@ -12,10 +14,33 @@ export const getModulesThunk = (userId, role) => async (dispatch) => {
       method: 'post',
       body: { userId }
     });
-    
+
     if (!response.error) {
       const modulList = response;
       dispatch(getModulesAC(modulList));
+    }
+
+  } catch (err) {
+    console.log('Err', err);
+  }
+}
+
+export const getModInfoThunk = (modId) => async (dispatch) => {
+  try {
+    const response = await fetchMethod({
+      path: `http://localhost:3100/module/get`,
+      method: 'post',
+      body: { modId }
+    });
+
+    if (!response.error) {
+      // const modulList = response;
+      // dispatch(getModulesAC(modulList));
+      console.log('response', response);
+      const { schedule, files } = response;
+
+      dispatch(getShedulesAC(schedule));
+      dispatch(getFilesAC(files));
     }
 
   } catch (err) {
