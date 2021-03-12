@@ -13,12 +13,23 @@ import BorderColorOutlinedIcon from '@material-ui/icons/BorderColorOutlined';
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+     width: '100%',
     margin: 10,
     display: 'grid',
-    gridTemplateColumns: '89% 11%',
-    textDecoration: 'none'
-  }
+    gridTemplateColumns: '89% 1fr',
+    textDecoration: 'none',
+  },
+  hover: {
+    "&:hover": {
+      overflow: "inherit",
+      textOverflow: "inherit",
+      whiteSpace: "inherit",
+      height: "auto"
+    }
+  },
+  card: {
+    overflow: "hidden"
+  },
 });
 
 export default function Note({ _id, title, content, editClickOpen }) {
@@ -36,11 +47,11 @@ export default function Note({ _id, title, content, editClickOpen }) {
 
   return (
     <Card className={classes.root}>
-      <CardContent>
+      <CardContent className={classes.card}>
         <Typography variant="h5" component="h4">
           {title}
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography hover="true" className={classes.hover} noWrap={true}  variant="body2" component="p">
           {content}
         </Typography>
       </CardContent>
