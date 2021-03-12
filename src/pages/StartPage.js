@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 // import { makeStyles } from '@material-ui/core/styles';
 import LoginForm from '../components/LoginForm';
@@ -21,8 +21,8 @@ export default function StartPage() {
   const { user } = useSelector(state => state.userReducer);
 
   if (user) {
-    firstName = user.firstName 
-  } 
+    firstName = user.firstName
+  }
 
   return (
     <div>

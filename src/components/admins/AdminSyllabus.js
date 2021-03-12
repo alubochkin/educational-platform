@@ -7,17 +7,19 @@ import ModuleList from '../modules/ModuleList';
 
 const useStyles = makeStyles({
   container: {
-    // width: '50%',
     marginTop: '20px',
     padding: '5px',
-    border: 'solid 1px #4253AF',
-    borderRadius: '5px',
   },
   formItems: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gap: '30px'
   },
+  select: {
+    padding: '5px 0',
+    background: '#f0f0f0',
+    margin: '30px 0',
+  }
 });
 function AdminSyllabus() {
   const dispatch = useDispatch();
@@ -63,21 +65,24 @@ function AdminSyllabus() {
 
         <h1>Учебная программа</h1>
         <InputLabel id="demo-controlled-open-select-label">Выберите направление</InputLabel>
-        <div className={classes.formItems}>
-          <Select
-            required
-            name="syllabusSpec"
-            native
-            value={syllabus.syllabusSpec}
-            onChange={handleChange}
-          >
-            <option aria-label="None" value="" />
-            {spec.map((el) => {
-              return (
-                <option key={Math.random()} value={el.title}>{el.title}</option>
-              )
-            })}
-          </Select>
+        <div className={classes.formWrap}>
+          <div className={classes.formItems}>
+            <Select
+              required
+              name="syllabusSpec"
+              native
+              value={syllabus.syllabusSpec}
+              onChange={handleChange}
+            >
+              <option aria-label="None" value="" />
+              {spec.map((el) => {
+                return (
+                  <option key={Math.random()} value={el.title}>{el.title}</option>
+                )
+              })}
+            </Select>
+          </div>
+
         </div>
 
         {isSelecting && <>
