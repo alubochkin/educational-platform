@@ -11,6 +11,14 @@ const useStyles = makeStyles({
   root: {
     width: 300,
     margin: 10
+  },
+  hover: {
+    "&:hover": {
+      overflow: "inherit",
+      textOverflow: "inherit",
+      whiteSpace: "inherit",
+      height: "auto"
+    }
   }
 });
 
@@ -33,7 +41,7 @@ export default function Note({ _id, title, content, editClickOpen }) {
         <Typography variant="h5" component="h2">
           {title}
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography hover="true" className={classes.hover} noWrap={true}  variant="body2" component="p">
           {content}
         </Typography>
       </CardContent>
