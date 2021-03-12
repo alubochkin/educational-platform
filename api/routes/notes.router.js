@@ -9,7 +9,7 @@ router.route('/add')
   .post(addNewNotes);
 
 router.route('/update')
-  .patch(updateNotes);
+  .post(updateNotes);
 
 router.route('/:id')
   .get(delNotes);

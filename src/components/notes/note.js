@@ -5,12 +5,19 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { useDispatch } from 'react-redux'
-import { removeNotesThunk } from '../../redux/actions/actionsNotes'
+import { useDispatch } from 'react-redux';
+import { removeNotesThunk } from '../../redux/actions/actionsNotes';
+import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
+import BorderColorOutlinedIcon from '@material-ui/icons/BorderColorOutlined';
+
+
 const useStyles = makeStyles({
   root: {
-    width: 300,
-    margin: 10
+    width: '100%',
+    margin: 10,
+    display: 'grid',
+    gridTemplateColumns: '89% 11%',
+    textDecoration: 'none'
   }
 });
 
@@ -30,7 +37,7 @@ export default function Note({ _id, title, content, editClickOpen }) {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h4">
           {title}
         </Typography>
         <Typography variant="body2" component="p">
@@ -38,8 +45,12 @@ export default function Note({ _id, title, content, editClickOpen }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={editNote} size="small">Edit</Button>
-        <Button onClick={delNote} size="small">Delete</Button>
+        <Button onClick={editNote} size="small">
+          <BorderColorOutlinedIcon />
+        </Button>
+        <Button onClick={delNote} size="small">
+          <RemoveCircleOutlineOutlinedIcon />
+        </Button>
       </CardActions>
     </Card>
   );

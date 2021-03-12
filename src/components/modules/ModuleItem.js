@@ -27,8 +27,15 @@ const useStyles = makeStyles((theme) => ({
     padding: '14px 0',
     fontSize: 18,
     background: '#3f51b62e',
-
-  }
+  },
+  modal: {
+    marginTop: '100px',
+    marginLeft: '300px',
+    transition: '.3s',
+    '& div[aria-hidden]': {
+      background: '#cccccc7a !important',
+    }
+  },
 }));
 
 export default function ModuleItem({ module }) {
@@ -72,7 +79,7 @@ export default function ModuleItem({ module }) {
     setUpdating(false);
   }
   const [open, setOpen] = React.useState(false);
-  
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -90,7 +97,7 @@ export default function ModuleItem({ module }) {
         {module.title}
       </Button>
 
-      {!isLooking &&
+      {isLooking &&
         <div className={classes.update}>
           <ScheduleList id={module._id} />
         </div>}
@@ -108,11 +115,11 @@ export default function ModuleItem({ module }) {
               variant="outlined"
               size="small"
               color="primary"
-
               onClick={handleOpen}>
               Добавить уроки
         </Button></>}
           <Modal
+            className={classes.modal}
             open={open}
             onClose={handleClose}
           >

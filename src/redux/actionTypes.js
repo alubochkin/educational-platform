@@ -19,6 +19,7 @@ export const ADD_SCHEDULE = 'ADD_SCHEDULE';
 export const GET_SCHEDULE = 'GET_SCHEDULE';
 
 export const GET_FILES = 'GET_FILES';
+export const ADD_FILE = 'ADD_FILE';
 
 export const UPDATE_NOTES = 'UPDATE_NOTES'
 export const ADD_NOTES = 'ADD_NOTES'

@@ -1,0 +1,31 @@
+<div class="wrapper items-to-buy">
+
+  {{#each items}}
+
+  <form class="{{this._id}}" action="/mycart/add" method="POST">
+
+    <div class="card text-center" style="width: 18rem;">
+      <img src="{{this.photolink}}" class="card-img-top" alt="some image">
+      <div class="card-body ">
+        <h5 class="card-title">{{this.title}}</h5>
+
+        <p class="card-text">{{this.description}}</p>
+        <p class="card-text">${{this.price}}</p>
+        <p class="card-text">Items left: {{this.quantity}}</p>
+
+        <button type="submit" class="buy-button btn btn-secondary btn-sm">
+          add to cart
+        </button>
+
+
+      </div>
+    </div>
+
+    <div class="form-error"></div>
+
+  </form>
+
+
+  {{/each}}
+
+</div>

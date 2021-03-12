@@ -18,5 +18,4 @@
   height: 100%;
   width: 100%;
   z-index: -1;
-  backdrop-filter: blur(3px);
 }

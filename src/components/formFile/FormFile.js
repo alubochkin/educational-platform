@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
+import { addFileAC } from '../../redux/actions/actionFiles';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // const useStyles = makeStyles({
 //   root: {
 //     width: 'max-content',
@@ -9,6 +11,7 @@ import { Button } from '@material-ui/core';
 //   },
 // });
 const FormFile = ({ schId, clickTrig }) => {
+  const dispatch = useDispatch();
   const form = useRef(null);
   // const classes = useStyles();
   const { user } = useSelector(state => state.userReducer);
@@ -27,8 +30,15 @@ const FormFile = ({ schId, clickTrig }) => {
       method: 'POST',
       body: data
     })
-      .then(res => res.json())
-      .then(json => console.log('@@@', json))
+      .then(res => {
+        res.json();
+        console.log(res)
+      })
+      .then(json => {
+
+
+        dispatch(addFileAC(json));
+      })
       .catch((err) => console.log('!!!!', err));
     clickTrig();
   }
@@ -40,8 +50,12 @@ const FormFile = ({ schId, clickTrig }) => {
         type="file"
         name="filedata"
       />
-      <Button type="submit">
-        Send
+      <Button
+        variant="contained"
+        size="small"
+        color="primary"
+        type="submit">
+        <CloudUploadIcon />
       </Button>
     </form>
   )

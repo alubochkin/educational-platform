@@ -35,7 +35,7 @@ const CalendarShedule = () => {
     getSheduleWeek() 
   }, [])
 
-  console.log(lessonValue)
+  // console.log(lessonValue)
 
   return (
     <div>

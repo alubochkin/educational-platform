@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,20 +27,18 @@ const useStyles = makeStyles({
     marginTop: '50px',
     maxWidth: 'max-content',
   },
-  mainPageBack: {
-    background: 'url(https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?cs=srgb&dl=pexels-olia-danilevich-4974915.jpg&fm=jpg)',
-    backgroundSize: 'cover',
-    position: 'absolute',
-    backgroundRepeat: 'no-repeat',
-    height: '100%',
-    width: '100%',
-    top: 0,
-    left: 0,
-    zIndex: -1,
-    filter:' blur(3px)',
-  },
+ 
 });
 export default function LoginForm() {
+
+
+    useEffect(()  => {
+      document.body.classList.add('bg-body');
+    
+      return () => {
+          document.body.classList.remove('bg-body');
+      };
+    });
   const classes = useStyles();
   const dispatch = useDispatch();
   // const spec = useSelector((state) => state.specReducer);

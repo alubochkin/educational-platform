@@ -41,14 +41,14 @@ const Header = () => {
   }
 
   return (
-    <a className={classes.header}>
+    <div className={classes.header}>
       <a href="/" className={classes.logo}>
         Онлайн образование
       </a>
       {role === 3 && <NavigationTopStudent />}
       {role === 2 && <NavigationTopTeacher />}
       {role === 1 && <NavigationTopAdmin />}
-    </a>
+    </div>
   )
 }
 

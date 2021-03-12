@@ -3,7 +3,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
@@ -28,16 +27,15 @@ const useStyles = makeStyles({
 });
 
 export default function News({titleComponent, dataComponent}) {
-  console.log('Koca: dataComponent ', dataComponent);
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography className={classes.title} variant="h2" component="h2" color="textSecondary" gutterBottom>
+        <Typography variant="h3" className={classes.title} component="h2" color="textSecondary" gutterBottom>
           {titleComponent}
         </Typography>
-          {dataComponent?.map((item) => <Typography key={Math.random()} variant="p" component="div"> {item}</Typography>
+          {dataComponent?.map((item) => <Typography variant="body1" key={Math.random()} component="div"> {item}</Typography>
           )}
 
 

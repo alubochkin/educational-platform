@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { fetchMethod } from '../../redux/thunkUtils';
+import React from 'react';
+// import { useSelector } from 'react-redux';
+// import { fetchMethod } from '../../redux/thunkUtils';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -67,11 +67,11 @@ export default function TableLessonComponent({lessondata}) {
 
 
   function createData( day, lesson) {
-    console.log(day, lesson, 'createData>>>>>>>>>>>>')
+    // console.log(day, lesson, 'createData>>>>>>>>>>>>')
     return { day, lesson };
   }
 
-  console.log(lessondata, 'lessondata************')
+  // console.log(lessondata, 'lessondata************')
 
   const rows = [
     createData('Понедельник', lessondata[0]),
@@ -90,23 +90,24 @@ export default function TableLessonComponent({lessondata}) {
       <Table className={classes.table} aria-label="a dense table">
         <TableHead>
           <TableRow className={classes.tableRowHead}>
-            <TableCell className={classes.tableHead} align="left"> День недели </TableCell>
-            <TableCell className={classes.tableHead} align="left"> Урок </TableCell>
+            <TableCell  size="small" className={classes.tableHead} align="left"> День недели </TableCell>
+            <TableCell  size="medium" className={classes.tableHead} align="left"> Урок </TableCell>
   
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow className={classes.gridRow} key={row.day}>  
-            {console.log(row, 'row----------') }          
+            <TableRow className={classes.gridRow} key={row.day}>          
               <TableCell key={Math.random()} 
                 className={classes.tableCell} 
-                size="small" align="left">
+                size="small" 
+                align="left">
                   {row.day}
               </TableCell>
               <TableCell key={Math.random()}  
                 className={classes.tableCell} 
-                size="madium" align="left">
+                size="medium" 
+                align="left">
                   { row?.lesson.schTitle}
                 </TableCell>
 

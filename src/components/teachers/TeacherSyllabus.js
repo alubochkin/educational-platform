@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Container, Select, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getModulesThunk } from '../../redux/actions/actionModules';
 import ModuleList from '../modules/ModuleList';
 
 const useStyles = makeStyles({
@@ -22,18 +21,12 @@ const useStyles = makeStyles({
   }
 });
 function TeacherSyllabus() {
-  const dispatch = useDispatch();
   const classes = useStyles();
   const { spec } = useSelector((state) => state.specReducer);
-  const { user } = useSelector(state => state.userReducer);
-
-  const [syllabus, setSyllabus] = useState({syllabusSpec: "Fullstack JS"
+  const [syllabus, setSyllabus] = useState({
+    syllabusSpec: "Fullstack JS"
   });
   const [isSelecting, setSelecting] = useState(true);
-
-  useEffect(() => {
-    dispatch(getModulesThunk(user._id, 'admin'));
-  }, [dispatch, user._id]);
 
   const handleChange = (event) => {
     setSelecting(true);
@@ -47,7 +40,6 @@ function TeacherSyllabus() {
       })
     });
   }
-  console.log(spec)
 
   return (
 
@@ -73,7 +65,7 @@ function TeacherSyllabus() {
           </Select>
         </div>
 
-        {isSelecting && <ModuleList spec={syllabus.syllabusSpec} /> }
+        {isSelecting && <ModuleList spec={syllabus.syllabusSpec} />}
       </div>
     </Container>
   );
