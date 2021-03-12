@@ -54,9 +54,9 @@ const MainPage = () => {
 
   const newsTeacher = ['1 новость', '2 новость']
 
-  const today = ['Сеголня парное программирование', '2 новость']
+  const today = ['Сегодня парное программирование', '2 новость']
 
-  const notes = ['Методы масивов', 'Изучить flexbox']
+  const notes = ['Методы массивов', 'Изучить flexbox']
 
   return (<>
 
@@ -66,7 +66,7 @@ const MainPage = () => {
         </Grid>
 
         <Grid className={classes.paper}>
-          <News titleComponent="Оповещения от преподователя" dataComponent={newsTeacher}/>
+          <News titleComponent="Оповещения от преподавателя" dataComponent={newsTeacher}/>
         </Grid>
 
         <Grid className={classes.paper} >

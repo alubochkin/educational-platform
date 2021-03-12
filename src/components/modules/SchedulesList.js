@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   schedulesList: {
     display: 'grid',
     justifyContent: 'space-between',
-    gridTemplateColumns: '88% 1fr',
+    gridTemplateColumns: '70% 1fr',
     borderBottom: '2px solid #33333321',
     paddingBottom: '10px',
   }
