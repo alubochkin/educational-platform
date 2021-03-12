@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 // import { makeStyles } from '@material-ui/core/styles';
 import LoginForm from '../components/LoginForm';
@@ -11,7 +11,11 @@ import MainPage from '../pages/MainPage';
 
 // }))
 
+
+
 export default function StartPage() {
+
+
   // const classes = useStyles();
   let firstName = '';
   const { user } = useSelector(state => state.userReducer);

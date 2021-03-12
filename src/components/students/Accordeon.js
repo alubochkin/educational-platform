@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   heading: {
-    fontSize: theme.typography.pxToRem(18),
-    fontWeight: 600,
+    fontWeight: 500,
     flexBasis: '90%',
     flexShrink: 0,
+    fontSize: '1rem',
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -95,7 +95,12 @@ const Accordeon = ({index,  itemModule}) => {
         <AccordionDetails>
           <div className={classes.video}>
           { expanded &&
-            <iframe width="350" height="200" src="https://www.youtube.com/embed/nbaCw0iborI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="350" 
+              height="200" 
+              src="https://www.youtube.com/embed/nbaCw0iborI" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen></iframe>
           }
           </div>
           <Typography className={classes.textMaterials}>

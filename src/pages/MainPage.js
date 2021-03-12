@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import News from '../components/InfoBlocksMainPage/News'
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,22 +17,16 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 const useStyles = makeStyles({
-  mainPageBack: {
-    background: 'url(https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?cs=srgb&dl=pexels-olia-danilevich-4974915.jpg&fm=jpg)',
-    backgroundSize: 'cover',
-    position: 'absolute',
-    backgroundRepeat: 'no-repeat',
-    height: '100%',
-    width: '100%',
-    top: 0,
-    left: 0,
-    zIndex: -1,
-    filter:' blur(3px)',
-  },
+
   content: {
-    marginTop: 50,
-    display: "grid",
-    gridTemplateColumns: '1fr 1fr'
+    maxWidth: '80%',
+    display: 'grid',
+    margin: '0 auto',
+    marginTop: 100,
+    gap: '15px 30px',
+    gridTemplateColumns: '1fr 1fr',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   paper: {
     backgroundColor: '#ffffffd1',
@@ -44,21 +38,27 @@ const useStyles = makeStyles({
 
 const MainPage = () => {
 
+  useEffect(()  => {
+    document.body.classList.add('bg-body');
+  
+    return () => {
+        document.body.classList.remove('bg-body');
+    };
+  });
+
   const { user } = useSelector(state => state.userReducer);
 
   const classes = useStyles();
 
-  const dataNews = ['1 новость', '2 новость']
+  const dataNews = ['В 17:00 выпуск группы буткемпа', 'Новый гость в пятницу']
 
   const newsTeacher = ['1 новость', '2 новость']
 
-  const today = ['1 новость', '2 новость']
+  const today = ['Сеголня парное программирование', '2 новость']
 
-  const notes = ['1 новость', '2 новость']
+  const notes = ['Методы масивов', 'Изучить flexbox']
 
   return (<>
-
-      <div className={classes.mainPageBack}></div>
 
       <Grid className={classes.content} container >
         <Grid className={classes.paper}>

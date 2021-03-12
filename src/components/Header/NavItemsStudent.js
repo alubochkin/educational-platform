@@ -13,7 +13,7 @@ import { logoutUserThunk } from '../../redux/actions/actionUser';
 
 const useStyles = makeStyles({
   root: {
-    width: 500,
+    width: 'max-content',
     background: 'none',
   },
 });

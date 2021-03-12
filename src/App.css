@@ -10,3 +10,12 @@
 .nav-item.is-top.Mui-selected {
   color: #fff;
 }
+
+.bg-body {
+  background: url(https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?cs=srgb&dl=pexels-olia-danilevich-4974915.jpg&fm=jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
