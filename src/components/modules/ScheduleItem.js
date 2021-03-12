@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import FormFile from '../formFile/FormFile';
 import { Button } from '@material-ui/core';
-import LinkMaterialLesson from './LinkMaterialLesson';
 
 const useStyles = makeStyles({
   bottomScheduleItem: {
