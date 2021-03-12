@@ -8,7 +8,9 @@ const useStyles = makeStyles({
   schedulesList: {
     display: 'grid',
     justifyContent: 'space-between',
-    gridTemplateColumns: '2fr 1fr',
+    gridTemplateColumns: '88% 1fr',
+    borderBottom: '2px solid #33333321',
+    paddingBottom: '10px',
   }
 })
 
@@ -29,10 +31,10 @@ export default function SchedulesList({ id }) {
 
   return (
     <>
-      {schedulesList && schedulesList.map((el) => {
+      {schedulesList && schedulesList.map((el, index) => {
         return (
           <div className={classes.schedulesList} key={Math.random()}>
-            <ScheduleItem schedule={el} />
+            <ScheduleItem index={index} schedule={el} />
 
           </div>
         )
