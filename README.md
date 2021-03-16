@@ -1,72 +1,30 @@
-# Getting Started with Create React App
+# Онлайн образование
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Универсальное веб-приложение для образовательной программы.
 
-## Available Scripts
+![edu-platform-demo](readme-assets/edu-platforma.gif)
 
-![alt text](registation.png "Описание будет тут")
+## Стек технологий
+Основной стек: React+Express+MongoDB
+Отправка писем с сервера и сохранение файлов в базу данных: Nodemailer+Multer
+Библиотека компонентов: Material UI
 
-In the project directory, you can run:
+## Функции приложения
+Приложение "Онлайн образование" реализует разделение ролей пользователей: администратор, преподаватель,
+студент. У студента и преподавателя есть личный кабинет для редактирования своих данных в приложении.
 
-### `yarn start`
+##### Администратор
+Из кабинета администратора осуществляется отправка электронных писем-приглашений с уникальной ссылкой для регистрации новых преподавателей и студентов, редактирование учебной программы, назвачение кураторов групп.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##### Преподаватель
+Преподаватель также имеет возможность приглашать новых студентов в курируемые им группы, а так же редактировать содержание уроков в учебной программе и добавлять материалы к урокам.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##### Студент
+Студент может просматривать учебную программу, переходить по ссылкам к методическим материалам, следить за расписанием, делать учебные заметки – всё в одном приложении.
 
-### `yarn test`
+## Команда
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* [Александр Лубочкин](https://github.com/alubochkin) – full-stack developer и руководитель проекта. Реализовация отправки электронных писем с уникальной ссылкой для регистрации новых пользователей, сохранение материалов в базу данных приложения, написание React-компонентов для интерфейса пользователя-студента, проектирования и написание стилей React-компонентов всего приложения, координация задач внутри команды.
+* [Ольга Колосова](https://github.com/KonfettyMolly) – full-stack developer. Создание бек-стороны приложения, база данных Mongo Atlas, соединение бек- и фронт- сторон приложения, Реализовация отправки электронных писем с уникальной ссылкой для регистрации новых пользователей, сохранение материалов в базу данных приложения, написание React-компонентов "Заметки" в кабинете студента.
+* [Александра Трошина](https://github.com/sandra0711) – full-stack developer. Создание базы данных, проектирование и написание React-компонентов для авторизации всех типов пользователей, интерфейса в кабинетах преподавателя и администратора.
+* [Екатерина Никифорова](https://github.com/elnikiforova) – full-stack developer. Проектирование и написание React-компонентов для авторизации всех типов пользователей, интерфейса в кабинетах преподавателя и администратора.
